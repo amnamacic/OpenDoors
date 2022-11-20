@@ -19,6 +19,14 @@ namespace OpenDoors.Data
         public DbSet<OpisNekretnine> OpisNekretnine { get; set; }
         public DbSet<PogodnostiNekretnine> PogodnostiNekretnine { get; set; }
         public DbSet<PosebnaPonuda> PosebnaPonuda { get; set; }
+        public DbSet<PromoKodovi> PromoKodovi { get; set; }
+        public DbSet<Recenzije> Recenzije { get; set; }
+        public DbSet<Rezervacija> Rezervacija { get; set; }
+        public DbSet<Slike> Slike { get; set; }
+        public DbSet<TipNekretnine> TipNekretnine { get; set; }
+        public DbSet<Transakcija> Transakcija { get; set; }
+        public DbSet<Vlasnik> Vlasnik { get; set; }
+
 
 
 
