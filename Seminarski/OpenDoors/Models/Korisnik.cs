@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IznajmljivanjeNekretnina.Models
+namespace OpenDoors.Models
 {
     [Table("Korisnik")]
     
