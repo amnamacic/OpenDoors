@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\studio\\Desktop\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {}
+    "C:\\Users\\Hp\\Documents\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {}
   },
   "projects": {
-    "C:\\Users\\studio\\Desktop\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {
+    "C:\\Users\\Hp\\Documents\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\studio\\Desktop\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+        "projectUniqueName": "C:\\Users\\Hp\\Documents\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
         "projectName": "OpenDoors",
-        "projectPath": "C:\\Users\\studio\\Desktop\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
-        "packagesPath": "C:\\Users\\studio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\studio\\Desktop\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
+        "projectPath": "C:\\Users\\Hp\\Documents\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+        "packagesPath": "C:\\Users\\Hp\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hp\\Documents\\GitHub\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\studio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,32 +42,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.4.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
