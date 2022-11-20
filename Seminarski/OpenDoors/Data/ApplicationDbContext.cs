@@ -1,11 +1,8 @@
 using OpenDoors.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Drawing;
 using OpenDoors.Models;
-using System.Data.Entity;
 
-namespace OpenDoors.Data
+namespace FIT_Api_Example.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -15,7 +12,7 @@ namespace OpenDoors.Data
         public DbSet<Korisnik> Korisnik { get; set; }
         public DbSet<KreditnaKartica> KreditnaKartica { get; set; }
         public DbSet<Lokacija> Lokacija { get; set; }
-        
+       
 
 
         public ApplicationDbContext(
@@ -25,6 +22,10 @@ namespace OpenDoors.Data
 
     }
 }
+
+
+
+
 
 
 
