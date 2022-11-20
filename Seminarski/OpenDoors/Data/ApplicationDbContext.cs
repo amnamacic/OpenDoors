@@ -2,7 +2,7 @@ using OpenDoors.Models;
 using Microsoft.EntityFrameworkCore;
 using OpenDoors.Models;
 
-namespace FIT_Api_Example.Data
+namespace OpenDoors.Data
 {
     public class ApplicationDbContext : DbContext
     {
