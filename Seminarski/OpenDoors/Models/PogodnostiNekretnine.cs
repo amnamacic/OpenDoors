@@ -11,7 +11,6 @@ namespace OpenDoors.Models
         [Key]
         public int Id { get; set; }
         public string Naziv { get; set; }
-        public string Opis { get; set; }
-        public List<OpisNekretnine> OpisNekretnine { get; set; }
+        public string? Opis { get; set; }
     }
 }

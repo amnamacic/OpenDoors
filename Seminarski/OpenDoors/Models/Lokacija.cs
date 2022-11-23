@@ -12,7 +12,6 @@ namespace OpenDoors.Models
         [ForeignKey("GradId")]
         public Grad Grad { get; set; }
         public int GradId { get; set; }
-        public List<Nekretnina> Nekretnina { get; set; }
     }
 }
 

@@ -12,6 +12,5 @@ namespace OpenDoors.Models
         public string Naziv { get; set; }
         public string Kod { get; set; }
         public bool Validan { get; set; }
-        public List<KrajnjiKorisnik> KrajnjiKorisnik { get; set; }
     }
 }

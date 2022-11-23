@@ -9,6 +9,5 @@ namespace OpenDoors.Models
         public int BrojNekretnina { get; set; }
         public DateTime IznajmljivateljOd { get; set; }
         public string Titula { get; set; }
-        public List<Nekretnina> Nekretnina { get; set; }
     }
 }

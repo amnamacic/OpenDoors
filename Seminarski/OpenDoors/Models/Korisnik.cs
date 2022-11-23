@@ -15,10 +15,7 @@ namespace OpenDoors.Models
         [ForeignKey("GradId")]
         public Grad Grad { get; set; }
         public int GradId { get; set; }
-        public List<PromoKodovi> PromoKodovi { get; set; }
-        public List<KreditnaKartica> KreditnaKartica { get; set; }
-        public List<Rezervacija> Rezervacija { get; set; }
-        public List<Transakcija> Transakcija { get; set; }
+       
     }
 }
 

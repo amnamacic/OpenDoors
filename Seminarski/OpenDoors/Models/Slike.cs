@@ -9,8 +9,8 @@ namespace OpenDoors.Models
         public int Id { get; set; }
         public DateTime DatumPostavljanja { get; set; }
         public byte[] Slika { get; set; }
-       [ForeignKey("OpisId")]
-        public OpisNekretnine OpisNekretnine { get; set; }
-        public int OpisId { get; set; }
+       [ForeignKey("NekretninaId")]
+        public Nekretnina Nekretnina { get; set; }
+        public int NekretninaId { get; set; }
     }
 }

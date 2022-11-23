@@ -9,7 +9,5 @@ namespace OpenDoors.Models
         public int Id { get; set; }
         public string Naziv { get; set; }
         public int PostanskiBroj { get; set; }
-        public List<Lokacija> Lokacija { get; set; }
-        public List<Korisnik> Korisnik { get; set; }
     }
 }

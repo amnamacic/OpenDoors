@@ -12,22 +12,22 @@ namespace OpenDoors.Models
         public bool Status { get; set; }
         public DateTime DatumPostavljanja { get; set; }
         public DateTime DatumIzmjene { get; set; }
-        [ForeignKey("OpisId")]
-        public OpisNekretnine Opis { get; set; }
-        public int OpisId { get; set; }
+        public int BrojKvadrata { get; set; }
+        public int BrojSoba { get; set; }
+        public int BrojKupatila { get; set; }
+        public int BrojKreveta { get; set; }
+        public double CijenaPoDanu { get; set; }
+        public string Adresa { get; set; }
+        public bool Avans { get; set; }
         [ForeignKey("LokacijaId")]
         public Lokacija Lokacija { get; set; }
         public int LokacijaId { get; set; }
         [ForeignKey("TipId")]
         public TipNekretnine Tip { get; set; }
         public int TipId { get; set; }
-        public List<Transakcija> Transakcija { get; set; }
-        public List<Recenzije> Recenzije { get; set; }
-        public List<Rezervacija> Rezervacija { get; set; }
-        public List<PosebnaPonuda> PosebnaPonuda { get; set; }
         [ForeignKey("VlasnikId")]
         public Vlasnik Vlasnik { get; set; }
         public int VlasnikId { get; set; }
-        public List<KrajnjiKorisnik> KrajnjiKorisnik { get; set; }
+
     }
 }

@@ -16,7 +16,6 @@ namespace OpenDoors.Data
         public DbSet<KrajnjiKorisnik> KrajnjiKorisnik { get; set; }
         public DbSet<Nekretnina> Nekretnina { get; set; }
         public DbSet<Notifikacija> Notifikacija { get; set; }
-        public DbSet<OpisNekretnine> OpisNekretnine { get; set; }
         public DbSet<PogodnostiNekretnine> PogodnostiNekretnine { get; set; }
         public DbSet<PosebnaPonuda> PosebnaPonuda { get; set; }
         public DbSet<PromoKodovi> PromoKodovi { get; set; }
@@ -26,6 +25,9 @@ namespace OpenDoors.Data
         public DbSet<TipNekretnine> TipNekretnine { get; set; }
         public DbSet<Transakcija> Transakcija { get; set; }
         public DbSet<Vlasnik> Vlasnik { get; set; }
+        public DbSet<NekretninaPogodnostiNekretnine> NekretninaPogodnostiNekretnine { get; set; }
+        public DbSet<KrajnjiKorisnikPromoKodovi> KrajnjiKorisnikPromoKodovi { get; set; }
+
 
 
 

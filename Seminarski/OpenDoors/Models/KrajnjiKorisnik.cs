@@ -8,7 +8,5 @@ namespace OpenDoors.Models
         public bool Registrovan { get; set; }
         public int BrojRezervacija { get; set; }
         public int BrojOtkazanihRezervacija { get; set; }
-        public List<Nekretnina> Nekretnina { get; set; }
-        public List<PromoKodovi> PromoKodovi { get; set; }
     }
 }
