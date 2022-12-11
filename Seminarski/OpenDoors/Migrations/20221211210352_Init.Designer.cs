@@ -12,7 +12,7 @@ using OpenDoors.Data;
 namespace OpenDoors.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221123201538_Init")]
+    [Migration("20221211210352_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -578,17 +578,16 @@ namespace OpenDoors.Migrations
                 {
                     b.HasBaseType("OpenDoors.Models.Korisnik");
 
-                    b.Property<int>("BrojOtkazanihRezervacija")
+                    b.Property<int?>("BrojOtkazanihRezervacija")
                         .HasColumnType("int");
 
-                    b.Property<int>("BrojRezervacija")
+                    b.Property<int?>("BrojRezervacija")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Registrovan")
+                    b.Property<bool?>("Registrovan")
                         .HasColumnType("bit");
 
                     b.Property<string>("Titula")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("KrajnjiKorisnik");
@@ -598,14 +597,13 @@ namespace OpenDoors.Migrations
                 {
                     b.HasBaseType("OpenDoors.Models.Korisnik");
 
-                    b.Property<int>("BrojNekretnina")
+                    b.Property<int?>("BrojNekretnina")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("IznajmljivateljOd")
+                    b.Property<DateTime?>("IznajmljivateljOd")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Titula")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Vlasnik");

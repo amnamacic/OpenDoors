@@ -6,32 +6,34 @@ using OpenDoors.Data;
 
 namespace OpenDoors.Controllers
 {
-
     //[Authorize]
     [ApiController]
     [Route("[controller]/[action]")]
-    public class KorisnikController : ControllerBase
+    public class KrajnjiKorisnikController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public KorisnikController(ApplicationDbContext dbContext)
+        public KrajnjiKorisnikController(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
         }
 
-
         [HttpPost]
-        public Korisnik Snimi([FromBody] KorisnikAdd x)
+        public KrajnjiKorisnik Snimi([FromBody] KrajnjiKorisnikAdd x)
         {
 
-            var korisnik = new Korisnik
+            var korisnik = new KrajnjiKorisnik
             {
                Ime=x.Ime,
                Prezime=x.Prezime,
                Spol=x.Spol,
                DatumRodjenja=x.DatumRodjenja,
                BrojTelefona=x.BrojTelefona,
-               GradId=x.GradId
+               GradId=x.GradId,
+               Id=x.Id,
+               Username=x.Username,
+               Password=x.Password,
+               Email=x.Email
             };
 
             _dbContext.Add(korisnik);
@@ -42,23 +44,26 @@ namespace OpenDoors.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            var data = _dbContext.Korisnik
+            var data = _dbContext.KrajnjiKorisnik
                 .OrderBy(s => s.Ime)
-                .Select(s => new
+                .Select(s => new KrajnjiKorisnikGetAll()
                 {
                     Ime = s.Ime,
                     Prezime = s.Prezime,
                     Spol = s.Spol,
                     DatumRodjenja = s.DatumRodjenja,
                     BrojTelefona = s.BrojTelefona,
-                    GradId = s.GradId
-
+                    GradId = s.GradId,
+                    Id = s.Id,
+                    Username = s.Username,
+                    Password = s.Password,
+                    Email = s.Email
                 })
-                .AsQueryable();
-            return Ok(data.Take(100).ToList());
+                .Take(100);
+            return Ok(data.ToList());
         }
     }
+
+
 }
-
-
 

@@ -18,27 +18,19 @@ namespace OpenDoors.Controllers
             this._dbContext = dbContext;
         }
 
-
         [HttpPost]
         public Grad Snimi([FromBody] GradAdd x)
         {
-            Grad? objekat;
 
-            if (x.Id == 0)
+            var grad = new Grad
             {
-                objekat = new Grad();
-                _dbContext.Add(objekat);//priprema sql
-            }
-            else
-            {
-                objekat = _dbContext.Grad.Find(x.Id);
-            }
+                Naziv = x.Naziv,
+                PostanskiBroj = x.PostanskiBroj
+            };
 
-            objekat.Naziv = x.Naziv;
-            objekat.PostanskiBroj = x.PostanskiBroj;
-
+            _dbContext.Add(grad);
             _dbContext.SaveChanges();
-            return objekat;
+            return grad;
         }
 
         [HttpGet]

@@ -21,28 +21,35 @@ namespace OpenDoors.Controllers
 
 
         [HttpPost]
+
         public Nekretnina Snimi([FromBody] NekretninaAdd x)
         {
+            Nekretnina? objekat;
 
-            var nekretnina = new Nekretnina
+            if (x.Id == 0)
             {
-                BrojKvadrata = x.BrojKvadrata,
-                BrojKupatila = x.BrojKupatila,
-                BrojSoba = x.BrojSoba,
-                BrojKreveta = x.BrojKreveta,
-                Avans = x.Avans,
-                Adresa = x.Adresa,
-                CijenaPoDanu = x.CijenaPoDanu,
-                LokacijaId = x.LokacijaId,
-                TipId = x.TipId,
-                VlasnikId = x.VlasnikId,
-            };
+                objekat = new Nekretnina();
+                _dbContext.Add(objekat);//priprema sql
+            }
+            else
+            {
+                objekat = _dbContext.Nekretnina.Find(x.Id);
+            }
 
-            _dbContext.Add(nekretnina);
-            _dbContext.SaveChanges();
-            return nekretnina;
+            objekat.BrojSoba = x.BrojSoba;
+            objekat.BrojKupatila = x.BrojKupatila;
+            objekat.BrojKvadrata = x.BrojKvadrata;
+            objekat.Adresa = x.Adresa;
+            objekat.Avans = x.Avans;
+            objekat.BrojKreveta = x.BrojKreveta;
+            objekat.CijenaPoDanu = x.CijenaPoDanu;
+            objekat.LokacijaId = x.LokacijaId;
+            objekat.TipId = x.TipId;
+            objekat.VlasnikId = x.VlasnikId;
+
+            _dbContext.SaveChanges(); //exceute sql -- update Predmet set ... where...
+            return objekat;
         }
-
         [HttpGet]
         public ActionResult GetAll()
         {

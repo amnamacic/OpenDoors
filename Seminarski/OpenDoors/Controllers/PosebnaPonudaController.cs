@@ -19,21 +19,28 @@ namespace OpenDoors.Controllers
             this._dbContext = dbContext;
         }
 
-
         [HttpPost]
+
         public PosebnaPonuda Snimi([FromBody] PosebnaPonudaAdd x)
         {
+            PosebnaPonuda? objekat;
 
-            var posebnaPonuda = new PosebnaPonuda
+            if (x.Id == 0)
             {
-               Opis=x.Opis,
-               Popust=x.Popust,
-               NekretninaId=x.NekretninaId,
-            };
+                objekat = new PosebnaPonuda();
+                _dbContext.Add(objekat);//priprema sql
+            }
+            else
+            {
+                objekat = _dbContext.PosebnaPonuda.Find(x.Id);
+            }
 
-            _dbContext.Add(posebnaPonuda);
-            _dbContext.SaveChanges();
-            return posebnaPonuda;
+            objekat.Opis = x.Opis;
+            objekat.Popust = x.Popust;
+            objekat.NekretninaId = x.NekretninaId;
+
+            _dbContext.SaveChanges(); //exceute sql -- update Predmet set ... where...
+            return objekat;
         }
 
         [HttpGet]

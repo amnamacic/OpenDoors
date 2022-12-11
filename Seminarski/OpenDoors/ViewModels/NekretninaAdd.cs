@@ -2,6 +2,7 @@
 {
     public class NekretninaAdd
     {
+        public int Id { get; set; }
         public int BrojKvadrata { get; set; }
         public int BrojSoba { get; set; }
         public int BrojKupatila { get; set; }

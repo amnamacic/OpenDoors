@@ -162,10 +162,10 @@ namespace OpenDoors.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    Titula = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Registrovan = table.Column<bool>(type: "bit", nullable: false),
-                    BrojRezervacija = table.Column<int>(type: "int", nullable: false),
-                    BrojOtkazanihRezervacija = table.Column<int>(type: "int", nullable: false)
+                    Titula = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Registrovan = table.Column<bool>(type: "bit", nullable: true),
+                    BrojRezervacija = table.Column<int>(type: "int", nullable: true),
+                    BrojOtkazanihRezervacija = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,9 +206,9 @@ namespace OpenDoors.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    BrojNekretnina = table.Column<int>(type: "int", nullable: false),
-                    IznajmljivateljOd = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Titula = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BrojNekretnina = table.Column<int>(type: "int", nullable: true),
+                    IznajmljivateljOd = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Titula = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
