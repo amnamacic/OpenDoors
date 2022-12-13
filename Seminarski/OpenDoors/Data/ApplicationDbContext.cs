@@ -27,11 +27,8 @@ namespace OpenDoors.Data
         public DbSet<Vlasnik> Vlasnik { get; set; }
         public DbSet<NekretninaPogodnostiNekretnine> NekretninaPogodnostiNekretnine { get; set; }
         public DbSet<KrajnjiKorisnikPromoKodovi> KrajnjiKorisnikPromoKodovi { get; set; }
-
-
-
-
-
+        public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; internal set; }
+        public DbSet<LogKretanjePoSistemu> LogKretanjePoSistemu { get; internal set; }
         public ApplicationDbContext(
             DbContextOptions options) : base(options)
         {

@@ -2,7 +2,6 @@
 using OpenDoors.Models;
 using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using OpenDoors.Data;
 
 namespace OpenDoors.Controllers
 {
@@ -70,6 +69,28 @@ namespace OpenDoors.Controllers
                 })
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
+        }
+
+        [HttpGet]
+        public List<NekretninaGetAll> GetByTip(int tipId)
+        {
+            var data = _dbContext.Nekretnina.Where(x => x.TipId == tipId)
+                .OrderBy(s => s.TipId)
+                .Select(s => new NekretninaGetAll
+                {
+                    BrojKvadrata=s.BrojKvadrata,
+                    BrojKupatila=s.BrojKupatila,
+                    BrojSoba=s.BrojSoba,
+                    BrojKreveta=s.BrojKvadrata,
+                    Adresa=s.Adresa,
+                    CijenaPoDanu=s.CijenaPoDanu,
+                    Avans=s.Avans,
+                    LokacijaId=s.LokacijaId,
+                    VlasnikId=s.VlasnikId,
+                    TipId=s.TipId
+                })
+                .AsQueryable();
+            return data.Take(100).ToList();
         }
     }
 }

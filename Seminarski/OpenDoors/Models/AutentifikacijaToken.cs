@@ -1,9 +1,8 @@
-﻿using OpenDoors.Models;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OpenDoors.Helper
+namespace OpenDoors.Models
 {
     public class AutentifikacijaToken
     {

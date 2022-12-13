@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace OpenDoors.Helper
+﻿namespace OpenDoors.ViewModels
 {
     public class LoginVM
     {
@@ -11,4 +6,3 @@ namespace OpenDoors.Helper
         public string lozinka { get; set; }
     }
 }
-
