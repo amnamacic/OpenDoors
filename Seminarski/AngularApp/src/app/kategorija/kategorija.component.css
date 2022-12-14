@@ -1,0 +1,20 @@
+.Kuca{
+  height:400px;
+  width:400px;
+  left: 0;
+  position: fixed;
+}
+
+.Stan{
+  height:400px;
+  width:400px;
+  right: 0;
+  position: fixed;
+}
+.Sve{
+  height:400px;
+  width:400px;
+  right: auto;
+  margin-left:24%;
+  position: fixed;
+}
