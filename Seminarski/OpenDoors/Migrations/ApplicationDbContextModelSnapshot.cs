@@ -617,10 +617,7 @@ namespace OpenDoors.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DatumRodjenja")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GradId")
+                    b.Property<int>("GodinaRodjenja")
                         .HasColumnType("int");
 
                     b.Property<string>("Ime")
@@ -634,8 +631,6 @@ namespace OpenDoors.Migrations
                     b.Property<string>("Spol")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("GradId");
 
                     b.ToTable("Korisnik");
                 });
@@ -911,19 +906,11 @@ namespace OpenDoors.Migrations
 
             modelBuilder.Entity("OpenDoors.Models.Korisnik", b =>
                 {
-                    b.HasOne("OpenDoors.Models.Grad", "Grad")
-                        .WithMany()
-                        .HasForeignKey("GradId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", null)
                         .WithOne()
                         .HasForeignKey("OpenDoors.Models.Korisnik", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Grad");
                 });
 
             modelBuilder.Entity("OpenDoors.Models.KrajnjiKorisnik", b =>

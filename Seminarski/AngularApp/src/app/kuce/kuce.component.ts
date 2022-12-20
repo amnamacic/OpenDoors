@@ -19,6 +19,6 @@ export class KuceComponent implements OnInit{
   }
 
   ngOnInit(): void {
-   this.fetchKuce(1);
+    this.fetchKuce(1);
   }
 }

@@ -1,7 +1,7 @@
 
 
 export class LoginInformacije {
-  autentifikacijaToken:        any=null;
+  autentifikacijaToken:        AutentifikacijaToken=null;
   isLogiran:                   boolean=false;
 }
 

@@ -12,7 +12,7 @@ using OpenDoors.Data;
 namespace OpenDoors.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221211210352_Init")]
+    [Migration("20221220104155_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -24,6 +24,35 @@ namespace OpenDoors.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("OpenDoors.Models.AutentifikacijaToken", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("KorisnickiNalogId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ipAdresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("vrijednost")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("vrijemeEvidentiranja")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("KorisnickiNalogId");
+
+                    b.ToTable("AutentifikacijaToken");
+                });
 
             modelBuilder.Entity("OpenDoors.Models.Email", b =>
                 {
@@ -146,6 +175,46 @@ namespace OpenDoors.Migrations
                     b.HasIndex("KorisnikId");
 
                     b.ToTable("KreditnaKartica");
+                });
+
+            modelBuilder.Entity("OpenDoors.Models.LogKretanjePoSistemu", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("exceptionMessage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ipAdresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isException")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("korisnikID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("postData")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("queryPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("vrijeme")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("korisnikID");
+
+                    b.ToTable("LogKretanjePoSistemu");
                 });
 
             modelBuilder.Entity("OpenDoors.Models.Lokacija", b =>
@@ -551,10 +620,7 @@ namespace OpenDoors.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DatumRodjenja")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GradId")
+                    b.Property<int>("GodinaRodjenja")
                         .HasColumnType("int");
 
                     b.Property<string>("Ime")
@@ -568,8 +634,6 @@ namespace OpenDoors.Migrations
                     b.Property<string>("Spol")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("GradId");
 
                     b.ToTable("Korisnik");
                 });
@@ -607,6 +671,17 @@ namespace OpenDoors.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Vlasnik");
+                });
+
+            modelBuilder.Entity("OpenDoors.Models.AutentifikacijaToken", b =>
+                {
+                    b.HasOne("OpenDoors.Models.KorisnickiNalog", "korisnickiNalog")
+                        .WithMany()
+                        .HasForeignKey("KorisnickiNalogId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("korisnickiNalog");
                 });
 
             modelBuilder.Entity("OpenDoors.Models.Email", b =>
@@ -648,6 +723,17 @@ namespace OpenDoors.Migrations
                         .IsRequired();
 
                     b.Navigation("Korisnik");
+                });
+
+            modelBuilder.Entity("OpenDoors.Models.LogKretanjePoSistemu", b =>
+                {
+                    b.HasOne("OpenDoors.Models.KorisnickiNalog", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnikID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("OpenDoors.Models.Lokacija", b =>
@@ -823,19 +909,11 @@ namespace OpenDoors.Migrations
 
             modelBuilder.Entity("OpenDoors.Models.Korisnik", b =>
                 {
-                    b.HasOne("OpenDoors.Models.Grad", "Grad")
-                        .WithMany()
-                        .HasForeignKey("GradId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", null)
                         .WithOne()
                         .HasForeignKey("OpenDoors.Models.Korisnik", "Id")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Grad");
                 });
 
             modelBuilder.Entity("OpenDoors.Models.KrajnjiKorisnik", b =>

@@ -8,6 +8,7 @@ import {LoginComponent} from "./login/login.component";
 import {NekretnineComponent} from "./nekretnine/nekretnine.component";
 import {KuceComponent} from "./kuce/kuce.component";
 import {StanoviComponent} from "./stanovi/stanovi.component";
+import {RegistracijaComponent} from "./registracija/registracija.component";
 
 
 const routes: Routes = [
@@ -17,12 +18,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'nekretnine', component: NekretnineComponent },
   { path: 'kuce', component: KuceComponent },
-  { path: 'stanovi', component: StanoviComponent }
+  { path: 'stanovi', component: StanoviComponent },
+  { path: 'registracija', component: RegistracijaComponent }
 ];
 
 @NgModule({
   imports: [CommonModule,
-  RouterModule.forChild(routes)],
+    RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

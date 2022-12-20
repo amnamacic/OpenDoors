@@ -108,6 +108,28 @@ namespace OpenDoors.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AutentifikacijaToken",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    vrijednost = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KorisnickiNalogId = table.Column<int>(type: "int", nullable: false),
+                    vrijemeEvidentiranja = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ipAdresa = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AutentifikacijaToken", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_AutentifikacijaToken_KorisnickiNalog_KorisnickiNalogId",
+                        column: x => x.KorisnickiNalogId,
+                        principalTable: "KorisnickiNalog",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Email",
                 columns: table => new
                 {
@@ -136,22 +158,40 @@ namespace OpenDoors.Migrations
                     Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Spol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DatumRodjenja = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BrojTelefona = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GradId = table.Column<int>(type: "int", nullable: false)
+                    GodinaRodjenja = table.Column<int>(type: "int", nullable: false),
+                    BrojTelefona = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Korisnik", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Korisnik_Grad_GradId",
-                        column: x => x.GradId,
-                        principalTable: "Grad",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
                         name: "FK_Korisnik_KorisnickiNalog_Id",
                         column: x => x.Id,
+                        principalTable: "KorisnickiNalog",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LogKretanjePoSistemu",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    korisnikID = table.Column<int>(type: "int", nullable: false),
+                    queryPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    postData = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    vrijeme = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ipAdresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    exceptionMessage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isException = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LogKretanjePoSistemu", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_LogKretanjePoSistemu_KorisnickiNalog_korisnikID",
+                        column: x => x.korisnikID,
                         principalTable: "KorisnickiNalog",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
@@ -494,14 +534,14 @@ namespace OpenDoors.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Email_KorisnickiNalogId",
-                table: "Email",
+                name: "IX_AutentifikacijaToken_KorisnickiNalogId",
+                table: "AutentifikacijaToken",
                 column: "KorisnickiNalogId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Korisnik_GradId",
-                table: "Korisnik",
-                column: "GradId");
+                name: "IX_Email_KorisnickiNalogId",
+                table: "Email",
+                column: "KorisnickiNalogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_KrajnjiKorisnikPromoKodovi_PromoKodoviId",
@@ -512,6 +552,11 @@ namespace OpenDoors.Migrations
                 name: "IX_KreditnaKartica_KorisnikId",
                 table: "KreditnaKartica",
                 column: "KorisnikId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LogKretanjePoSistemu_korisnikID",
+                table: "LogKretanjePoSistemu",
+                column: "korisnikID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lokacija_GradId",
@@ -603,10 +648,16 @@ namespace OpenDoors.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AutentifikacijaToken");
+
+            migrationBuilder.DropTable(
                 name: "Email");
 
             migrationBuilder.DropTable(
                 name: "KrajnjiKorisnikPromoKodovi");
+
+            migrationBuilder.DropTable(
+                name: "LogKretanjePoSistemu");
 
             migrationBuilder.DropTable(
                 name: "NekretninaPogodnostiNekretnine");
@@ -654,10 +705,10 @@ namespace OpenDoors.Migrations
                 name: "Vlasnik");
 
             migrationBuilder.DropTable(
-                name: "Korisnik");
+                name: "Grad");
 
             migrationBuilder.DropTable(
-                name: "Grad");
+                name: "Korisnik");
 
             migrationBuilder.DropTable(
                 name: "KorisnickiNalog");
