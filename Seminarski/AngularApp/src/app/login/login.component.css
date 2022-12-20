@@ -1,11 +1,17 @@
 label {
-  display: block;}
+  display: block;
+  background: cadetblue;
+  height:50%;
+  width:200px;
+  background-color: cadetblue;
+}
 
 input, textarea {
   display: block;
-  width: 50%;
+  width: 200px;
   margin-bottom: 20px;
   padding: 1em;
+  height: 50%;
 }
 
 .error {
@@ -39,4 +45,8 @@ strong {
 span {
   margin-bottom: 20px;
   display: block;
+}
+.sve{
+  position: center ;
+  width: 50%;
 }

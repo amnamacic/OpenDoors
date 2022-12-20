@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4v5iKr2yFkVHtWACSpQYaCRzxZsmaGc/+qdh+8Sw2QczMImGdDi+yus3Yxe+zHrIbMYBtJNx4jS/dLOfIe8o3Q==",
+  "dgSpecHash": "iifQWpQkvZw2o2Tb2ZgNgHN91vucKa2bDzrVXNtz8JcL+XD/ZSOoaB/ECXsQGUqH8PoXe7YTu6fg5JFQHQeIrA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+  "projectFilePath": "C:\\Users\\HP\\Documents\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

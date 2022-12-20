@@ -7655,11 +7655,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Documents\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
       "projectName": "OpenDoors",
-      "projectPath": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+      "projectPath": "C:\\Users\\HP\\Documents\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
+      "outputPath": "C:\\Users\\HP\\Documents\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",

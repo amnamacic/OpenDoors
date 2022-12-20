@@ -1,22 +1,13 @@
-<table class="table table-warning">
-  <tr>
-    <th>Broj kvadrata</th>
-    <th>Broj soba</th>
-    <th>Broj kupatila</th>
-    <th>Broj kreveta</th>
-    <th>Cijena po danu</th>
-    <th>Adresa</th>
-    <th>Avans</th>
-  </tr>
-  <tbody>
-  <tr *ngFor="let s of nekretninaPodaci">
-    <td>{{s.brojKvadrata}}</td>
-    <td>{{s.brojSoba}}</td>
-    <td>{{s.brojKupatila}}</td>
-    <td>{{s.brojKreveta}}</td>
-    <td>{{s.cijenaPoDanu}}</td>
-    <td>{{s.adresa}}</td>
-    <td>{{s.avans}}</td>
-  </tr>
-  </tbody>
-</table>
+<td *ngFor="let s of nekretninaPodaci">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <tr>Broj kvadrata: {{s.brojKvadrata}}</tr>
+      <tr>Broj soba: {{s.brojSoba}}</tr>
+      <tr>Broj kupatila: {{s.brojKupatila}}</tr>
+      <tr>Broj kreveta: {{s.brojKreveta}}</tr>
+      <tr>Cijena po danu: {{s.cijenaPoDanu}}</tr>
+      <tr>Adresa: {{s.adresa}}</tr>
+      <tr>Avans: {{s.avans}}</tr>
+    </div>
+  </div>
+</td>

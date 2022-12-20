@@ -14,11 +14,10 @@ declare function porukaError(a: string):any;
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  txtLozinka="Asmira123";
+  txtLozinka="asmira123";
   txtKorisnickoIme="asmira.husic";
-
-  porukaSuccess=false;
-  porukaError=false;
+  odabraniKorisnik:any;
+  korisnikPodaci:any;
 
   constructor(private httpKlijent: HttpClient, private router: Router) {
   }
@@ -45,6 +44,4 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-
-
 }

@@ -1,18 +1,49 @@
-<header>
-  <base href="./">
-  <div class="container">
-    <a href="/" class="logo">{{ appTitle }}</a>
-    <div class="nav1">
-      <ul>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/kategorija">Nekretnine</a></li>
-      </ul>
+<div *ngIf="!loginInfo().isLogiran">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;" >
+    <div class="container">
+      <a class="navbar-brand" href="#">{{appTitle}}</a>
+      <form class="form-inline">
+        <ul class="navbar-nav" >
+          <li class="nav-item active">
+            <a class="nav-link active" routerLink="/pocetna">Pocetna</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link active" routerLink="/kategorija">Nekretnine</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/pomoc" >Pomoć</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/login">Login</a>
+          </li>
+        </ul>
+      </form>
     </div>
-    <div class="nav2">
-      <ul>
-        <li><a routerLink="/pocetna" >Početna</a></li>
-        <li><a routerLink="/pomoc">Pomoć</a></li>
-      </ul>
+  </nav>
+</div>
+
+<div *ngIf="loginInfo().isLogiran">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;" >
+    <div class="container">
+      <a class="navbar-brand" href="#">{{appTitle}}</a>
+      <form class="form-inline">
+        <ul class="navbar-nav" >
+          <li class="nav-item active">
+            <a class="nav-link active" routerLink="/pocetna">Pocetna</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link active" routerLink="/kategorija">Nekretnine</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/pomoc" >Pomoć</a>
+          </li>
+          <div class="text-end">
+            <li class="nav-item">
+              <button class="btn btn-primary" (click)="logOut()">Odjavi se</button>
+            </li>
+          </div>
+        </ul>
+      </form>
     </div>
-  </div>
-</header>
+  </nav>
+</div>

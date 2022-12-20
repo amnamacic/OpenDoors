@@ -1,5 +1,9 @@
 import {LoginInformacije} from "./login-informacije";
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root',
+})
 export class AutentifikacijaHelper {
 
   static setLoginInfo(x: LoginInformacije | null):void
@@ -16,7 +20,7 @@ export class AutentifikacijaHelper {
       return new LoginInformacije();
 
     try {
-      let loginInformacije:LoginInformacije = JSON.parse(x as string);
+      let loginInformacije:LoginInformacije = JSON.parse(x);
       if (loginInformacije==null)
         return new LoginInformacije();
       return loginInformacije;
@@ -25,5 +29,9 @@ export class AutentifikacijaHelper {
     {
       return new LoginInformacije();
     }
+  }
+
+  removeToken(){
+    localStorage.removeItem("autentifikacija-token");
   }
 }
