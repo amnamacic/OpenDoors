@@ -41,10 +41,11 @@ namespace OpenDoors.Controllers
         {
             var data = _dbContext.PogodnostiNekretnine
                 .OrderBy(s => s.Naziv)
-                .Select(s => new
+                .Select(s => new PogodnostiNekretnineGetAll()
                 {
-                    naziv = s.Naziv,
-                    opis = s.Opis
+                    Id=s.Id,
+                    Naziv = s.Naziv
+                    
 
                 })
                 .AsQueryable();

@@ -41,12 +41,15 @@
   </div>
   <div class="form-group">
     <label>Godina rodjenja</label>
-    <input type="text" class="form-control" placeholder="Unesite godinu rodjenja" formControlName="godinaRodjenja">
+    <input type="number" class="form-control" placeholder="Unesite godinu rodjenja" formControlName="godinaRodjenja">
     <div class="form-text text-danger" *ngIf="godinaRodjenja.errors?.['required'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
       Vaš godina rodjenja je obavezna.
     </div>
     <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['pattern'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
       Vaš godina rodjenja nije validna.
+    </div>
+    <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['min'] || godinaRodjenja.errors?.['max']">
+      Godina mora biti veća od 1955, a manja od 2004.
     </div>
   </div>
   <div class="form-group">

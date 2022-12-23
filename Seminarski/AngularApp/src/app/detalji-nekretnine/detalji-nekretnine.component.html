@@ -1,0 +1,23 @@
+<td *ngFor="let s of pogodnosti">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <tr>Broj kvadrata: {{s.brojKvadrata}}</tr>
+      <tr>Broj soba: {{s.brojSoba}}</tr>
+      <tr>Broj kupatila: {{s.brojKupatila}}</tr>
+      <tr>Broj kreveta: {{s.brojKreveta}}</tr>
+      <tr>Cijena po danu: {{s.cijenaPoDanu}}</tr>
+      <tr>Adresa: {{s.adresa}}</tr>
+      <tr>Lokacija: {{s.lokacija}}</tr>
+      <tr>Vlasnik: {{s.imeVlasnik}}</tr>
+      <tr>Avans: {{s.avans?"Da":"Ne"}}</tr>
+      <tr>Pogodnosti: {{s.pogodnosti}}</tr>
+    </div>
+  </div>
+  <tr><img class="profilna-slika" src="{{get_slika(s)}}" ></tr>
+  <div class="mb-3">
+    <label class="form-label">Nova slika</label>
+    <input class="form-control" id="slika-input" type="file"  accept="image/*" (change)="generisi_preview()" />
+    <img style="max-width: 100%; height: 200px" src="{{pogodnosti.slika_Nova}}">
+    <button (click)="spasiSliku()">Spasi</button>
+  </div>
+</td>

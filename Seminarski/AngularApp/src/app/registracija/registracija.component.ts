@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MojConfig} from "../app.module";
+import {MojConfig} from "../../MojConfig";
 import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {LoginInformacije} from "../helper/login-informacije";
+import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 
 
 declare function porukaSuccess(a: string):any;
@@ -19,19 +21,9 @@ export class RegistracijaComponent implements OnInit{
   repeatPass:string='none';
   register:FormGroup;
 
-  collect() {
-    if(this.register.valid){
-      this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
-        console.warn("rezultat",x);
-        porukaSuccess("Uspjesna registracija");
-        this.router.navigateByUrl("/pocetna");
-      });
-    }
-    else
-      console.table(this.register.value)
-  }
 
   gradPodaci: any;
+
 
   constructor(private httpKlijent: HttpClient, private router: Router, private formBuilder: FormBuilder) {
   }
@@ -54,6 +46,8 @@ export class RegistracijaComponent implements OnInit{
       godinaRodjenja: new FormControl('', [
         Validators.required,
         Validators.pattern('[0-9]{4}'),
+        Validators.min(1955),
+        Validators.max(2004),
       ]),
       brojTelefona: new FormControl('',[
         Validators.required,
@@ -76,6 +70,35 @@ export class RegistracijaComponent implements OnInit{
         Validators.email
       ]),
     });
+  }
+
+  collect() {
+    if(this.register.valid){
+      this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
+        console.warn("rezultat",x);
+        //this.router.navigateByUrl("/pocetna");
+      });
+
+      let saljemo = {
+        korisnickoIme:this.username.value,
+        lozinka: this.password.value
+      };
+      this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login/", saljemo)
+        .subscribe((x:LoginInformacije) =>{
+          if (x.isLogiran) {
+
+            AutentifikacijaHelper.setLoginInfo(x)
+            this.router.navigateByUrl("/pocetna");
+          }
+          else
+          {
+            AutentifikacijaHelper.setLoginInfo(null)
+
+          }
+        });
+    }
+    else
+      console.table(this.register.value)
   }
 
   private fetchKrajnjiKorisnici() : void{
@@ -111,7 +134,6 @@ export class RegistracijaComponent implements OnInit{
   get password() : FormControl{
     return this.register.get("password") as FormControl;
   }
-
 
   get email() : FormControl{
     return this.register.get("email") as FormControl;

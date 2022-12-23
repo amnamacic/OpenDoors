@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {MojConfig} from "../app.module";
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
+import {HttpClient} from "@angular/common/http";
 import {LoginInformacije} from "../helper/login-informacije";
+import {MojConfig} from "../../MojConfig";
+import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
@@ -13,35 +14,54 @@ declare function porukaError(a: string):any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  txtLozinka="asmira123";
-  txtKorisnickoIme="asmira.husic";
-  odabraniKorisnik:any;
-  korisnikPodaci:any;
+export class LogInComponent implements OnInit{
+  LogInForma:FormGroup;
+  submitted=false;
+  success=false;
+  korisnickoIme:any;
+  lozinka:any;
 
-  constructor(private httpKlijent: HttpClient, private router: Router) {
+
+
+  constructor(private formBuilder:FormBuilder, private router : Router, private httpKlijent:HttpClient) {
+
+    this.LogInForma=this.formBuilder.group({
+      korisnickoIme:new FormControl('', Validators.required),
+      lozinka:new FormControl('', Validators.required)
+    })
   }
 
-  ngOnInit(): void {
-  }
+  onSubmit()
+  {
+    this.submitted=true;
 
-  btnLogin() {
+    if(this.LogInForma.invalid)
+    {
+      return;
+    }
+
     let saljemo = {
-      korisnickoIme:this.txtKorisnickoIme,
-      lozinka: this.txtLozinka
+      korisnickoIme:this.korisnickoIme,
+      lozinka: this.lozinka
     };
-    this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login/", saljemo)
+    this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera + "/Autentifikacija/Login/", saljemo)
       .subscribe((x:LoginInformacije) =>{
         if (x.isLogiran) {
-          porukaSuccess("uspjesan login");
+          //porukaSuccess("Uspješna prijava!");
           AutentifikacijaHelper.setLoginInfo(x)
           this.router.navigateByUrl("/pocetna");
         }
         else
         {
           AutentifikacijaHelper.setLoginInfo(null)
-          porukaError("neispravan login");
+          //porukaError("Prijava nije uspješna!");
         }
       });
   }
+
+  ngOnInit (){
+    this.korisnickoIme="asmira.husic";
+    this.lozinka="asmira123";
+  }
+
 }

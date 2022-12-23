@@ -10,13 +10,16 @@ import { PocetnaComponent } from './pocetna/pocetna.component';
 import { KategorijaComponent } from './kategorija/kategorija.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {AppRoutingModule} from "./app-routing.module";
-import { LoginComponent } from './login/login.component';
+import {LogInComponent} from "./login/login.component";
 import { NekretnineComponent } from './nekretnine/nekretnine.component';
 import { KuceComponent } from './kuce/kuce.component';
 import { StanoviComponent } from './stanovi/stanovi.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import {AutentifikacijaToken} from "./helper/login-informacije";
 import {AutentifikacijaHelper} from "./helper/autentifikacija-helper";
+import { DetaljiNekretnineComponent } from './detalji-nekretnine/detalji-nekretnine.component';
+import { AddNekretninaComponent } from './add-nekretnina/add-nekretnina.component';
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -25,11 +28,13 @@ import {AutentifikacijaHelper} from "./helper/autentifikacija-helper";
     PomocComponent,
     PocetnaComponent,
     KategorijaComponent,
-    LoginComponent,
+    LogInComponent,
     NekretnineComponent,
     KuceComponent,
     StanoviComponent,
     RegistracijaComponent,
+    DetaljiNekretnineComponent,
+    AddNekretninaComponent,
 
   ],
   exports: [RouterModule],
@@ -42,26 +47,12 @@ import {AutentifikacijaHelper} from "./helper/autentifikacija-helper";
     RouterLink,
     RouterTestingModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
 })
 export class AppModule { }
 
-export class MojConfig{
-  static adresa_servera = "https://localhost:7115";
-  static http_opcije= function (){
 
-    let autentifikacijaToken:AutentifikacijaToken = AutentifikacijaHelper.getLoginInfo().autentifikacijaToken;
-    let mojtoken = "";
-
-    if (autentifikacijaToken!=null)
-      mojtoken = autentifikacijaToken.vrijednost;
-    return {
-      headers: {
-        'autentifikacija-token': mojtoken,
-      }
-    };
-  }
-}
 

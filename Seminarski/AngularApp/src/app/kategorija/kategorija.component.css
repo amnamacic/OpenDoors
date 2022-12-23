@@ -1,20 +1,23 @@
 .Kuca{
-  height:400px;
-  width:400px;
+
   left: 0;
   position: fixed;
 }
 
 .Stan{
-  height:400px;
-  width:400px;
+
   right: 0;
   position: fixed;
 }
 .Sve{
-  height:400px;
-  width:400px;
+
   right: auto;
-  margin-left:21%;
+  margin-left:23%;
   position: fixed;
+}
+
+img{
+  margin-top:5%;
+  height:60%;
+  width:30%;
 }

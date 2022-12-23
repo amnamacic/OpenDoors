@@ -1,4 +1,6 @@
-﻿namespace OpenDoors.ViewModels
+﻿using OpenDoors.Models;
+
+namespace OpenDoors.ViewModels
 {
     public class NekretninaAdd
     {
@@ -12,7 +14,9 @@
         public bool Avans { get; set; }
         public int LokacijaId { get; set; }
         public int TipId { get; set; }
-        public int VlasnikId { get; set; }
+        public string LokacijaOpis{ get; set; }
+        public string Tip { get; set; }
+        public int VlasnikId { get; set; } 
       
     }
 }

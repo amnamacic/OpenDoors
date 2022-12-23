@@ -1,29 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {AppService} from "./get-api.service";
-import {MojConfig} from "./app.module";
+import { Component } from '@angular/core';
 
-
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
-  NekretninaPodaci: any;
+export class AppComponent {
   title = 'OpenDoors';
-  router: any;
-
-
-  constructor(private httpKlijent: AppService) {
-    this.NekretninaPodaci = [];
-  }
-
-  ngOnInit(): void {
-    this.httpKlijent.apiCall().subscribe((data) => {
-      this.NekretninaPodaci = data
-    })
-  }
 
 
 }

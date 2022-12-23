@@ -7,7 +7,9 @@
       <tr>Broj kreveta: {{s.brojKreveta}}</tr>
       <tr>Cijena po danu: {{s.cijenaPoDanu}}</tr>
       <tr>Adresa: {{s.adresa}}</tr>
-      <tr>Avans: {{s.avans}}</tr>
+      <tr>Avans: {{s.avans?"Da":"Ne"}}</tr>
+      <tr>Lokacija: {{s.lokacija}}</tr>
+      <tr><button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button></tr>
     </div>
   </div>
 </td>

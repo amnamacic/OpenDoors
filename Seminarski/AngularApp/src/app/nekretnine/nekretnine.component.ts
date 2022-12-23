@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {MojConfig} from "../app.module";
+import {MojConfig} from "../../MojConfig";
 
 @Component({
   selector: 'app-nekretnine',
@@ -29,5 +29,9 @@ export class NekretnineComponent implements OnInit {
   }
   ngOnInit() :void{
     this.getNekretnine();
+  }
+
+  detaljiNekretnine(s:any) {
+    this.router.navigate(["detalji-nekretnine/",s.id])
   }
 }

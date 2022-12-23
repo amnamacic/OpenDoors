@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GoDonate.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpenDoors.Data;
@@ -28,7 +29,7 @@ namespace OpenDoors.Controllers
         public ActionResult<LoginInformacije> Login([FromBody] LoginVM x)
         {
             //1 - provjera logina
-            KorisnickiNalog logiraniKorisnik = _dbContext.KorisnickiNalog
+            KorisnickiNalog? logiraniKorisnik = _dbContext.KorisnickiNalog
             .FirstOrDefault(k =>
              k.Username != null && k.Username == x.korisnickoIme && k.Password == x.lozinka);
 

@@ -1,52 +1,44 @@
 label {
   display: block;
-  background: cadetblue;
-  height:50%;
-  width:200px;
-  background-color: cadetblue;
 }
-
-input, textarea {
+input{
   display: block;
-  width: 200px;
+  width:50%;
   margin-bottom: 20px;
   padding: 1em;
-  height: 50%;
 }
-
-.error {
+.error{
   margin-top: -20px;
-  background: yellow;
-  padding: .5em;
+  color:red ;
+  padding: .1em;
   display: inline-block;
   font-size: .9em;
   margin-bottom: 20px;
 }
 
-
-.cta {
-  background: #7700FF;
+.cta{
+  background: #080300;
   border: none;
-  color: white;
-
+  color:white;
   text-transform: uppercase;
   border-radius: 4px;
-  padding: 1em;
-  cursor: pointer;
+  padding:0.5em;
+  cursor:pointer;
   font-family: 'Montserrat';
 }
 
-.results {
+.results{
   margin-top: 50px;}
 
-strong {
+strong{
   display: block;
 }
-span {
+
+span{
   margin-bottom: 20px;
   display: block;
 }
-.sve{
-  position: center ;
-  width: 50%;
+
+h1{
+  font-family: Montserrat;
 }

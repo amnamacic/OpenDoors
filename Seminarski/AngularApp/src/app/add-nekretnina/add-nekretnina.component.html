@@ -1,0 +1,52 @@
+<div style="width:50%">
+  <div class="mb-3">
+    <label class="form-label">Broj kvadrata: </label>
+    <input class="form-control" placeholder="Ime" [(ngModel)]="novaNekretnina.brojKvadrata">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Broj soba: </label>
+    <input class="form-control" placeholder="Prezime" [(ngModel)]="novaNekretnina.brojSoba"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Broj kupatila: </label>
+    <input class="form-control" placeholder="Ime" [(ngModel)]="novaNekretnina.brojKupatila">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Broj kreveta: </label>
+    <input class="form-control" placeholder="Prezime" [(ngModel)]="novaNekretnina.brojKreveta"/>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Cijena po danu: </label>
+    <input class="form-control" placeholder="Ime" [(ngModel)]="novaNekretnina.cijenaPoDanu">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Adresa: </label>
+    <input class="form-control" placeholder="Prezime" [(ngModel)]="novaNekretnina.adresa"/>
+  </div>
+  <form>
+    <label>Avans: </label>
+    <input type="checkbox" [checked]="promjenaAvansa()">Da
+  </form>
+  <label class="form-label">Pogodnosti nekretnine</label>
+  <form>
+    <ng-container *ngFor="let object of pogodnostiNekretnine">
+      <input  type="checkbox" name="pogodnost" [(ngModel)]="object.selected" (change)="onSelectPogodnost(object)"> {{object.naziv}}
+    </ng-container>
+  </form>
+  <label class="form-label">Lokacija</label>
+  <select class="form-control"  [(ngModel)]="novaNekretnina.lokacijaId">
+    <option *ngFor="let x of lokacije" [value]="x.id">{{x.dioGrada+ "-" + x.grad}}</option>
+  </select>
+  <label class="form-label">Tip nekretnine</label>
+  <select class="form-control" [(ngModel)]="novaNekretnina.tipId">
+    <option *ngFor="let x of tipovi" [value]="x.id">{{x.tip}}</option>
+  </select>
+  <div class="mb-3">
+    <label class="form-label">Nova slika</label>
+    <input class="form-control" id="slika-input" type="file"  accept="image/*" (change)="generisi_preview()" />
+    <img style="max-width: 100%; height: 200px" src="{{slika}}">
+  </div>
+  <button class="btn btn-primary" (click)="postaviNekretninu()">Postavi nekretninu</button>
+</div>
+
+

@@ -56,6 +56,7 @@ namespace OpenDoors.Controllers
                 .OrderBy(s => s.Adresa)
                 .Select(s => new
                 {
+                    id=s.Id,
                     brojKvadrata = s.BrojKvadrata,
                     brojKupatila = s.BrojKupatila,
                     brojSoba = s.BrojSoba,
@@ -64,8 +65,11 @@ namespace OpenDoors.Controllers
                     adresa = s.Adresa,
                     cijenaPoDanu = s.CijenaPoDanu,
                     lokacijaId = s.LokacijaId,
+                    lokacija=s.Lokacija,
+                    tip=s.Tip,
                     tipId = s.TipId,
                     vlasnikId = s.VlasnikId,
+                    vlasnik=s.Vlasnik.Ime+" "+s.Vlasnik.Prezime
                 })
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
@@ -78,7 +82,8 @@ namespace OpenDoors.Controllers
                 .OrderBy(s => s.TipId)
                 .Select(s => new NekretninaGetAll
                 {
-                    BrojKvadrata=s.BrojKvadrata,
+                    Id = s.Id,
+                    BrojKvadrata =s.BrojKvadrata,
                     BrojKupatila=s.BrojKupatila,
                     BrojSoba=s.BrojSoba,
                     BrojKreveta=s.BrojKvadrata,
@@ -86,8 +91,38 @@ namespace OpenDoors.Controllers
                     CijenaPoDanu=s.CijenaPoDanu,
                     Avans=s.Avans,
                     LokacijaId=s.LokacijaId,
+                    Lokacija=s.Lokacija.DioGrada,
+                    Tip=s.Tip.Opis,
                     VlasnikId=s.VlasnikId,
                     TipId=s.TipId
+                })
+                .AsQueryable();
+            return data.Take(100).ToList();
+        }
+
+        [HttpGet]
+        public List<NekretninaGetAll> GetById(int nekretninaId)
+        {
+            var pogodnosti = _dbContext.NekretninaPogodnostiNekretnine.Where(x => x.NekretninaId == nekretninaId);
+            var data = _dbContext.Nekretnina.Where(x => x.Id == nekretninaId)
+                .OrderBy(s => s.TipId)
+                .Select(s => new NekretninaGetAll
+                {
+                    Id = s.Id,
+                    BrojKvadrata = s.BrojKvadrata,
+                    BrojKupatila = s.BrojKupatila,
+                    BrojSoba = s.BrojSoba,
+                    BrojKreveta = s.BrojKvadrata,
+                    Adresa = s.Adresa,
+                    CijenaPoDanu = s.CijenaPoDanu,
+                    Avans = s.Avans,
+                    LokacijaId = s.LokacijaId,
+                    Lokacija=s.Lokacija.DioGrada,
+                    VlasnikId = s.VlasnikId,
+                    ImeVlasnik=s.Vlasnik.Ime+ " " + s.Vlasnik.Prezime,
+                    TipId = s.TipId,
+                    Tip=s.Tip.Opis,
+                    Pogodnosti=pogodnosti.Select(x=>x.PogodnostiNekretnine.Naziv).ToList()
                 })
                 .AsQueryable();
             return data.Take(100).ToList();

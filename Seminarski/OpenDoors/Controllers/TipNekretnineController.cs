@@ -40,10 +40,10 @@ namespace OpenDoors.Controllers
         {
             var data = _dbContext.TipNekretnine
                 .OrderBy(s => s.Tip)
-                .Select(s => new
+                .Select(s => new TipNekretnineGetAll
                 {
+                    Id=s.Id,
                     Tip = s.Tip,
-                    Opis = s.Opis,
 
                 })
                 .AsQueryable();

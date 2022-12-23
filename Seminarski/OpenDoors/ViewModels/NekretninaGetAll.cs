@@ -2,6 +2,7 @@
 {
     public class NekretninaGetAll
     {
+        public int Id { get; set; }
         public int BrojKvadrata { get; set; }
         public int BrojSoba { get; set; }
         public int BrojKupatila { get; set; }
@@ -9,8 +10,12 @@
         public double CijenaPoDanu { get; set; }
         public string Adresa { get; set; }
         public bool Avans { get; set; }
-        public int LokacijaId { get; set; }
+        public int? LokacijaId { get; set; }
+        public string Lokacija { get; set; }
         public int TipId { get; set; }
+        public string Tip { get; set; }
         public int VlasnikId { get; set; }
+        public string ImeVlasnik { get; set; }
+        public List<string> Pogodnosti { get; internal set; }
     }
 }

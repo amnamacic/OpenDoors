@@ -1,19 +1,25 @@
-<div class="sve">
-  <div class="mb-3 row">
-    <label for="txtKorisnickoIme" class="col-sm-2 col-form-label">Korisnicko ime</label>
-    <div class="col-sm-3">
-      <input id="txtKorisnickoIme" [(ngModel)]="txtKorisnickoIme" class="form-control" type="username">
+<form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
+  <label>
+    <p style="font-weight: bold; font-size: 17px;"> Korisničko ime: </p>
+    <input type="text" [(ngModel)]="this.korisnickoIme" formControlName="korisnickoIme" placeholder="KorisnickoIme">
+    <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
+      <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> Korisničko ime je obavezno! </div>
     </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="txtLozinka" class="col-sm-2 col-form-label">Lozinka</label>
-    <div class="col-sm-3">
-      <input id="txtLozinka" [(ngModel)]="txtLozinka" class="form-control" type="password">
+  </label>
+
+  <label>
+    <p style="font-weight: bold; font-size: 17px;"> Lozinka: </p>
+    <input type="password" [(ngModel)]="this.lozinka" formControlName="lozinka" placeholder="*****">
+    <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
+      <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> Lozinka je obavezna! </div>
     </div>
-  </div>
+  </label>
 
 
-  <button class="btn btn-primary" (click)="btnLogin()">Logiraj se</button>
-  <br>
-  <button class="form-label"><a routerLink="/registracija">Registracija</a></button>
-</div>
+  <button type="click" class="cta" (click)="onSubmit()">Prijavite se</button>
+  <br><br>
+
+  <h5 style="font-weight: bold">Nemate račun?</h5>
+  <button class="btn btn-info" ><a routerLink="/registracija"> Registrujte se</a></button>
+
+</form>

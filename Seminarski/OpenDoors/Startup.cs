@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using OpenDoors.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-
+using OpenDoors.Data;
 
 namespace OpenDoors
 {
@@ -90,4 +90,3 @@ namespace OpenDoors
         }
     }
 }
-

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MojConfig} from "../app.module";
+import {MojConfig} from "../../MojConfig";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
@@ -20,5 +20,9 @@ export class KuceComponent implements OnInit{
 
   ngOnInit(): void {
     this.fetchKuce(1);
+  }
+
+  detaljiNekretnine(s:any) {
+    this.router.navigate(["detalji-nekretnine/",s.id])
   }
 }
