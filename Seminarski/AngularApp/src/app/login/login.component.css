@@ -1,44 +1,12 @@
-label {
-  display: block;
-}
-input{
-  display: block;
-  width:50%;
-  margin-bottom: 20px;
-  padding: 1em;
-}
-.error{
-  margin-top: -20px;
-  color:red ;
-  padding: .1em;
-  display: inline-block;
-  font-size: .9em;
-  margin-bottom: 20px;
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
-.cta{
-  background: #080300;
-  border: none;
-  color:white;
-  text-transform: uppercase;
-  border-radius: 4px;
-  padding:0.5em;
-  cursor:pointer;
-  font-family: 'Montserrat';
-}
 
-.results{
-  margin-top: 50px;}
-
-strong{
-  display: block;
-}
-
-span{
-  margin-bottom: 20px;
-  display: block;
-}
-
-h1{
-  font-family: Montserrat;
-}

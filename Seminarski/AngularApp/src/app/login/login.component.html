@@ -1,40 +1,65 @@
-<section style="background-color: #eee; width: 50%; height: 50%; position: center">
-  <div class="row g-0">
-    <div class="col-md-6 col-lg-5 d-none d-md-block">
-      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
-           alt="login form" class="img-fluid" style="border-radius: 1rem 1rem 1rem 1rem; height: 90%; width: 100%"/>
-    </div>
-    <div class="col-md-6 col-lg-7 d-flex align-items-center">
-      <div class="card-body p-4 p-lg-5 text-black">
-        <form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
+<section class="h-100 w-100 gradient-form" style="background-color: #eee;">
 
-          <label>
-            <p style="font-weight: bold; font-size: larger;"> Korisničko ime: </p>
-            <input style="width: 100%; height: 20%" type="text" [(ngModel)]="this.korisnickoIme"
-                   formControlName="korisnickoIme" placeholder="KorisnickoIme">
-            <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
-              <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> Korisničko ime je obavezno!</div>
+    <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-1">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="text-center">
+                  <img src="https://t3.ftcdn.net/jpg/03/56/46/10/360_F_356461066_rUflx03xPKYXEGe36Ecslg2ilEnWsAHa.jpg"
+                       style="width: 200px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1">OpenDoors</h4>
+                </div>
+
+
+                  <form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
+
+                  <div class="form-outline mb-4">
+                    <p > Korisničko ime: </p>
+                    <input type="text" class="form-control" [(ngModel)]="this.korisnickoIme"
+                           formControlName="korisnickoIme" placeholder="KorisnickoIme">
+                    <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
+                      <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> Korisničko ime je obavezno!</div>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <p> Lozinka: </p>
+                    <input class="form-control" [(ngModel)]="this.lozinka" formControlName="lozinka"
+                           placeholder="*****">
+                    <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
+                      <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> Lozinka je obavezna!</div>
+                    </div>
+                  </div>
+
+                  <div class="text-right pt-1 mb-5 pb-1">
+                    <button class="btn fa-lg gradient-custom-2 w-100" type="click" (click)="onSubmit()">Prijavite se</button>
+
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Nemate račun?</p>
+                    <button type="button" class="btn btn-outline-danger" ><a routerLink="/registracija" style="color:black">Registrujte se</a></button>
+                  </div>
+
+                </form>
+
+
             </div>
-          </label>
-
-          <label>
-            <p style="font-weight: bold; font-size: larger;"> Lozinka: </p>
-            <input style="width: 100%; height: 20%" type="password" [(ngModel)]="this.lozinka" formControlName="lozinka"
-                   placeholder="*****">
-            <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
-              <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> Lozinka je obavezna!</div>
+          </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">We are more than just a company</h4>
+                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
             </div>
-          </label>
-
-          <button type="click" class="cta" (click)="onSubmit()">Prijavite se</button>
-          <br><br>
-
-          <h5 style="font-weight: bold">Nemate račun?</h5>
-          <button class="btn btn-info"><a routerLink="/registracija"> Registrujte se</a></button>
-
-        </form>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
+</section>

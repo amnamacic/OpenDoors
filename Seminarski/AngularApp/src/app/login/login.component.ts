@@ -61,7 +61,7 @@ export class LogInComponent implements OnInit{
 
   ngOnInit (){
     this.korisnickoIme="asmira.husic";
-    this.lozinka="asmira123";
+    this.lozinka="asmira1234";
   }
 
 }
