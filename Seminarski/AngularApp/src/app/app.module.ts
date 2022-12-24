@@ -20,6 +20,7 @@ import {AutentifikacijaHelper} from "./helper/autentifikacija-helper";
 import { DetaljiNekretnineComponent } from './detalji-nekretnine/detalji-nekretnine.component';
 import { AddNekretninaComponent } from './add-nekretnina/add-nekretnina.component';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { KorisnickiProfilComponent } from './korisnicki-profil/korisnicki-profil.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     RegistracijaComponent,
     DetaljiNekretnineComponent,
     AddNekretninaComponent,
+    KorisnickiProfilComponent,
 
   ],
   exports: [RouterModule],
