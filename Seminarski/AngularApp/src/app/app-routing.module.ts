@@ -13,6 +13,7 @@ import {DetaljiNekretnineComponent} from "./detalji-nekretnine/detalji-nekretnin
 import {AddNekretninaComponent} from "./add-nekretnina/add-nekretnina.component";
 
 
+
 const routes: Routes = [
   { path: 'pocetna', component: PocetnaComponent},
   { path: 'pomoc', component: PomocComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'stanovi', component: StanoviComponent },
   { path: 'registracija', component: RegistracijaComponent },
   { path: 'detalji-nekretnine/:id', component: DetaljiNekretnineComponent },
-  { path: 'add-nekretnina', component: AddNekretninaComponent }
+  { path: 'add-nekretnina', component: AddNekretninaComponent },
+
 ];
 
 @NgModule({

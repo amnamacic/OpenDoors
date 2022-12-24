@@ -76,14 +76,13 @@ export class RegistracijaComponent implements OnInit{
     if(this.register.valid){
       this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
         console.warn("rezultat",x);
-        //this.router.navigateByUrl("/pocetna");
       });
 
       let saljemo = {
         korisnickoIme:this.username.value,
         lozinka: this.password.value
       };
-      this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login/", saljemo)
+      this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login/", saljemo,MojConfig.http_opcije())
         .subscribe((x:LoginInformacije) =>{
           if (x.isLogiran) {
 

@@ -21,6 +21,7 @@ import { DetaljiNekretnineComponent } from './detalji-nekretnine/detalji-nekretn
 import { AddNekretninaComponent } from './add-nekretnina/add-nekretnina.component';
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
+
 @NgModule({
   declarations: [
     AppComponent,

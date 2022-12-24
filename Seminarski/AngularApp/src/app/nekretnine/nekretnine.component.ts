@@ -15,15 +15,9 @@ export class NekretnineComponent implements OnInit {
   constructor(private httpKlijent: HttpClient, private router: Router) {
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*'
-    })
-  };
-
   getNekretnine() :void
       {
-        this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",this.httpOptions).subscribe(x=>{
+        this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",MojConfig.http_opcije()).subscribe(x=>{
           this.nekretninaPodaci = x;
         });
   }

@@ -15,11 +15,10 @@ export interface AutentifikacijaToken {
 }
 
 export interface KorisnickiNalog {
-  Id:                 number;
-  Username:      string;
-  Email:    string;
-  Verifikovan: boolean;
+  id:                 number;
+  username:      string;
+  email:    string;
+  verifikovan: boolean;
   isVlasnik:        boolean;
   isKrajnjiKorisnik: boolean;
-
 }

@@ -44,7 +44,7 @@ export class LogInComponent implements OnInit{
       korisnickoIme:this.korisnickoIme,
       lozinka: this.lozinka
     };
-    this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera + "/Autentifikacija/Login/", saljemo)
+    this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera + "/Autentifikacija/Login/", saljemo,MojConfig.http_opcije())
       .subscribe((x:LoginInformacije) =>{
         if (x.isLogiran) {
           //porukaSuccess("Uspješna prijava!");

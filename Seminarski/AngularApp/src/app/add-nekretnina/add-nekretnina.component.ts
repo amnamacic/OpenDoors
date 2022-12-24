@@ -51,19 +51,19 @@ export class AddNekretninaComponent implements OnInit {
   }
 
   fetchPogodnosti(): void {
-    this.httpKlijent.get(`${MojConfig.adresa_servera}/PogodnostiNekretnine/GetAll`).subscribe(data => {
+    this.httpKlijent.get(`${MojConfig.adresa_servera}/PogodnostiNekretnine/GetAll`,MojConfig.http_opcije()).subscribe(data => {
       this.pogodnostiNekretnine = data;
     });
   }
 
   fetchLokacije(): void {
-    this.httpKlijent.get(`${MojConfig.adresa_servera}/Lokacija/GetAll`).subscribe(data => {
+    this.httpKlijent.get(`${MojConfig.adresa_servera}/Lokacija/GetAll`,MojConfig.http_opcije()).subscribe(data => {
       this.lokacije = data;
     });
   }
 
   fetchTipove(): void {
-    this.httpKlijent.get(`${MojConfig.adresa_servera}/TipNekretnine/GetAll`).subscribe(data => {
+    this.httpKlijent.get(`${MojConfig.adresa_servera}/TipNekretnine/GetAll`,MojConfig.http_opcije()).subscribe(data => {
       this.tipovi = data;
     });
   }

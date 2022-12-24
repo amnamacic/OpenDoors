@@ -60,6 +60,23 @@ namespace OpenDoors.Controllers
                 .Take(100);
             return Ok(data.ToList());
         }
+
+        [HttpPost]
+        public ActionResult PromjeniLozinku([FromBody] PromjenaLozinkeVM x)
+        {
+            var korisnik = _dbContext.KrajnjiKorisnik.Find(x.id);
+            if (korisnik == null)
+                return BadRequest();
+            else if (korisnik.Password != x.staraLozinka)
+                return BadRequest();
+            else
+            {
+                korisnik.Password = x.novaLozinka;
+                _dbContext.SaveChanges();
+            }
+
+            return Ok();
+        }
     }
 
 

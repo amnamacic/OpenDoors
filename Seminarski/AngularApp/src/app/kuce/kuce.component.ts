@@ -13,7 +13,7 @@ export class KuceComponent implements OnInit{
   constructor(private httpKlijent: HttpClient, private router: Router) {
   }
   fetchKuce(s: any) {
-    this.httpKlijent.get(`${MojConfig.adresa_servera}/Nekretnina/GetByTip?tipId=`+1).subscribe(x=>{
+    this.httpKlijent.get(`${MojConfig.adresa_servera}/Nekretnina/GetByTip?tipId=`+1,MojConfig.http_opcije()).subscribe(x=>{
       this.kucePodaci=x;
     });
   }

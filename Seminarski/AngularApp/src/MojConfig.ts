@@ -12,7 +12,7 @@ export class MojConfig{
       mojtoken = autentifikacijaToken.vrijednost;
     return {
       headers: {
-        'autentifikacija-token': mojtoken
+        'autentifikacija-token': mojtoken,
       }
     };
   }
