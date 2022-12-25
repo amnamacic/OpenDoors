@@ -61,11 +61,11 @@ namespace OpenDoors.Controllers
             //tipoviNekretnina.Add(new TipNekretnine { Tip = "Kuća", Opis = "..." });
             //tipoviNekretnina.Add(new TipNekretnine { Tip = "Stan", Opis = "..." });
 
-            nekretnine.Add(new Nekretnina { Status = true, DatumPostavljanja = DateTime.Now, BrojKvadrata = 80, BrojKreveta = 16, BrojSoba = 8, BrojKupatila = 4, CijenaPoDanu = 50, Adresa = "Prkanj bb", Avans = true, VlasnikId = 1, LokacijaId = 1, TipId = 1 });
-            nekretnine.Add(new Nekretnina { Status = true, DatumPostavljanja = DateTime.Now, BrojKvadrata = 60, BrojKreveta = 8, BrojSoba = 2, BrojKupatila = 2, CijenaPoDanu = 50, Adresa = "Orasje bb", Avans = true, VlasnikId = 1, LokacijaId = 1, TipId = 2 });
+            nekretnine.Add(new Nekretnina { Status = true, DatumPostavljanja = DateTime.Now, BrojKvadrata = 80, BrojKreveta = 16, BrojSoba = 8, BrojKupatila = 4, CijenaPoDanu = 50, Adresa = "Prkanj bb", Avans = true, VlasnikId = 2, LokacijaId = 1, TipId = 1 });
+            nekretnine.Add(new Nekretnina { Status = true, DatumPostavljanja = DateTime.Now, BrojKvadrata = 60, BrojKreveta = 8, BrojSoba = 2, BrojKupatila = 2, CijenaPoDanu = 50, Adresa = "Orasje bb", Avans = true, VlasnikId = 2, LokacijaId = 1, TipId = 2 });
 
-            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 5, Djeca = true, Status = "Zavrsena", DatumOtkazivanja = DateTime.Now, Cijena = 100, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, NekretninaId = 1, KorisnikId = 2 });
-            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 3, Djeca = false, Status = "U toku", DatumOtkazivanja = DateTime.Now, Cijena = 80, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, NekretninaId = 1, KorisnikId = 2 });
+            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 5, Djeca = true, Status = "Zavrsena", DatumOtkazivanja = DateTime.Now, Cijena = 100, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, NekretninaId = 1, KorisnikId = 1 });
+            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 3, Djeca = false, Status = "U toku", DatumOtkazivanja = DateTime.Now, Cijena = 80, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, NekretninaId = 1, KorisnikId = 1 });
 
             //lokacije.Add(new Lokacija { DioGrada="Centar", Naziv="Musala", GradId =1 });
             lokacije.Add(new Lokacija { DioGrada = "Centar", Naziv = "Bulevar", GradId = 1 });

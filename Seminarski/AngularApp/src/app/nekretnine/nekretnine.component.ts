@@ -28,4 +28,9 @@ export class NekretnineComponent implements OnInit {
   detaljiNekretnine(s:any) {
     this.router.navigate(["detalji-nekretnine/",s.id])
   }
+  delete(s: any) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.getNekretnine();
+    });
+  }
 }
