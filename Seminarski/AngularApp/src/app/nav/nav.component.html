@@ -40,20 +40,16 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="/pomoc">Pomoć</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/korisnicki-profil">Profil</a>
-          </li>
           <div class="dropdown dropdown-menu-right">
             <button class="btn fa-lg dropdown-toggle" type="button" data-toggle="dropdown">
               <i class="bi-person-fill pe-2" style="font-size: 1.25em"></i></button>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li><a href="#" style="color:black;"> <i class="bi-person-circle pe-2" style="font-size: 1.25em;margin-left: 5%"> </i>Moj profil</a></li>
+              <li><a routerLink="/korisnicki-profil" style="color:black;"> <i class="bi-person-circle pe-2" style="font-size: 1.25em;margin-left: 5%"> </i>Moj profil</a></li>
               <li>
                 <button style="border: none;background-color: white;margin-left: 3%" (click)="logOut()"><i class="bi-box-arrow-down-right pe-2" style="font-size: 1.25em"> </i>Odjavi se</button>
               </li>
             </ul>
           </div>
-
         </ul>
       </form>
     </div>

@@ -42,20 +42,16 @@ namespace OpenDoors.Controllers
 
 
 
-        [HttpGet("{id}")]
-        public ActionResult GetSlikaDB(int id)
+        [HttpGet("{slika_id}")]
+        public ActionResult GetSlikaDB(int slika_id)
         {
-            byte[] bajtovi_slike;
+            var bajtovi_slike = _dbContext.Slike.FirstOrDefault(x => x.Id == slika_id)?.Slika;
 
-            if (_dbContext.Slike.FirstOrDefault(x => x.NekretninaId == id)==null || 
-                _dbContext.Slike.FirstOrDefault(x => x.NekretninaId == id).Slika == null)
+            if (bajtovi_slike == null)
             {
                 bajtovi_slike = Fajlovi.Ucitaj("wwwroot/images/download.png");
             }
-            else
-            {
-                bajtovi_slike = _dbContext.Slike.FirstOrDefault(x => x.NekretninaId == id).Slika;
-            }
+
 
             return File(bajtovi_slike, "image/png");
         }

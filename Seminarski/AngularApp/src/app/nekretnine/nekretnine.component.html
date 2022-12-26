@@ -9,6 +9,10 @@
       <tr>Adresa: {{s.adresa}}</tr>
       <tr>Avans: {{s.avans?"Da":"Ne"}}</tr>
       <tr>Lokacija: {{s.lokacija.dioGrada}}</tr>
+      <tr>
+        <img *ngFor="let x of s.slike_ids" [src]="getslika(x)">
+
+      </tr>
       <tr><button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button></tr>
     </div>
   </div>

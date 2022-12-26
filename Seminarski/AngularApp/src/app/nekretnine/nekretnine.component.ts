@@ -23,9 +23,14 @@ export class NekretnineComponent implements OnInit {
   }
   ngOnInit() :void{
     this.getNekretnine();
+    console.log(this.getNekretnine());
   }
 
   detaljiNekretnine(s:any) {
     this.router.navigate(["detalji-nekretnine/",s.id])
+  }
+
+  getslika(slika_id: any) {
+    return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
   }
 }

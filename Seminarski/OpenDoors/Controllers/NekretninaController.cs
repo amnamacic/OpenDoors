@@ -2,6 +2,8 @@
 using OpenDoors.Models;
 using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
+using OpenDoors.Helper;
 
 namespace OpenDoors.Controllers
 {
@@ -47,6 +49,30 @@ namespace OpenDoors.Controllers
             objekat.VlasnikId = x.VlasnikId;
 
             _dbContext.SaveChanges(); //exceute sql -- update Predmet set ... where...
+
+
+            foreach (var s in x.slike)
+            {
+                var noviSlika = new Slike
+                {
+                    Slika = s.ParsirajBase64(),
+                    Nekretnina = objekat,
+                    DatumPostavljanja = DateTime.Now
+                };
+                _dbContext.Add(noviSlika);
+
+                _dbContext.SaveChanges(); ;
+            }
+
+            foreach (var s in x.selectedPogodnosti)
+            {
+                var n = new NekretninaPogodnostiNekretnine
+                {
+                    Nekretnina = objekat,
+                    PogodnostiNekretnineId = s
+                };
+                _dbContext.Add(n);
+            }
             return objekat;
         }
         [HttpGet]
@@ -56,7 +82,7 @@ namespace OpenDoors.Controllers
                 .OrderBy(s => s.Adresa)
                 .Select(s => new
                 {
-                    id=s.Id,
+                    id = s.Id,
                     brojKvadrata = s.BrojKvadrata,
                     brojKupatila = s.BrojKupatila,
                     brojSoba = s.BrojSoba,
@@ -65,11 +91,12 @@ namespace OpenDoors.Controllers
                     adresa = s.Adresa,
                     cijenaPoDanu = s.CijenaPoDanu,
                     lokacijaId = s.LokacijaId,
-                    lokacija=s.Lokacija,
-                    tip=s.Tip,
+                    lokacija = s.Lokacija,
+                    tip = s.Tip,
                     tipId = s.TipId,
                     vlasnikId = s.VlasnikId,
-                    vlasnik=s.Vlasnik.Ime+" "+s.Vlasnik.Prezime
+                    vlasnik = s.Vlasnik.Ime + " " + s.Vlasnik.Prezime,
+                    slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
                 })
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
@@ -83,18 +110,18 @@ namespace OpenDoors.Controllers
                 .Select(s => new NekretninaGetAll
                 {
                     Id = s.Id,
-                    BrojKvadrata =s.BrojKvadrata,
-                    BrojKupatila=s.BrojKupatila,
-                    BrojSoba=s.BrojSoba,
-                    BrojKreveta=s.BrojKvadrata,
-                    Adresa=s.Adresa,
-                    CijenaPoDanu=s.CijenaPoDanu,
-                    Avans=s.Avans,
-                    LokacijaId=s.LokacijaId,
-                    Lokacija=s.Lokacija.DioGrada,
-                    Tip=s.Tip.Opis,
-                    VlasnikId=s.VlasnikId,
-                    TipId=s.TipId
+                    BrojKvadrata = s.BrojKvadrata,
+                    BrojKupatila = s.BrojKupatila,
+                    BrojSoba = s.BrojSoba,
+                    BrojKreveta = s.BrojKvadrata,
+                    Adresa = s.Adresa,
+                    CijenaPoDanu = s.CijenaPoDanu,
+                    Avans = s.Avans,
+                    LokacijaId = s.LokacijaId,
+                    Lokacija = s.Lokacija.DioGrada,
+                    Tip = s.Tip.Opis,
+                    VlasnikId = s.VlasnikId,
+                    TipId = s.TipId
                 })
                 .AsQueryable();
             return data.Take(100).ToList();
@@ -117,12 +144,12 @@ namespace OpenDoors.Controllers
                     CijenaPoDanu = s.CijenaPoDanu,
                     Avans = s.Avans,
                     LokacijaId = s.LokacijaId,
-                    Lokacija=s.Lokacija.DioGrada,
+                    Lokacija = s.Lokacija.DioGrada,
                     VlasnikId = s.VlasnikId,
-                    ImeVlasnik=s.Vlasnik.Ime+ " " + s.Vlasnik.Prezime,
+                    ImeVlasnik = s.Vlasnik.Ime + " " + s.Vlasnik.Prezime,
                     TipId = s.TipId,
-                    Tip=s.Tip.Opis,
-                    Pogodnosti=pogodnosti.Select(x=>x.PogodnostiNekretnine.Naziv).ToList()
+                    Tip = s.Tip.Opis,
+                    Pogodnosti = pogodnosti.Select(x => x.PogodnostiNekretnine.Naziv).ToList()
                 })
                 .AsQueryable();
             return data.Take(100).ToList();

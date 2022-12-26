@@ -14,9 +14,6 @@ export class AddNekretninaComponent implements OnInit {
   novaNekretnina: NekretninaVM;
   lokacije: any;
   tipovi: any;
-  Slika: any;
-  slika:string;
-  selectedPogodnosti: any = [];
 
   constructor(private httpKlijent: HttpClient, private router: Router) {
 
@@ -42,12 +39,10 @@ export class AddNekretninaComponent implements OnInit {
       lokacijaOpis: " ",
       tip: " ",
       vlasnikId: 1,
+      slike:[],
+      selectedPogodnosti:[]
     };
-    this.Slika={
-      id: 0,
-      nekretninaId: 12,
-      slika: ""
-    }
+
   }
 
   fetchPogodnosti(): void {
@@ -69,6 +64,7 @@ export class AddNekretninaComponent implements OnInit {
   }
 
   addNekretnina() {
+    this.novaNekretnina.selectedPogodnosti = this.pogodnostiNekretnine.filter((w:any)=>w.selected == true).map((s:any)=>s.id);
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Snimi`, this.novaNekretnina, MojConfig.http_opcije()).subscribe(x => {
       this.router.navigateByUrl("/pocetna");
     });
@@ -76,44 +72,37 @@ export class AddNekretninaComponent implements OnInit {
 
   postaviNekretninu() {
     this.addNekretnina();
-    this.postaviSliku();
   }
 
   promjenaAvansa() {
     this.novaNekretnina.avans = true;
   }
 
-  onSelectPogodnost(object: any) {
-    if (object.selected) {
-      this.selectedPogodnosti.push(object);
-    }
-    console.log(this.selectedPogodnosti);
-  }
+
   randomIntFromInterval(min: number, max: number) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  get_slika(s: any) {
-    let r = this.randomIntFromInterval(1, 6);
-    return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${s.id}?a=${r}`;
+  get_slika(s: string) {
+    return s;
   }
 
   generisi_preview() {
     // @ts-ignore
-    var file = document.getElementById("slika-input").files[0];
-    if (file) {
-      var reader = new FileReader();
-      let this2 = this;
-      reader.onload = function () {
-        this2.slika = reader.result.toString();
+    let files = document.getElementById("slika-input").files;
+    if (files.length>0) {
+      for (let file of files) {
+        let reader = new FileReader();
+        let this2 = this;
+        reader.onload = function () {
+          this2.novaNekretnina.slike.push(reader.result.toString());
+        }
+
+        reader.readAsDataURL(file);
       }
 
-      reader.readAsDataURL(file);
     }
   }
-  postaviSliku() {
-    this.httpKlijent.post(`${MojConfig.adresa_servera}/Slike/Snimi`, this.Slika, MojConfig.http_opcije()).subscribe(x => {
-    });
-  }
+
 
 }

@@ -9303,19 +9303,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HP\\.nuget\\packages\\": {}
+    "C:\\Users\\Asmira\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP\\Desktop\\New folder\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+      "projectUniqueName": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
       "projectName": "OpenDoors",
-      "projectPath": "C:\\Users\\HP\\Desktop\\New folder\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
-      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP\\Desktop\\New folder\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
+      "projectPath": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+      "packagesPath": "C:\\Users\\Asmira\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Asmira\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9387,7 +9387,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
