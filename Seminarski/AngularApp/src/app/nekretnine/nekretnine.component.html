@@ -11,9 +11,9 @@
       <tr>Lokacija: {{s.lokacija.dioGrada}}</tr>
       <tr>
         <img *ngFor="let x of s.slike_ids" [src]="getslika(x)">
-
       </tr>
       <tr><button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button></tr>
+      <tr><button (click)="delete(s)">Obrisi</button></tr>
     </div>
   </div>
 </td>

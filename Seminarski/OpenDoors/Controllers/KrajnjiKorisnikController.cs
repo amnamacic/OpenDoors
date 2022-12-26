@@ -62,7 +62,7 @@ namespace OpenDoors.Controllers
         }
 
         [HttpPost]
-        public ActionResult PromjeniLozinku([FromBody] PromjenaLozinkeVM x)
+        public ActionResult PromijeniLozinku([FromBody] PromjenaLozinkeVM x)
         {
             var korisnik = _dbContext.KrajnjiKorisnik.Find(x.id);
             if (korisnik == null)

@@ -20,6 +20,20 @@ namespace OpenDoors.Controllers
             this._dbContext = dbContext;
         }
 
+        [HttpPost("{ID}")]
+        public ActionResult Delete(int id)
+        {
+            Nekretnina? nekretnina = _dbContext.Nekretnina.Find(id);
+
+            if (nekretnina == null)
+                return BadRequest("pogresan ID");
+
+            _dbContext.Remove(nekretnina);
+
+            _dbContext.SaveChanges();
+            return Ok(nekretnina);
+        }
+
 
         [HttpPost]
 

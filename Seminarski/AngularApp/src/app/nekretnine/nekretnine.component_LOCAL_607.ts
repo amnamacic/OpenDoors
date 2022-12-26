@@ -11,30 +11,26 @@ import {MojConfig} from "../../MojConfig";
 export class NekretnineComponent implements OnInit {
   nekretninaPodaci: any;
 
+
   constructor(private httpKlijent: HttpClient, private router: Router) {
   }
 
-  getNekretnine(): void {
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Nekretnina/GetAll", MojConfig.http_opcije()).subscribe(x => {
-      this.nekretninaPodaci = x;
-    });
+  getNekretnine() :void
+      {
+        this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",MojConfig.http_opcije()).subscribe(x=>{
+          this.nekretninaPodaci = x;
+        });
   }
-
-  ngOnInit(): void {
+  ngOnInit() :void{
     this.getNekretnine();
+    console.log(this.getNekretnine());
   }
 
-  detaljiNekretnine(s: any) {
-    this.router.navigate(["detalji-nekretnine/", s.id]);
+  detaljiNekretnine(s:any) {
+    this.router.navigate(["detalji-nekretnine/",s.id])
   }
 
   getslika(slika_id: any) {
     return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
-  }
-
-  delete(s: any) {
-    this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x => {
-      this.getNekretnine();
-    });
   }
 }

@@ -47,14 +47,14 @@ export class LogInComponent implements OnInit{
     this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera + "/Autentifikacija/Login/", saljemo,MojConfig.http_opcije())
       .subscribe((x:LoginInformacije) =>{
         if (x.isLogiran) {
-          //porukaSuccess("Uspješna prijava!");
+          porukaSuccess("Uspješna prijava!");
           AutentifikacijaHelper.setLoginInfo(x)
           this.router.navigateByUrl("/pocetna");
         }
         else
         {
           AutentifikacijaHelper.setLoginInfo(null)
-          //porukaError("Prijava nije uspješna!");
+          porukaError("Prijava nije uspješna!");
         }
       });
   }
