@@ -5,11 +5,13 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../MojConfig";
 
+declare function porukaSuccess(a: string):any;
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
+
 export class NavComponent {
   constructor(private autentifikacijahelper: AutentifikacijaHelper, private router: Router,private httpKlijent:HttpClient) {
   }
@@ -21,12 +23,15 @@ export class NavComponent {
   }
 
   logOut() {
+    let token=MojConfig.http_opcije();
     AutentifikacijaHelper.setLoginInfo(null);
 
-    this.httpKlijent.post(MojConfig.adresa_servera + "/Autentifikacija/LogOut/", null, MojConfig.http_opcije())
+    this.httpKlijent.post(MojConfig.adresa_servera + "/Autentifikacija/LogOut/", null, token)
       .subscribe((x: any) => {
-        this.router.navigateByUrl("/login");
-        //porukaSuccess("Logout uspješan.");
+
+        porukaSuccess("Logout uspješan.");
       });
+
+    this.router.navigateByUrl("/login");
   }
 }
