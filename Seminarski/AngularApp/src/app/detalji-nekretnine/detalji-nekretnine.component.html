@@ -1,44 +1,44 @@
-<td *ngFor="let s of pogodnosti">
-  <div class="card" style="width: 70rem; height:37rem;margin-left: 7%">
-    <div class="card-body" style="padding: 3%">
-      <div  style="float:left;">
-        <tr><img style="width: 466px;height:389px" [src]="getslika(s.slike_ids[0])" (click)="otvoriSlike(s)"></tr>
-      </div>
-      <div style="float:right; padding:10px; margin-right: 25%">
-        <h2><tr>{{s.adresa}}, {{s.lokacija}}</tr></h2>
-        <tr>{{s.brojKvadrata}} kvadrata</tr>
-        <tr>{{s.brojSoba}} sobe</tr>
-        <tr>{{s.brojKupatila}} kupatila</tr>
-        <tr>{{s.brojKreveta}} kreveta</tr>
-        <tr>{{s.cijenaPoDanu}}KM po danu</tr>
-        <tr>Avans: {{s.avans?"Da":"Ne"}}</tr>
+<section *ngFor="let s of pogodnosti" class="h-100" style="background-color: white; border-radius: 20px; width:90%">
+  <div class="row ">
+    <div class="col-6">
+      <img style="width: 466px;height:389px" [src]="getslika(s.slike_ids[0])" (click)="otvoriSlike(s)">
+    </div>
+    <div class="col-6 col-md-4">
+      <h2>
+        <tr>{{s.adresa}}, {{s.lokacija}}</tr>
+      </h2>
+      <tr>{{s.brojKvadrata}} kvadrata</tr>
+      <tr>{{s.brojSoba}} sobe</tr>
+      <tr>{{s.brojKupatila}} kupatila</tr>
+      <tr>{{s.brojKreveta}} kreveta</tr>
+      <tr>{{s.cijenaPoDanu}}KM po danu</tr>
+      <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
       <tr>Pogodnosti:</tr>
       <span *ngFor="let p of s.pogodnosti">{{p}},</span>
-      </div>
-
-      <div class="mb-3" style="margin-top: 40%">
-        <label class="form-label">Nova slika</label>
-        <input class="form-control" id="slika-input" type="file"  accept="image/*" (change)="generisi_preview()" />
-        <img style="max-width: 100%; height: 200px" src="{{pogodnosti.slika_Nova}}">
-        <button class="btn-secondary"(click)="spasiSliku()">Spasi</button>
-      </div>
     </div>
-
   </div>
+  <div class="row">
+    <div class="col">
+      <label class="form-label">Nova slika:</label>
+      <input class="form-control" type="file" accept="image/*" (change)="generisi_preview()"/>
+      <img style="max-width: 100%; height: 200px" src="{{pogodnosti.slika_Nova}}">
+      <button class="btn-secondary" (click)="spasiSliku()">Spasi</button>
+    </div>
+  </div>
+</section>
 
-</td>
-
-<div *ngIf="slike!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive2" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog modal-xl" >
+<div *ngIf="slike!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive2" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="slike=null"></button>
       </div>
       <div class="modal-body">
         <td>
-        <img *ngFor="let s of objekat.slike_ids" [src]="getslika(s)" style="height: 300px;width: 400px">
-      </td>
-        </div>
+          <img *ngFor="let s of objekat.slike_ids" [src]="getslika(s)" style="height: 300px;width: 400px">
+        </td>
+      </div>
     </div>
   </div>
 </div>
