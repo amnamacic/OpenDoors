@@ -8,7 +8,14 @@
     <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.email}}</h5>
   </div>
 </div>
-<button type="submit" class="btn btn-dark btn-lg" (click)="promjenaLozinke=true"> Promijeni lozinku</button>
+<div style="float:left">
+  <button type="button" class="btn btn-primary" (click)="promjenaLozinke=true"> Promijeni lozinku</button>
+</div>
+<div style="float: right; color: black;">
+  <button type="button" class="btn btn-primary" (click)="otvoriNekretnineVlasnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje nekretnine</button>
+</div>
+
+
 
 
 <div *ngIf="promjenaLozinke==true" class="modal fade show" id="exampleModalLive2" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
@@ -18,22 +25,22 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="promjenaLozinke=false"></button>
       </div>
 
-      <div class="sve" style="background-color: powderblue">
+      <div class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px; color: white">
         <div class="modal-body">
           <div class="mb-3" >
-            <label class="form-label" style="font-weight: bold; font-size: larger">Trenutna lozinka:</label>
+            <label class="form-label" style="font-weight: bold; font-size: larger; color: white; font-style: initial" >Trenutna lozinka:</label>
             <input class="form-control" [(ngModel)]="novaSifra.staraLozinka">
           </div>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label" style="font-weight: bold; font-size: larger">Nova lozinka:</label>
+            <label class="form-label" style="font-weight: bold; font-size: larger; color:white ">Nova lozinka:</label>
             <input class="form-control" [(ngModel)]="novaSifra.novaLozinka">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-dark btn-lg"(click)="promjenaLozinke=false">Odustani</button>
-          <button type="button" class="btn btn-dark btn-lg" (click)="PromijeniPassword()">Spasi</button>
+          <button type="button" class="btn btn-primary"(click)="promjenaLozinke=false">Odustani</button>
+          <button type="button" class="btn btn-primary" (click)="PromijeniPassword()">Spasi</button>
         </div>
       </div>
     </div>

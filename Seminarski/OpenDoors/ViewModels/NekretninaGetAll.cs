@@ -17,5 +17,6 @@
         public int VlasnikId { get; set; }
         public string ImeVlasnik { get; set; }
         public List<string> Pogodnosti { get; internal set; }
+        public List<int> slike_ids { get; set; }
     }
 }

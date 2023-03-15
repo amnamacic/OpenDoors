@@ -34,4 +34,9 @@ export class KorisnickiProfilComponent  implements OnInit{
       this.router.navigateByUrl("/login");
     });
   }
+
+  otvoriNekretnineVlasnika(s:any){
+    this.router.navigate(['nekretnine-vlasnik/', s]);
+  }
+
 }

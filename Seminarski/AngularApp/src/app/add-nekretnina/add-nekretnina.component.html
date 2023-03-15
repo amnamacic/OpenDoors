@@ -1,28 +1,52 @@
-<div style="width:50%">
-  <div class="mb-3">
-    <label class="form-label">Broj kvadrata: </label>
-    <input class="form-control" placeholder="Ime" [(ngModel)]="novaNekretnina.brojKvadrata">
+<section class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px; color: white"
+         xmlns="http://www.w3.org/1999/html">
+<div>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+      <label class="form-label" style="color: white">Broj kvadrata: </label>
+      <input class="form-control" placeholder="Broj kvadrata" [(ngModel)]="novaNekretnina.brojKvadrata">
+    </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="form-group">
+      <label class="form-label">Broj soba: </label>
+      <input class="form-control" placeholder="Broj soba" [(ngModel)]="novaNekretnina.brojSoba"/>
+    </div>
+          </div>
+        </div>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-group">
+        <label class="form-label">Broj kupatila: </label>
+        <input class="form-control" placeholder="Broj kupatila" [(ngModel)]="novaNekretnina.brojKupatila">
+      </div>
+
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="form-group">
+        <label class="form-label">Broj kreveta: </label>
+        <input class="form-control" placeholder="Broj kreveta" [(ngModel)]="novaNekretnina.brojKreveta"/>
+      </div>
+
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">Broj soba: </label>
-    <input class="form-control" placeholder="Prezime" [(ngModel)]="novaNekretnina.brojSoba"/>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-group">
+        <label class="form-label">Cijena po danu: </label>
+        <input class="form-control" placeholder="Cijena po danu" [(ngModel)]="novaNekretnina.cijenaPoDanu">
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-group">
+        <label class="form-label">Adresa: </label>
+        <input class="form-control" placeholder="Adresa" [(ngModel)]="novaNekretnina.adresa"/>
+      </div>
+    </div>
   </div>
-  <div class="mb-3">
-    <label class="form-label">Broj kupatila: </label>
-    <input class="form-control" placeholder="Ime" [(ngModel)]="novaNekretnina.brojKupatila">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Broj kreveta: </label>
-    <input class="form-control" placeholder="Prezime" [(ngModel)]="novaNekretnina.brojKreveta"/>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Cijena po danu: </label>
-    <input class="form-control" placeholder="Ime" [(ngModel)]="novaNekretnina.cijenaPoDanu">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Adresa: </label>
-    <input class="form-control" placeholder="Prezime" [(ngModel)]="novaNekretnina.adresa"/>
-  </div>
+
   <form>
     <label>Avans: </label>
     <input type="checkbox" [checked]="promjenaAvansa()">Da
@@ -33,14 +57,24 @@
       <input  type="checkbox" name="pogodnost" [(ngModel)]="object.selected" > {{object.naziv}}
     </ng-container>
   </form>
-  <label class="form-label">Lokacija</label>
-  <select class="form-control"  [(ngModel)]="novaNekretnina.lokacijaId">
-    <option *ngFor="let x of lokacije" [value]="x.id">{{x.dioGrada+ "-" + x.grad}}</option>
-  </select>
-  <label class="form-label">Tip nekretnine</label>
-  <select class="form-control" [(ngModel)]="novaNekretnina.tipId">
-    <option *ngFor="let x of tipovi" [value]="x.id">{{x.tip}}</option>
-  </select>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+    <div class="form-group">
+      <label class="form-label">Lokacija</label>
+      <select class="form-control"  [(ngModel)]="novaNekretnina.lokacijaId">
+        <option *ngFor="let x of lokacije" [value]="x.id">{{x.dioGrada+ "-" + x.grad}}</option>
+      </select>
+    </div>
+    </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+    <label class="form-label">Tip nekretnine</label>
+    <select class="form-control" [(ngModel)]="novaNekretnina.tipId">
+      <option *ngFor="let x of tipovi" [value]="x.id">{{x.tip}}</option>
+    </select>
+        </div>
+  </div>
+  </div>
   <div class="mb-3">
     <label class="form-label">Nova slika</label>
     <input class="form-control" id="slika-input" type="file"  accept="image/*" multiple="multiple" (change)="generisi_preview()" />
@@ -48,5 +82,5 @@
   </div>
   <button class="btn btn-primary" (click)="postaviNekretninu()">Postavi nekretninu</button>
 </div>
-
+</section>
 

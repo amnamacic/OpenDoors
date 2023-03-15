@@ -38,7 +38,7 @@ export class AddNekretninaComponent implements OnInit {
       tipId: 1,
       lokacijaOpis: " ",
       tip: " ",
-      vlasnikId: 1,
+      vlasnikId: 14,
       slike:[],
       selectedPogodnosti:[]
     };

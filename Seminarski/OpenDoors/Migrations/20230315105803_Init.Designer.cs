@@ -12,7 +12,7 @@ using OpenDoors.Data;
 namespace OpenDoors.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221225010817_Init")]
+    [Migration("20230315105803_Init")]
     partial class Init
     {
         /// <inheritdoc />

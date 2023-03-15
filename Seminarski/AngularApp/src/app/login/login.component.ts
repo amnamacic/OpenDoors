@@ -60,8 +60,8 @@ export class LogInComponent implements OnInit{
   }
 
   ngOnInit (){
-    this.korisnickoIme="asmira.husic";
-    this.lozinka="asmira1234";
+    this.korisnickoIme="amina.muhibic";
+    this.lozinka="Amina123";
   }
 
 }
