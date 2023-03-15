@@ -1,19 +1,21 @@
 <td *ngFor="let s of nekretninaPodaci">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <tr>Broj kvadrata: {{s.brojKvadrata}}</tr>
-      <tr>Broj soba: {{s.brojSoba}}</tr>
-      <tr>Broj kupatila: {{s.brojKupatila}}</tr>
-      <tr>Broj kreveta: {{s.brojKreveta}}</tr>
-      <tr>Cijena po danu: {{s.cijenaPoDanu}}</tr>
-      <tr>Adresa: {{s.adresa}}</tr>
+  <div class="card" style="width: 40rem;">
+    <div class="card-body" style="margin-right: 10%">
+      <div  style="float:left;">
+        <tr><img style="width: 266px;height:189px" [src]="getslika(s.slike_ids[0])"></tr>
+        <tr>{{s.adresa}}, {{s.lokacija.dioGrada}}</tr>
+      </div>
+      <div style="float:right; padding:10px; margin-right: 10%">
+      <tr>{{s.brojKvadrata}} kvadrata</tr>
+      <tr>{{s.brojSoba}} sobe</tr>
+      <tr>{{s.brojKupatila}} kupatila</tr>
+      <tr>{{s.brojKreveta}} kreveta</tr>
+      <tr>{{s.cijenaPoDanu}}KM po danu</tr>
       <tr>Avans: {{s.avans?"Da":"Ne"}}</tr>
-      <tr>Lokacija: {{s.lokacija.dioGrada}}</tr>
-      <tr>
-        <img *ngFor="let x of s.slike_ids" [src]="getslika(x)">
-      </tr>
-      <tr><button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button></tr>
-      <tr><button (click)="delete(s)">Obrisi</button></tr>
+      <tr><button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button>
+        <button class="btn btn-outline-danger" (click)="delete(s)">Obrisi</button></tr>
+      </div>
     </div>
   </div>
 </td>
+

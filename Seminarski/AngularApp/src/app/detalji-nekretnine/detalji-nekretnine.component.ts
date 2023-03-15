@@ -30,11 +30,9 @@ export class DetaljiNekretnineComponent implements OnInit {
 
   }
 
-  get_slika(s: any) {
-
-    return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${s.id}`;
+  getslika(slika_id: any) {
+    return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
   }
-
   generisi_preview() {
     // @ts-ignore
     var file = document.getElementById("slika-input").files[0];
@@ -59,4 +57,10 @@ export class DetaljiNekretnineComponent implements OnInit {
     });
   }
 
+  slike:any;
+  objekat:any;
+  otvoriSlike(s:any) {
+    this.slike=true;
+    this.objekat=s;
+  }
 }
