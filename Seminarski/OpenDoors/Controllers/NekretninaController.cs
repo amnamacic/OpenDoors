@@ -111,7 +111,7 @@ namespace OpenDoors.Controllers
                     vlasnikId = s.VlasnikId,
                     vlasnik = s.Vlasnik.Ime + " " + s.Vlasnik.Prezime,
                     slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
-                    slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),                                       
+                                      
                 })
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
@@ -136,8 +136,8 @@ namespace OpenDoors.Controllers
                     Lokacija = s.Lokacija.DioGrada,
                     Tip = s.Tip.Opis,
                     VlasnikId = s.VlasnikId,
-                    TipId = s.TipId
-                    
+                    TipId = s.TipId,
+                    slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
                 })
                 .AsQueryable();
             return data.Take(100).ToList();
@@ -165,7 +165,7 @@ namespace OpenDoors.Controllers
                     ImeVlasnik = s.Vlasnik.Ime + " " + s.Vlasnik.Prezime,
                     TipId = s.TipId,
                     Tip = s.Tip.Opis,
-                    
+                    slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
                     Pogodnosti = pogodnosti.Select(x => x.PogodnostiNekretnine.Naziv).ToList()
                 })
                 .AsQueryable();
