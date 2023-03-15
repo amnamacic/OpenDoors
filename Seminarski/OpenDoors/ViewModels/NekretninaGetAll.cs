@@ -16,6 +16,7 @@
         public string Tip { get; set; }
         public int VlasnikId { get; set; }
         public string ImeVlasnik { get; set; }
+        public List<int> slike_ids { get; set; }
         public List<string> Pogodnosti { get; internal set; }
     }
 }
