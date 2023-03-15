@@ -1,0 +1,70 @@
+<section class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px; color: white">
+  <form [formGroup]="register" (ngSubmit)="collect()">
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>Broj osoba:</label>
+          <input type="text" class="form-control" placeholder="Unesite broj osoba" formControlName="brojOsoba">
+          <div class="form-text text-danger" *ngIf="brojOsoba.errors?.['required'] && (brojOsoba.dirty || brojOsoba.touched)">
+           Unos broja osoba je obavezan.
+          <div class="form-text text-danger" *ngIf="brojOsoba.errors?.['pattern'] && (brojOsoba.dirty || brojOsoba.touched)">
+            Možete unijeti samo brojeve.
+          </div>
+        </div>
+      </div>
+        </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>Djeca:</label>
+          <input type="text" class="form-control" placeholder="Unesite broj djece:" formControlName="brojDjece">
+          <div class="form-text text-danger" *ngIf="brojDjece.errors?.['required'] && (brojDjece.dirty || brojDjece.touched)">
+            Unos broja djece je obavezan.
+          </div>
+          <div class="form-text text-danger" *ngIf="!!brojDjece.errors?.['minlength'] && (brojDjece.dirty || brojDjece.touched)">
+            Možete unijeti samo brojeve.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>Check in:</label>
+          <input type="date" class="form-control" formControlName="checkIn">
+          <div class="form-text text-danger" *ngIf="checkIn.errors?.['required'] && (checkIn.dirty || checkIn.touched)">
+            Unos check-in-a je obavezan.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="form-group">
+          <label>Check-out: </label>
+          <input type="date" class="form-control" formControlName="checkOut">
+          <div class="form-text text-danger" *ngIf="checkOut.errors?.['required'] && (checkOut.dirty || checkOut.touched)">
+           Unos check-out-a je obavezan.
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+            <label>Broj kartice: </label>
+            <input type="text" class="form-control" formControlName="brojKartice">
+            <div class="form-text text-danger" *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
+              Unos broja kartice je obavezan.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+            <label class="form-label">Tip kartice: </label>
+            <select class="form-control">
+              <option *ngFor="let x of tipoviKartice" [value]="x">{{x}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    <button type="submit"  class="btn btn-primary" >Izvrši rezervaciju</button>
+  </form>
+</section>

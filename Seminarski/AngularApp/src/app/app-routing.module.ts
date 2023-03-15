@@ -13,6 +13,7 @@ import {DetaljiNekretnineComponent} from "./detalji-nekretnine/detalji-nekretnin
 import {AddNekretninaComponent} from "./add-nekretnina/add-nekretnina.component";
 import {KorisnickiProfilComponent} from "./korisnicki-profil/korisnicki-profil.component";
 import {NekretnineVlasnikComponent} from "./nekretnine-vlasnik/nekretnine-vlasnik.component";
+import {RezervacijaComponent} from "./rezervacija/rezervacija.component";
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'registracija', component: RegistracijaComponent },
   { path: 'detalji-nekretnine/:id', component: DetaljiNekretnineComponent },
   { path: 'nekretnine-vlasnik/:id', component: NekretnineVlasnikComponent },
+  { path: 'rezervacija/:id', component: RezervacijaComponent},
   { path: 'add-nekretnina', component: AddNekretninaComponent },
   { path: 'korisnicki-profil', component: KorisnickiProfilComponent }
 ];

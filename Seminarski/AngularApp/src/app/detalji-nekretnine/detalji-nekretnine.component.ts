@@ -63,4 +63,8 @@ export class DetaljiNekretnineComponent implements OnInit {
     this.slike=true;
     this.objekat=s;
   }
+
+  rezervisiNekretninu(s:any) {
+    this.router.navigate(['rezervacija/', s.id]);
+  }
 }

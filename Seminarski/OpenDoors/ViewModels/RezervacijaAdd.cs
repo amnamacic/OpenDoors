@@ -13,5 +13,7 @@ namespace OpenDoors.ViewModels
         public double Cijena { get; set; }
         public int NekretninaId { get; set; }
         public int KorisnikId { get; set; }
+        public string BrojKartice { get; set; }
+        public string TipKartice { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace OpenDoors.Controllers
                Cijena=x.Cijena,
                NekretninaId=x.NekretninaId,
                KorisnikId=x.KorisnikId,
+              
             };
 
             _dbContext.Add(rezervacija);
