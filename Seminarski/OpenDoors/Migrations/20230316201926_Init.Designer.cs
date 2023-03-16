@@ -12,7 +12,7 @@ using OpenDoors.Data;
 namespace OpenDoors.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230316175451_Init")]
+    [Migration("20230316201926_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -445,7 +445,7 @@ namespace OpenDoors.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DatumModifikacije")
+                    b.Property<DateTime?>("DatumModifikacije")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DatumPostavljanja")

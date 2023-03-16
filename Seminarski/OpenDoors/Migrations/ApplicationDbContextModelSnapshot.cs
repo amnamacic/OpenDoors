@@ -442,7 +442,7 @@ namespace OpenDoors.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DatumModifikacije")
+                    b.Property<DateTime?>("DatumModifikacije")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DatumPostavljanja")

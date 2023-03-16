@@ -385,7 +385,7 @@ namespace OpenDoors.Migrations
                     DatumPostavljanja = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Ocjena = table.Column<int>(type: "int", nullable: false),
                     Komentar = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DatumModifikacije = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DatumModifikacije = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NekretninaId = table.Column<int>(type: "int", nullable: false),
                     KorisnickiNalogId = table.Column<int>(type: "int", nullable: false)
                 },
