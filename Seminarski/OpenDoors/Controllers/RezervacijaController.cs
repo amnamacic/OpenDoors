@@ -3,6 +3,7 @@ using OpenDoors.Models;
 using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using OpenDoors.Data;
+using Microsoft.VisualBasic;
 
 namespace OpenDoors.Controllers
 {
@@ -74,11 +75,11 @@ namespace OpenDoors.Controllers
                     BrojOsoba = s.BrojOsoba,
                     Djeca = s.Djeca,
                     Status = s.Status,
-                    CheckIn = s.CheckIn,
-                    CheckOut = s.CheckOut,
+                    CheckIn = s.CheckIn.ToString("MM/dd/yyyy"),
+                    CheckOut = s.CheckOut.ToString("MM/dd/yyyy"),
                     Cijena = s.Cijena,
                     Nekretnina = s.Nekretnina.Adresa+s.Nekretnina.Lokacija.Naziv,
-                    Korisnik = s.Korisnik.Ime+s.Korisnik.Prezime,
+                    Korisnik = s.Korisnik.Ime+ " "+s.Korisnik.Prezime,
                     KreditnaKartica = s.KreditnaKartica.TipKartice + s.KreditnaKartica.BrojKartice,
                 })
                 .AsQueryable();

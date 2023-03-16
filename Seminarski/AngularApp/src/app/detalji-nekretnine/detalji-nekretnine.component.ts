@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class DetaljiNekretnineComponent implements OnInit {
   pogodnosti: any;
   nekretninaId: number;
+  rezervacijaPodaci: any;
 
   constructor(private httpKlijent: HttpClient, private router: Router,  private route: ActivatedRoute) {
   }
@@ -67,5 +68,12 @@ export class DetaljiNekretnineComponent implements OnInit {
 
   rezervisiNekretninu(s:any) {
     this.router.navigate(['rezervacija/', s.id]);
+  }
+
+  otvoriRezervacije() {
+       this.httpKlijent.get(MojConfig.adresa_servera + "/Rezervacija/GetById?nekretninaId=" + this.nekretninaId).
+         subscribe((x:any)=>{
+           this.rezervacijaPodaci=x;
+       })
   }
 }
