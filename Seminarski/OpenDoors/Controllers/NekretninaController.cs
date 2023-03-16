@@ -177,7 +177,7 @@ namespace OpenDoors.Controllers
         {
             
             var data = _dbContext.Nekretnina.Where(x => x.VlasnikId ==korisnickiNalogId )
-                .OrderBy(s => s.Id)
+                .OrderBy(s => s.TipId)
                 .Select(s => new NekretninaGetAll
                 {
                     Id = s.Id,

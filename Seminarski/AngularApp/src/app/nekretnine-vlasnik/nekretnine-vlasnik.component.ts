@@ -17,13 +17,13 @@ export class NekretnineVlasnikComponent {
   ngOnInit(): void {
     this.route.params.subscribe(s=>{
       this.vlasnikId=+s['id'];
-      this.fetchVlasnikNekretnine();
     })
+    this.fetchVlasnikNekretnine();
   }
 
   fetchVlasnikNekretnine() :void
   {
-    this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetByVlasnik?VlasnikId=" + this.vlasnikId,MojConfig.http_opcije()).subscribe(x=>{
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetByVlasnik?korisnickiNalogId=" + this.vlasnikId,MojConfig.http_opcije()).subscribe(x=>{
       this.nekretninaVlasnikPodaci = x;
     });
   }

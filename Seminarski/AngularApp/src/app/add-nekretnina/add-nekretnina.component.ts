@@ -3,6 +3,8 @@ import {MojConfig} from "../../MojConfig";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {NekretninaVM} from "./nekretninaVM";
+import {LoginInformacije} from "../helper/login-informacije";
+import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 
 @Component({
   selector: 'app-add-nekretnina',
@@ -38,11 +40,15 @@ export class AddNekretninaComponent implements OnInit {
       tipId: 1,
       lokacijaOpis: " ",
       tip: " ",
-      vlasnikId: 14,
+      vlasnikId: this.loginInfo().autentifikacijaToken.korisnickiNalog.id,
       slike:[],
       selectedPogodnosti:[]
     };
 
+  }
+
+  loginInfo():LoginInformacije {
+    return AutentifikacijaHelper.getLoginInfo();
   }
 
   fetchPogodnosti(): void {
