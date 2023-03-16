@@ -20,7 +20,11 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.nekretninaId=+s["id"];
       this.fetchPogodnosti();
     })
-
+    this.slika =   {
+      id:0,
+      nekretninaId:this.nekretninaId,
+      slika:""
+    };
   }
 
   fetchPogodnosti() {
@@ -40,7 +44,7 @@ export class DetaljiNekretnineComponent implements OnInit {
       var reader = new FileReader();
       let this2=this;
       reader.onload = function () {
-        this2.pogodnosti.slika_Nova = reader.result.toString();
+        this2.slika.slika = reader.result.toString();
       }
       reader.readAsDataURL(file);
     }
@@ -48,12 +52,9 @@ export class DetaljiNekretnineComponent implements OnInit {
 
   slika:any;
   spasiSliku() {
-    this.slika =   {
-      id:0,
-      nekretnina_id:this.nekretninaId,
-      slika_Nova:""
-    };
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Slike/Snimi`, this.slika, MojConfig.http_opcije()).subscribe(x=>{
+      this.fetchPogodnosti();
+      this.slika=null;
     });
   }
 
