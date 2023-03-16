@@ -15,14 +15,41 @@
       <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
       <tr>Pogodnosti:</tr>
       <span *ngFor="let p of s.pogodnosti">{{p}},</span>
-        <button type="button" class="btn btn-primary" (click)=rezervisiNekretninu(s)>Rezerviši</button>
+      <button type="button" class="btn btn-primary" (click)=rezervisiNekretninu(s)>Rezerviši</button>
+      <button style="float: right" type="button" class="btn btn-primary" (click)="otvoriRezervacije()">Rezervacije</button>
       </div>
-  <div class="row">
+
+    <table *ngIf="rezervacijaPodaci!=null" style="border-radius: 1%; background-color: #eeeeee; color: black">
+      <thead>
+      <tr>
+        <th scope="col">Korisnik</th>
+        <th scope="col">Osobe</th>
+        <th scope="col">Djeca</th>
+        <th scope="col">Check-in</th>
+        <th scope="col">Check-out</th>
+        <th scope="col">Status</th>
+        <th scope="col">Cijena</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let s of rezervacijaPodaci">
+        <td>{{s.korisnik}}</td>
+        <td>{{s.brojOsoba}}</td>
+        <td>{{s.djeca}}</td>
+        <td>{{s.checkIn}}</td>
+        <td>{{s.checkOut}}</td>
+        <td>{{s.status}}</td>
+        <td>{{s.cijena}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="row">
     <div class="col">
       <label class="form-label">Nova slika:</label>
       <input class="form-control" type="file" id="slika-input" accept="image/*" (change)="generisi_preview()"/>
       <img style="max-width: 100%; height: 200px" src="{{slika.slika}}">
-      <button class="btn-secondary" (click)="spasiSliku()">Spasi</button>
+      <button class="btn btn-primary" (click)="spasiSliku()">Spasi</button>
     </div>
   </div>
   </div>
@@ -43,4 +70,10 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
