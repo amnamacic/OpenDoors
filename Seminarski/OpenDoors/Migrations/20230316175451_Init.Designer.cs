@@ -12,7 +12,7 @@ using OpenDoors.Data;
 namespace OpenDoors.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230316134943_Init")]
+    [Migration("20230316175451_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -686,7 +686,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", "korisnickiNalog")
                         .WithMany()
                         .HasForeignKey("KorisnickiNalogId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("korisnickiNalog");
@@ -697,7 +697,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", "KorisnickiNalog")
                         .WithMany()
                         .HasForeignKey("KorisnickiNalogId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("KorisnickiNalog");
@@ -708,13 +708,13 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KrajnjiKorisnik", "KrajnjiKorisnik")
                         .WithMany()
                         .HasForeignKey("KrajnjiKorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.PromoKodovi", "PromoKodovi")
                         .WithMany()
                         .HasForeignKey("PromoKodoviId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("KrajnjiKorisnik");
@@ -727,7 +727,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Korisnik", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Korisnik");
@@ -738,7 +738,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -749,7 +749,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Grad", "Grad")
                         .WithMany()
                         .HasForeignKey("GradId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Grad");
@@ -760,19 +760,19 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Lokacija", "Lokacija")
                         .WithMany()
                         .HasForeignKey("LokacijaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.TipNekretnine", "Tip")
                         .WithMany()
                         .HasForeignKey("TipId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.Vlasnik", "Vlasnik")
                         .WithMany()
                         .HasForeignKey("VlasnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Lokacija");
@@ -787,13 +787,13 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.PogodnostiNekretnine", "PogodnostiNekretnine")
                         .WithMany()
                         .HasForeignKey("PogodnostiNekretnineId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Nekretnina");
@@ -806,13 +806,13 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", "KorisnickiNalog")
                         .WithMany()
                         .HasForeignKey("KorisnickiNalogId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.Rezervacija", "Rezervacija")
                         .WithMany()
                         .HasForeignKey("RezervacijaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("KorisnickiNalog");
@@ -825,7 +825,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Nekretnina");
@@ -836,13 +836,13 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", "KorisnickiNalog")
                         .WithMany()
                         .HasForeignKey("KorisnickiNalogId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("KorisnickiNalog");
@@ -855,19 +855,19 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Korisnik", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.KreditnaKartica", "KreditnaKartica")
                         .WithMany()
                         .HasForeignKey("KreditnaKarticaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Korisnik");
@@ -882,7 +882,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Nekretnina");
@@ -893,25 +893,25 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Korisnik", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.KreditnaKartica", "KreditnaKartica")
                         .WithMany()
                         .HasForeignKey("KreditnaKarticaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("OpenDoors.Models.Rezervacija", "Rezervacija")
                         .WithMany()
                         .HasForeignKey("RezervacijaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Korisnik");
@@ -928,7 +928,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.KorisnickiNalog", null)
                         .WithOne()
                         .HasForeignKey("OpenDoors.Models.Korisnik", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -937,7 +937,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Korisnik", null)
                         .WithOne()
                         .HasForeignKey("OpenDoors.Models.KrajnjiKorisnik", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -946,7 +946,7 @@ namespace OpenDoors.Migrations
                     b.HasOne("OpenDoors.Models.Korisnik", null)
                         .WithOne()
                         .HasForeignKey("OpenDoors.Models.Vlasnik", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
