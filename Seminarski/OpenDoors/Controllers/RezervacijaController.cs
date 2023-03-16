@@ -23,18 +23,19 @@ namespace OpenDoors.Controllers
         [HttpPost]
         public Rezervacija Snimi([FromBody] RezervacijaAdd x)
         {
+            var cijenaPoDanu = _dbContext.Nekretnina.Find(x.NekretninaId).CijenaPoDanu;
 
             var rezervacija = new Rezervacija
             {
                BrojOsoba=x.BrojOsoba,
                Djeca=x.Djeca,
-               Status=x.Status,
+               Status="Aktivna",
                CheckIn=x.CheckIn,
                CheckOut=x.CheckOut,
-               Cijena=x.Cijena,
+               Cijena= (x.CheckOut.Subtract(x.CheckIn)).Days*cijenaPoDanu ,
                NekretninaId=x.NekretninaId,
                KorisnikId=x.KorisnikId,
-              
+               KreditnaKarticaId=x.KreditnaKarticaId
             };
 
             _dbContext.Add(rezervacija);
@@ -57,10 +58,31 @@ namespace OpenDoors.Controllers
                     Cijena = s.Cijena,
                     NekretninaId = s.NekretninaId,
                     KorisnikId = s.KorisnikId,
-
+                    KreditnaKartica=s.KreditnaKartica.TipKartice + s.KreditnaKartica.BrojKartice,
                 })
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
+        }
+        [HttpGet]
+        public List<RezervacijaGetAll> GetById(int nekretninaId)
+        {
+            
+            var data = _dbContext.Rezervacija.Where(x => x.NekretninaId == nekretninaId)
+                .OrderBy(s => s.Id)
+                .Select(s => new RezervacijaGetAll
+                {
+                    BrojOsoba = s.BrojOsoba,
+                    Djeca = s.Djeca,
+                    Status = s.Status,
+                    CheckIn = s.CheckIn,
+                    CheckOut = s.CheckOut,
+                    Cijena = s.Cijena,
+                    Nekretnina = s.Nekretnina.Adresa+s.Nekretnina.Lokacija.Naziv,
+                    Korisnik = s.Korisnik.Ime+s.Korisnik.Prezime,
+                    KreditnaKartica = s.KreditnaKartica.TipKartice + s.KreditnaKartica.BrojKartice,
+                })
+                .AsQueryable();
+            return data.Take(100).ToList();
         }
     }
 }

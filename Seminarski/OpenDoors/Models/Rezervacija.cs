@@ -9,7 +9,7 @@ namespace OpenDoors.Models
         public int Id { get; set; }
         public DateTime DatumRezervacije { get; set; }
         public int BrojOsoba { get; set; }
-        public bool Djeca { get; set; }
+        public int Djeca { get; set; }
         public string Status { get; set; }
         public DateTime DatumOtkazivanja { get; set; }
         public double Cijena { get; set; }
@@ -22,5 +22,8 @@ namespace OpenDoors.Models
         [ForeignKey("KorisnikId")]
         public Korisnik Korisnik { get; set; }
         public int KorisnikId { get; set; }
+        [ForeignKey("KreditnaKarticaId")]
+        public KreditnaKartica KreditnaKartica { get; set; }
+        public int KreditnaKarticaId { get; set; }
     }
 }

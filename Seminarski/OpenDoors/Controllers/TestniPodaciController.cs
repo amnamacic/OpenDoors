@@ -12,6 +12,7 @@ namespace OpenDoors.Controllers
     public class TestniPodaciController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
+        private object kreditneKartice;
 
         public TestniPodaciController(ApplicationDbContext dbContext)
         {
@@ -30,6 +31,8 @@ namespace OpenDoors.Controllers
             data.Add("Rezervacija", _dbContext.Rezervacija.Count());
             data.Add("TipNekretnine", _dbContext.TipNekretnine.Count());
             data.Add("Lokacija", _dbContext.TipNekretnine.Count());
+            data.Add("KreditnaKartica", _dbContext.KreditnaKartica.Count());
+
 
 
             return Ok(data);
@@ -45,6 +48,7 @@ namespace OpenDoors.Controllers
             var rezervacije = new List<Rezervacija>();
             var tipoviNekretnina = new List<TipNekretnine>();
             var lokacije = new List<Lokacija>();
+            var kreditneKartice = new List<KreditnaKartica>();
 
 
             //vlasnici.Add(new Vlasnik { Ime = "Asmira", Prezime = "Husić", Spol = "Ž", GodinaRodjenja = 2001, BrojTelefona = "062/555-111",  Username="asmira.husic", Password="Asmira123", Email="asmira.husic@edu.fit.ba" });
@@ -67,8 +71,10 @@ namespace OpenDoors.Controllers
             nekretnine.Add(new Nekretnina { Status = true, DatumPostavljanja = DateTime.Now, BrojKvadrata = 80, BrojKreveta = 16, BrojSoba = 8, BrojKupatila = 4, CijenaPoDanu = 50, Adresa = "Prkanj bb", Avans = true, Vlasnik = vlasnici[0], Lokacija = lokacije[0], Tip = tipoviNekretnina[0] });
             nekretnine.Add(new Nekretnina { Status = true, DatumPostavljanja = DateTime.Now, BrojKvadrata = 60, BrojKreveta = 8, BrojSoba = 2, BrojKupatila = 2, CijenaPoDanu = 50, Adresa = "Orasje bb", Avans = true, Vlasnik = vlasnici[0], Lokacija = lokacije[1], Tip = tipoviNekretnina[1] });
 
-            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 5, Djeca = true, Status = "Zavrsena", DatumOtkazivanja = DateTime.Now, Cijena = 100, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[0], Korisnik = krajnjiKorisnici[0] });
-            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 3, Djeca = false, Status = "U toku", DatumOtkazivanja = DateTime.Now, Cijena = 80, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[1], Korisnik = krajnjiKorisnici[0] });
+            kreditneKartice.Add(new KreditnaKartica { BrojKartice = "123456789876", TipKartice = "Debitna", datumIsteka = DateTime.Now, CVV = 123, Korisnik = krajnjiKorisnici[0] });
+
+            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 5, Djeca = 3, Status = "Zavrsena", DatumOtkazivanja = DateTime.Now, Cijena = 100, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[0], Korisnik = krajnjiKorisnici[0], KreditnaKartica = kreditneKartice[0]});
+            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 3, Djeca = 1, Status = "U toku", DatumOtkazivanja = DateTime.Now, Cijena = 80, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[1], Korisnik = krajnjiKorisnici[0], KreditnaKartica = kreditneKartice[0] });
 
            
 
@@ -83,7 +89,9 @@ namespace OpenDoors.Controllers
             _dbContext.AddRange(krajnjiKorisnici);
             _dbContext.AddRange(vlasnici);
             _dbContext.AddRange(tipoviNekretnina);
+            _dbContext.AddRange(kreditneKartice);
             _dbContext.AddRange(rezervacije);
+            
             _dbContext.SaveChanges();
 
             return Count();

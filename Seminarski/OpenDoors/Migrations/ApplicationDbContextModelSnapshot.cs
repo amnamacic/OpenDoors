@@ -154,6 +154,9 @@ namespace OpenDoors.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CVV")
+                        .HasColumnType("int");
+
                     b.Property<int>("KorisnikId")
                         .HasColumnType("int");
 
@@ -164,8 +167,8 @@ namespace OpenDoors.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Validna")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("datumIsteka")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -493,10 +496,13 @@ namespace OpenDoors.Migrations
                     b.Property<DateTime>("DatumRezervacije")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("Djeca")
-                        .HasColumnType("bit");
+                    b.Property<int>("Djeca")
+                        .HasColumnType("int");
 
                     b.Property<int>("KorisnikId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KreditnaKarticaId")
                         .HasColumnType("int");
 
                     b.Property<int>("NekretninaId")
@@ -512,6 +518,8 @@ namespace OpenDoors.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("KorisnikId");
+
+                    b.HasIndex("KreditnaKarticaId");
 
                     b.HasIndex("NekretninaId");
 
@@ -847,6 +855,12 @@ namespace OpenDoors.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OpenDoors.Models.KreditnaKartica", "KreditnaKartica")
+                        .WithMany()
+                        .HasForeignKey("KreditnaKarticaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OpenDoors.Models.Nekretnina", "Nekretnina")
                         .WithMany()
                         .HasForeignKey("NekretninaId")
@@ -854,6 +868,8 @@ namespace OpenDoors.Migrations
                         .IsRequired();
 
                     b.Navigation("Korisnik");
+
+                    b.Navigation("KreditnaKartica");
 
                     b.Navigation("Nekretnina");
                 });

@@ -3,6 +3,7 @@ using OpenDoors.Models;
 using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using OpenDoors.Data;
+using System.Text.Json.Serialization.Metadata;
 
 namespace OpenDoors.Controllers
 {
@@ -26,9 +27,11 @@ namespace OpenDoors.Controllers
 
             var kreditnaKartica = new KreditnaKartica
             {
-               BrojKartice=x.BrojKartice,
-               TipKartice=x.TipKartice,
-               KorisnikId=x.KorisnikId,
+                BrojKartice = x.BrojKartice,
+                TipKartice = x.TipKartice,
+                KorisnikId = x.KorisnikId,
+                CVV = x.CVV,
+                datumIsteka=x.datumIsteka,
             };
 
             _dbContext.Add(kreditnaKartica);
@@ -51,8 +54,22 @@ namespace OpenDoors.Controllers
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
         }
+
+        [HttpGet]
+        public List<KreditnaKarticaGetAll> GetById(int korisnikId)
+        {
+            var data = _dbContext.KreditnaKartica
+                .OrderBy(s => s.TipKartice)
+                .Select(s => new KreditnaKarticaGetAll
+                {
+                    BrojKartice = s.BrojKartice,
+                    TipKartice = s.TipKartice,
+                    datumIsteka=s.datumIsteka,
+                    CVV = s.CVV,
+                    Id=s.Id,
+                })
+                .ToList();
+            return data;
+        }
     }
 }
-
-
-

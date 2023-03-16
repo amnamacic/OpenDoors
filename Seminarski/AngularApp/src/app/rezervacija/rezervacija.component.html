@@ -4,24 +4,19 @@
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Broj osoba:</label>
-          <input type="text" class="form-control" placeholder="Unesite broj osoba" formControlName="brojOsoba">
-          <div class="form-text text-danger" *ngIf="brojOsoba.errors?.['required'] && (brojOsoba.dirty || brojOsoba.touched)">
-           Unos broja osoba je obavezan.
-          <div class="form-text text-danger" *ngIf="brojOsoba.errors?.['pattern'] && (brojOsoba.dirty || brojOsoba.touched)">
-            Možete unijeti samo brojeve.
+          <input type="number" class="form-control" placeholder="Unesite broj osoba" formControlName="brojOsoba">
+          <div class="form-text text-danger"
+               *ngIf="brojOsoba.errors?.['required'] && (brojOsoba.dirty || brojOsoba.touched)">
+            Unos broja osoba je obavezan.
           </div>
         </div>
       </div>
-        </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Djeca:</label>
-          <input type="text" class="form-control" placeholder="Unesite broj djece:" formControlName="brojDjece">
-          <div class="form-text text-danger" *ngIf="brojDjece.errors?.['required'] && (brojDjece.dirty || brojDjece.touched)">
+          <input type="number" class="form-control" placeholder="Unesite broj djece:" formControlName="djeca">
+          <div class="form-text text-danger" *ngIf="djeca.errors?.['required'] && (djeca.dirty || djeca.touched)">
             Unos broja djece je obavezan.
-          </div>
-          <div class="form-text text-danger" *ngIf="!!brojDjece.errors?.['minlength'] && (brojDjece.dirty || brojDjece.touched)">
-            Možete unijeti samo brojeve.
           </div>
         </div>
       </div>
@@ -40,31 +35,89 @@
         <div class="form-group">
           <label>Check-out: </label>
           <input type="date" class="form-control" formControlName="checkOut">
-          <div class="form-text text-danger" *ngIf="checkOut.errors?.['required'] && (checkOut.dirty || checkOut.touched)">
-           Unos check-out-a je obavezan.
+          <div class="form-text text-danger"
+               *ngIf="checkOut.errors?.['required'] && (checkOut.dirty || checkOut.touched)">
+            Unos check-out-a je obavezan.
           </div>
         </div>
       </div>
     </div>
-      <div class="row">
-        <div class="col-md-6 mb-4">
-          <div class="form-group">
-            <label>Broj kartice: </label>
-            <input type="text" class="form-control" formControlName="brojKartice">
-            <div class="form-text text-danger" *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
-              Unos broja kartice je obavezan.
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 mb-4">
-          <div class="form-group">
-            <label class="form-label">Tip kartice: </label>
-            <select class="form-control">
-              <option *ngFor="let x of tipoviKartice" [value]="x">{{x}}</option>
-            </select>
-          </div>
+    <div class="col-md-6 mb-4">
+      <div class="form-group">
+        <label class="form-label">Odaberi karticu: </label>
+        <select type="number" class="form-control" formControlName="kreditnaKarticaId">
+          <option *ngFor="let x of kreditnaKarticaPodaci" [ngValue]="x.id">{{x.tipKartice}}-{{x.brojKartice}}</option>
+        </select>
+        <div class="form-text text-danger"
+             *ngIf="kreditnaKarticaId.errors?.['required'] && (kreditnaKarticaId.dirty || kreditnaKarticaId.touched)">
+          Unos kreditne kartice je obavezan.
         </div>
       </div>
-    <button type="submit"  class="btn btn-primary" >Izvrši rezervaciju</button>
+    </div>
+    <button class="btn btn-primary" (click)="otvoriModal()">Unesi novu karticu</button>
+    <button type="submit" class="btn btn-primary">Izvrši rezervaciju</button>
   </form>
 </section>
+
+
+<div *ngIf="uplata!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive2" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block; margin-left: 30%; width:50%;">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" style="background-color: rgb(53,53,53); color: white;">
+      <div class="modal-header">
+        <button type="button" class="btn btn-close" aria-label="Close" (click)="uplata=null"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="uplata" (ngSubmit)="spasiKarticu()">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label class="form-label">Tip kartice: </label>
+                <select class="form-control" formControlName="tipKartice">
+                  <option *ngFor="let x of tipoviKartice" [value]="x.naziv">{{x.naziv}}</option>
+                </select>
+                <div class="form-text text-danger"
+                     *ngIf="tipKartice.errors?.['required'] && (tipKartice.dirty || tipKartice.touched)">
+                  Unos tipa kartice je obavezan.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label>Broj kartice:</label>
+                <input type="text" class="form-control" placeholder="Unesite broj djece:"
+                       formControlName="brojKartice">
+                <div class="form-text text-danger"
+                     *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
+                  Unos broja kartice je obavezan.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label>Datum isteka:</label>
+                <input type="date" class="form-control" formControlName="datumIsteka">
+                <div class="form-text text-danger"
+                     *ngIf="datumIsteka.errors?.['required'] && (datumIsteka.dirty || datumIsteka.touched)">
+                  Unos datuma isteka je obavezan.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="form-group">
+                <label>CVV: </label>
+                <input type="number" class="form-control" formControlName="CVV">
+                <div class="form-text text-danger" *ngIf="CVV.errors?.['required'] && (CVV.dirty || CVV.touched)">
+                  Unos CVC je obavezan.
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Spasi</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

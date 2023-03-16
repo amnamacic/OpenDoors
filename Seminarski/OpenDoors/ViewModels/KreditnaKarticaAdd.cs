@@ -7,6 +7,8 @@ namespace OpenDoors.ViewModels
     {
         public string BrojKartice { get; set; }
         public string TipKartice { get; set; }
+        public int CVV { get; set; }
+        public DateTime datumIsteka { get; set; }
         public int KorisnikId { get; set; }
     }
 }
