@@ -26,10 +26,12 @@ namespace OpenDoors.Controllers
             {
                 recenzija = new Recenzije();
                 _dbContext.Add(recenzija);
+                recenzija.DatumPostavljanja=DateTime.Now;
             }
             else
             {
                 recenzija = _dbContext.Recenzije.Find(x.Id);
+                recenzija.DatumModifikacije=DateTime.Now;
             }
 
             recenzija.Ocjena = x.Ocjena;
@@ -49,14 +51,49 @@ namespace OpenDoors.Controllers
                 .OrderBy(s => s.Id)
                 .Select(s => new RecenzijaGetAll
                 {
+                    Id= s.Id,
                     Ocjena=s.Ocjena,
                     Komentar=s.Komentar,
                     Korisnik=s.KorisnickiNalog.Username,
                     DatumModifikacije=s.DatumModifikacije,
-                    DatumPostavljanja=s.DatumPostavljanja
+                    DatumPostavljanja=s.DatumPostavljanja.ToString("dd/MM/yyyy")
                 })
                 .AsQueryable();
             return data.Take(100).ToList();
+        }
+
+        [HttpGet]
+        public List<RecenzijaGetAll> GetByKomentarId(int komentarId)
+        {
+
+            var data = _dbContext.Recenzije.Where(x => x.Id == komentarId)
+                .OrderBy(s => s.Id)
+                .Select(s => new RecenzijaGetAll
+                {
+                    Id = s.Id,
+                    Ocjena = s.Ocjena,
+                    Komentar = s.Komentar,
+                    Korisnik = s.KorisnickiNalog.Username,
+                    DatumModifikacije = s.DatumModifikacije,
+                    DatumPostavljanja = s.DatumPostavljanja.ToString("dd/MM/yyyy"),
+                    NekretninaId=s.NekretninaId,
+                })
+                .AsQueryable();
+            return data.Take(100).ToList();
+        }
+
+        [HttpPost("{ID}")]
+        public ActionResult Delete(int id)
+        {
+            Recenzije? recenzija = _dbContext.Recenzije.Find(id);
+
+            if (recenzija == null)
+                return BadRequest("pogresan ID");
+
+            _dbContext.Remove(recenzija);
+
+            _dbContext.SaveChanges();
+            return Ok(recenzija);
         }
     }
 }
