@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'pomoc', component: PomocComponent},
   { path: 'kategorija', component: KategorijaComponent },
   { path: 'login', component: LogInComponent },
-  { path: 'nekretnine', component: NekretnineComponent },
+  { path: 'nekretnine/:id', component: NekretnineComponent },
   { path: 'kuce', component: KuceComponent },
   { path: 'stanovi', component: StanoviComponent },
   { path: 'registracija', component: RegistracijaComponent },

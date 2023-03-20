@@ -58,7 +58,7 @@ namespace OpenDoors.Controllers
         [HttpGet]
         public List<KreditnaKarticaGetAll> GetById(int korisnikId)
         {
-            var data = _dbContext.KreditnaKartica
+            var data = _dbContext.KreditnaKartica.Where(x=>x.KorisnikId==korisnikId)
                 .OrderBy(s => s.TipKartice)
                 .Select(s => new KreditnaKarticaGetAll
                 {

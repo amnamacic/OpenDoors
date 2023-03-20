@@ -49,7 +49,7 @@ export class LogInComponent implements OnInit{
         if (x.isLogiran) {
           porukaSuccess("Uspješna prijava!");
           AutentifikacijaHelper.setLoginInfo(x)
-          this.router.navigateByUrl("/pocetna");
+          this.router.navigate(['nekretnine/', 0]);
         }
         else
         {

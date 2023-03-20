@@ -49,7 +49,6 @@ export class DetaljiNekretnineComponent implements OnInit {
         Validators.required]),
       ocjena: new FormControl('', [
         Validators.required,
-        Validators.pattern('[0-9]'),
         Validators.min(1),
         Validators.max(10)
       ]),
@@ -133,7 +132,6 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.httpKlijent.post(`${MojConfig.adresa_servera}/Recenzije/AddUpdate`, this.noviKomentar.value,MojConfig.http_opcije()).subscribe(x=>{
         this.fetchRecenzije();
         porukaSuccess("Uspjesno dodan komentar!");
-        this.noviKomentar=null;
       });
     }
     else
@@ -143,7 +141,6 @@ export class DetaljiNekretnineComponent implements OnInit {
   urediKomentar(s:any) {
     this.httpKlijent.get(MojConfig.adresa_servera+ "/Recenzije/GetByKomentarId?komentarId=" + s.id,MojConfig.http_opcije()).subscribe(x=>{
       this.komentarPodaci=x;
-
     });
   }
 

@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./korisnicki-profil.component.css']
 })
 export class KorisnickiProfilComponent  implements OnInit{
+  rezervacije: any;
 
   constructor(private httpKlijent: HttpClient, private router :Router) {
   }
@@ -39,4 +40,15 @@ export class KorisnickiProfilComponent  implements OnInit{
     this.router.navigate(['nekretnine-vlasnik/', s]);
   }
 
+  otvoriRezervacijeKorisnika(id: number) {
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Rezervacija/GetByKorisnikId?korisnikId=" + id,MojConfig.http_opcije()).subscribe(x=>{
+      this.rezervacije = x;
+    });
+  }
+
+  otkaziRezervaciju(id:number) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/OtkaziRezervaciju/${id}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.otvoriRezervacijeKorisnika(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
+    });
+  }
 }

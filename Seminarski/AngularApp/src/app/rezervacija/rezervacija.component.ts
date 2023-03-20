@@ -18,6 +18,7 @@ declare function porukaError(a: string): any;
 export class RezervacijaComponent {
   korisnikId: number;
   kreditnaKarticaPodaci: any;
+   errors: any;
 
   loginInfo(): LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
@@ -45,9 +46,11 @@ export class RezervacijaComponent {
     this.register = this.formBuilder.group({
       brojOsoba: new FormControl('', [
         Validators.required,
+        Validators.min(1)
       ]),
       djeca: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.min(0)
       ]),
       checkIn: new FormControl('', [
         Validators.required,
@@ -87,12 +90,10 @@ export class RezervacijaComponent {
   collect() {
     if (this.register.valid) {
       this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/Snimi`, this.register.value, MojConfig.http_opcije()).subscribe(x => {
-        this.router.navigateByUrl("/pocetna");
         porukaSuccess('Rezervacija uspjesna!');
-      });
+      }, error => {porukaError("Nekretnina je zauzeta u izabranom periodu.")});
     } else
       console.table(this.register.value);
-
   }
 
   fetchKreditneKartice() {

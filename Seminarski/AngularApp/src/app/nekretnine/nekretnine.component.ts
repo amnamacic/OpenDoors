@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MojConfig} from "../../MojConfig";
 
 @Component({
@@ -10,19 +10,29 @@ import {MojConfig} from "../../MojConfig";
 })
 export class NekretnineComponent implements OnInit {
   nekretninaPodaci: any;
+   Id: any;
 
 
-  constructor(private httpKlijent: HttpClient, private router: Router) {
+  constructor(private httpKlijent: HttpClient, private router: Router,private route: ActivatedRoute) {
+  }
+
+  ngOnInit() :void{
+    this.route.params.subscribe(s=>{
+      this.Id=+s["id"];
+    });
+    this.getNekretnine();
   }
 
   getNekretnine() :void
   {
-    this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",MojConfig.http_opcije()).subscribe(x=>{
+    if(this.Id==0)
+      this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",MojConfig.http_opcije()).subscribe(x=>{
       this.nekretninaPodaci = x;
     });
-  }
-  ngOnInit() :void{
-    this.getNekretnine();
+    else
+      this.httpKlijent.get(`${MojConfig.adresa_servera}/Nekretnina/GetByTip?tipId=`+this.Id,MojConfig.http_opcije()).subscribe(x=>{
+        this.nekretninaPodaci=x;
+      });
   }
 
   detaljiNekretnine(s:any) {

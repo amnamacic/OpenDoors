@@ -141,7 +141,7 @@ namespace OpenDoors.Controllers
                     adresa = s.Adresa,
                     cijenaPoDanu = s.CijenaPoDanu,
                     lokacijaId = s.LokacijaId,
-                    lokacija = s.Lokacija,
+                    lokacija = s.Lokacija.DioGrada,
                     tip = s.Tip,
                     tipId = s.TipId,
                     vlasnikId = s.VlasnikId,

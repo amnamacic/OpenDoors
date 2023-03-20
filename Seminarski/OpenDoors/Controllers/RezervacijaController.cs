@@ -4,6 +4,7 @@ using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using OpenDoors.Data;
 using Microsoft.VisualBasic;
+using System;
 
 namespace OpenDoors.Controllers
 {
@@ -22,9 +23,15 @@ namespace OpenDoors.Controllers
 
 
         [HttpPost]
-        public Rezervacija Snimi([FromBody] RezervacijaAdd x)
+        public ActionResult<Rezervacija> Snimi([FromBody] RezervacijaAdd x)
         {
             var cijenaPoDanu = _dbContext.Nekretnina.Find(x.NekretninaId).CijenaPoDanu;
+            var rezervacijeNekretnine = _dbContext.Rezervacija.Where(y => y.NekretninaId == x.NekretninaId).ToList();
+            foreach(var rez in rezervacijeNekretnine)
+            {
+                if (x.CheckIn.IsBetween(rez.CheckIn, rez.CheckOut) || x.CheckOut.IsBetween(rez.CheckIn, rez.CheckOut))
+                    return BadRequest("Nekretnina je zauzeta u izabranom periodu.");
+            }            
 
             var rezervacija = new Rezervacija
             {
@@ -72,18 +79,55 @@ namespace OpenDoors.Controllers
                 .OrderBy(s => s.Id)
                 .Select(s => new RezervacijaGetAll
                 {
+                    Id=s.Id,
                     BrojOsoba = s.BrojOsoba,
                     Djeca = s.Djeca,
                     Status = s.Status,
                     CheckIn = s.CheckIn.ToString("MM/dd/yyyy"),
                     CheckOut = s.CheckOut.ToString("MM/dd/yyyy"),
                     Cijena = s.Cijena,
-                    Nekretnina = s.Nekretnina.Adresa+s.Nekretnina.Lokacija.Naziv,
+                    Nekretnina = s.Nekretnina.Adresa+ ", " + s.Nekretnina.Lokacija.Naziv,
                     Korisnik = s.Korisnik.Ime+ " "+s.Korisnik.Prezime,
                     KreditnaKartica = s.KreditnaKartica.TipKartice + s.KreditnaKartica.BrojKartice,
                 })
                 .AsQueryable();
             return data.Take(100).ToList();
+        }
+        [HttpGet]
+        public List<RezervacijaGetAll> GetByKorisnikId(int korisnikId)
+        {
+
+            var data = _dbContext.Rezervacija.Where(x => x.KorisnikId == korisnikId)
+                .OrderBy(s => s.Id)
+                .Select(s => new RezervacijaGetAll
+                {
+                    Id=s.Id,
+                    BrojOsoba = s.BrojOsoba,
+                    Djeca = s.Djeca,
+                    Status = s.Status,
+                    CheckIn = s.CheckIn.ToString("MM/dd/yyyy"),
+                    CheckOut = s.CheckOut.ToString("MM/dd/yyyy"),
+                    Cijena = s.Cijena,
+                    Nekretnina = s.Nekretnina.Adresa + ", " + s.Nekretnina.Lokacija.Naziv,
+                    Korisnik = s.Korisnik.Ime + " " + s.Korisnik.Prezime,
+                    KreditnaKartica = s.KreditnaKartica.TipKartice + s.KreditnaKartica.BrojKartice,
+                })
+                .AsQueryable();
+            return data.Take(100).ToList();
+        }
+
+        [HttpPost("{ID}")]
+        public ActionResult OtkaziRezervaciju(int id)
+        {
+            Rezervacija? rezervacija = _dbContext.Rezervacija.Find(id);
+
+            if (rezervacija == null)
+                return BadRequest("pogresan ID");
+
+            _dbContext.Remove(rezervacija);
+
+            _dbContext.SaveChanges();
+            return Ok(rezervacija);
         }
     }
 }

@@ -23,6 +23,7 @@ export class RegistracijaComponent implements OnInit{
 
 
   gradPodaci: any;
+   vlasnik: any;
 
 
   constructor(private httpKlijent: HttpClient, private router: Router, private formBuilder: FormBuilder) {
@@ -74,27 +75,16 @@ export class RegistracijaComponent implements OnInit{
 
   collect() {
     if(this.register.valid){
-      this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
-        console.warn("rezultat",x);
+      if(this.vlasnik==true)
+        this.httpKlijent.post(`${MojConfig.adresa_servera}/Vlasnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
+          porukaSuccess("Uspjesna registracija!");
+          this.router.navigateByUrl("/login");
+        });
+      else
+        this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
+          porukaSuccess("Neuspjesna registracija!");
       });
 
-      let saljemo = {
-        korisnickoIme:this.username.value,
-        lozinka: this.password.value
-      };
-      this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login/", saljemo,MojConfig.http_opcije())
-        .subscribe((x:LoginInformacije) =>{
-          if (x.isLogiran) {
-
-            AutentifikacijaHelper.setLoginInfo(x)
-            this.router.navigateByUrl("/pocetna");
-          }
-          else
-          {
-            AutentifikacijaHelper.setLoginInfo(null)
-
-          }
-        });
     }
     else
       console.table(this.register.value)
@@ -136,6 +126,13 @@ export class RegistracijaComponent implements OnInit{
 
   get email() : FormControl{
     return this.register.get("email") as FormControl;
+  }
+
+  promjenaVlasnika(event:any) {
+    if (event.target.checked)
+      this.vlasnik= true;
+    else
+      this.vlasnik = false;
   }
 }
 
