@@ -16,9 +16,11 @@
       <tr>{{s.cijenaPoDanu}}KM po danu</tr>
       <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
       <tr>Pogodnosti:</tr>
-      <span *ngFor="let p of s.pogodnosti">{{p}},</span>
+      <span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span>
 
       <button style="float: right" type="button" class="btn btn-outline-dark" (click)="otvoriRezervacije()">Rezervacije
+      </button>
+      <button style="float: right" type="button" class="btn btn-outline-dark" (click)="urediNekretninu(s)">Uredi
       </button>
     </div>
 
@@ -133,14 +135,28 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="slike=null"></button>
       </div>
       <div class="modal-body">
-        <td>
-          <img *ngFor="let s of objekat.slike_ids" [src]="getslika(s)" style="height: 300px;width: 400px">
-        </td>
+        <div class="container" style="padding: 0;margin-right: 1%; display: inline;position: relative;" *ngFor="let x of objekat.slike_ids" >
+          <img  [src]="getslika(x)" style="height: 300px;width: 400px">
+          <button type="button" class="btn-close" aria-label="Close" style="position: absolute;right: 0" (click)="obrisiSliku(x)"></button>
       </div>
     </div>
   </div>
 </div>
+</div>
 
+<div *ngIf="odabranaNekretnina!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive3" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog modal-xl" >
+    <div class="modal-content" style="background-color: rgb(53,53,53)">
+      <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="odabranaNekretnina=null"></button>
+      </div>
+      <div class="modal-body">
+        <app-add-nekretnina [urediNekretninu]="odabranaNekretnina"></app-add-nekretnina>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

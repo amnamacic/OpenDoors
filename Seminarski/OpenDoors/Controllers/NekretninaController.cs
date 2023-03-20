@@ -36,7 +36,6 @@ namespace OpenDoors.Controllers
 
 
         [HttpPost]
-
         public Nekretnina Snimi([FromBody] NekretninaAdd x)
         {
             Nekretnina? objekat;
@@ -62,33 +61,70 @@ namespace OpenDoors.Controllers
             objekat.TipId = x.TipId;
             objekat.VlasnikId = x.VlasnikId;
 
-            _dbContext.SaveChanges(); //exceute sql -- update Predmet set ... where...
+            _dbContext.SaveChanges();
 
-
-            foreach (var s in x.slike)
+            if (x.Id == 0)
             {
-                var noviSlika = new Slike
+                foreach (var s in x.slike)
                 {
-                    Slika = s.ParsirajBase64(),
-                    Nekretnina = objekat,
-                    DatumPostavljanja = DateTime.Now
-                };
-                _dbContext.Add(noviSlika);
+                    var noviSlika = new Slike
+                    {
+                        Slika = s.ParsirajBase64(),
+                        Nekretnina = objekat,
+                        DatumPostavljanja = DateTime.Now
+                    };
+                    _dbContext.Add(noviSlika);
+                    _dbContext.SaveChanges(); ;
+                }
 
-                _dbContext.SaveChanges(); ;
+                foreach (var s in x.selectedPogodnosti)
+                {
+                    var n = new NekretninaPogodnostiNekretnine
+                    {
+                        Nekretnina = objekat,
+                        PogodnostiNekretnineId = s
+                    };
+                    _dbContext.Add(n);
+                    _dbContext.SaveChanges();
+                }
+            }            
+
+            if (x.Id != 0)
+            {
+                foreach (var s in x.selectedPogodnosti)
+                {
+                    var postojecePog = _dbContext.NekretninaPogodnostiNekretnine.Where(y => y.NekretninaId == x.Id).Select(y => y.PogodnostiNekretnineId).ToList();
+                    if (!postojecePog.Contains(s))
+                    {
+                        var n = new NekretninaPogodnostiNekretnine
+                        {
+                            Nekretnina = objekat,
+                            PogodnostiNekretnineId = s
+                        };
+                        _dbContext.Add(n);
+                        _dbContext.SaveChanges();
+                    }
+                }
+
+                var postojecePogodnosti = _dbContext.NekretninaPogodnostiNekretnine.Where(y => y.NekretninaId == x.Id).Select(y => y.PogodnostiNekretnineId).ToList();
+
+                foreach (var p in postojecePogodnosti)
+                if (!x.selectedPogodnosti.Contains(p))
+                {
+                    NekretninaPogodnostiNekretnine? nekretninaPogodnost = _dbContext.NekretninaPogodnostiNekretnine.Where(y => y.NekretninaId == x.Id && y.PogodnostiNekretnineId == p).FirstOrDefault();
+
+                    if (nekretninaPogodnost != null)
+                    {
+                        _dbContext.Remove(nekretninaPogodnost);
+                        _dbContext.SaveChanges();
+                    }
+                }
             }
 
-            foreach (var s in x.selectedPogodnosti)
-            {
-                var n = new NekretninaPogodnostiNekretnine
-                {
-                    Nekretnina = objekat,
-                    PogodnostiNekretnineId = s
-                };
-                _dbContext.Add(n);
-            }
+            _dbContext.SaveChanges();
             return objekat;
         }
+        
         [HttpGet]
         public ActionResult GetAll()
         {
@@ -128,7 +164,7 @@ namespace OpenDoors.Controllers
                     BrojKvadrata = s.BrojKvadrata,
                     BrojKupatila = s.BrojKupatila,
                     BrojSoba = s.BrojSoba,
-                    BrojKreveta = s.BrojKvadrata,
+                    BrojKreveta = s.BrojKreveta,
                     Adresa = s.Adresa,
                     CijenaPoDanu = s.CijenaPoDanu,
                     Avans = s.Avans,
@@ -155,7 +191,7 @@ namespace OpenDoors.Controllers
                     BrojKvadrata = s.BrojKvadrata,
                     BrojKupatila = s.BrojKupatila,
                     BrojSoba = s.BrojSoba,
-                    BrojKreveta = s.BrojKvadrata,
+                    BrojKreveta = s.BrojKreveta,
                     Adresa = s.Adresa,
                     CijenaPoDanu = s.CijenaPoDanu,
                     Avans = s.Avans,
@@ -166,7 +202,11 @@ namespace OpenDoors.Controllers
                     TipId = s.TipId,
                     Tip = s.Tip.Opis,
                     slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
-                    Pogodnosti = pogodnosti.Select(x => x.PogodnostiNekretnine.Naziv).ToList()
+                    selectedPogodnosti = pogodnosti.Select(x=> new PogodnostiNekretnineGetAll
+                    {
+                        Id=x.PogodnostiNekretnineId,
+                        Naziv=x.PogodnostiNekretnine.Naziv
+                    }).ToList()
                 })
                 .AsQueryable();
             return data.Take(100).ToList();
@@ -184,7 +224,7 @@ namespace OpenDoors.Controllers
                     BrojKvadrata = s.BrojKvadrata,
                     BrojKupatila = s.BrojKupatila,
                     BrojSoba = s.BrojSoba,
-                    BrojKreveta = s.BrojKvadrata,
+                    BrojKreveta = s.BrojKreveta,
                     Adresa = s.Adresa,
                     CijenaPoDanu = s.CijenaPoDanu,
                     Avans = s.Avans,

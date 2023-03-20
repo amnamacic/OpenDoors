@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UCB7dIY9U2txD155s+WDzqIsebNqCdjq9W3IXsoe0Ko=",
+  "Hash": "LQYJgDGTgS9LSHFD/QIFNJeHyqifLlt4hMEuRAFmEF0=",
   "Source": "OpenDoors",
   "BasePath": "_content/OpenDoors",
   "Mode": "Default",
@@ -85,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\wwwroot\\images\\download.png",
+      "Identity": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\wwwroot\\images\\kuca.png",
       "SourceId": "OpenDoors",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\wwwroot\\",
       "BasePath": "_content/OpenDoors",
-      "RelativePath": "images/download.png",
+      "RelativePath": "images/kuca.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -99,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\download.png"
+      "OriginalItemSpec": "wwwroot\\images\\kuca.png"
     },
     {
       "Identity": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\wwwroot\\js\\site.js",

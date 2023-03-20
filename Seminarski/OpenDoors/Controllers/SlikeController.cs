@@ -49,11 +49,38 @@ namespace OpenDoors.Controllers
 
             if (bajtovi_slike == null)
             {
-                bajtovi_slike = Fajlovi.Ucitaj("wwwroot/images/download.png");
+                bajtovi_slike = Fajlovi.Ucitaj("wwwroot/images/kuca.png");
             }
-
 
             return File(bajtovi_slike, "image/png");
         }
+
+        [HttpGet]
+        public ActionResult GetSlikaString(int nekretnina_id)
+        {
+            var data = _dbContext.Slike.Where(x => x.NekretninaId == nekretnina_id).Select
+                (s => new
+                {
+                    id = s.Id,
+                    slikaString = s.Slika.ToBase64()
+                }).ToList();
+
+            return Ok(data);
+        }
+
+        [HttpPost("{ID}")]
+        public ActionResult Delete(int id)
+        {
+            Slike? slika = _dbContext.Slike.Find(id);
+
+            if (slika == null)
+                return BadRequest("pogresan ID");
+
+            _dbContext.Remove(slika);
+
+            _dbContext.SaveChanges();
+            return Ok(slika);
+        }
+
     }
 }

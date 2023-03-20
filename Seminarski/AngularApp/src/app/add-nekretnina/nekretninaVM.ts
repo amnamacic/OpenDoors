@@ -1,6 +1,5 @@
 export class NekretninaVM {
   id: number;
-
   slike:string[];
   brojKvadrata: number;
   brojSoba: number;
@@ -10,11 +9,8 @@ export class NekretninaVM {
   adresa: string;
   avans: boolean;
   lokacijaId: number;
-  GradOpis: string;
   tipId: number;
-  lokacijaOpis: string;
   tip: string;
   vlasnikId: number;
-
   selectedPogodnosti: boolean[] = [];
 }

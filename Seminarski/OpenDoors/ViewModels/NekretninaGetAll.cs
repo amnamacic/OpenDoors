@@ -1,4 +1,6 @@
-﻿namespace OpenDoors.ViewModels
+﻿using OpenDoors.Models;
+
+namespace OpenDoors.ViewModels
 {
     public class NekretninaGetAll
     {
@@ -16,7 +18,7 @@
         public string Tip { get; set; }
         public int VlasnikId { get; set; }
         public string ImeVlasnik { get; set; }
-        public List<string> Pogodnosti { get; internal set; }
+        public List<PogodnostiNekretnineGetAll> selectedPogodnosti { get;  set; }
         public List<int> slike_ids { get; set; }
     }
 }

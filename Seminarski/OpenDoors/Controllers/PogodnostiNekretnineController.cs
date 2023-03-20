@@ -44,8 +44,7 @@ namespace OpenDoors.Controllers
                 .Select(s => new PogodnostiNekretnineGetAll()
                 {
                     Id=s.Id,
-                    Naziv = s.Naziv
-                    
+                    Naziv = s.Naziv                    
 
                 })
                 .AsQueryable();

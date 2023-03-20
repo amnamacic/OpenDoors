@@ -14,11 +14,9 @@ namespace OpenDoors.ViewModels
         public bool Avans { get; set; }
         public int LokacijaId { get; set; }
         public int TipId { get; set; }
-        public string LokacijaOpis{ get; set; }
         public string Tip { get; set; }
         public int VlasnikId { get; set; } 
         public List<string> slike{ get; set; } 
-        public List<int> selectedPogodnosti { get; set; } 
-      
+        public List<int> selectedPogodnosti { get; set; }       
     }
 }

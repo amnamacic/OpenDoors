@@ -20,14 +20,12 @@ export class DetaljiNekretnineComponent implements OnInit {
   rezervacijaPodaci: any;
    recenzijePodaci: any;
    komentarPodaci: any;
-
+  odabranaNekretnina: any;
+  slike:any;
+  objekat:any;
+  noviKomentar: any;
+  slika:any;
   constructor(private httpKlijent: HttpClient, private router: Router,  private route: ActivatedRoute,private formBuilder: FormBuilder) {
-  }
-  get komentar() : FormControl{
-    return this.noviKomentar.get("komentar") as FormControl;
-  }
-  get ocjena() : FormControl{
-    return this.noviKomentar.get("ocjena") as FormControl;
   }
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
@@ -37,11 +35,13 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.nekretninaId=+s["id"];
       this.fetchPogodnosti();
     })
+
     this.slika =   {
       id:0,
       nekretninaId:this.nekretninaId,
       slika:""
     };
+
     this.fetchRecenzije();
 
     this.noviKomentar=this.formBuilder.group({
@@ -58,6 +58,13 @@ export class DetaljiNekretnineComponent implements OnInit {
     });
   }
 
+  get komentar() : FormControl{
+    return this.noviKomentar.get("komentar") as FormControl;
+  }
+  get ocjena() : FormControl{
+    return this.noviKomentar.get("ocjena") as FormControl;
+  }
+
   fetchPogodnosti() {
     this.httpKlijent.get(MojConfig.adresa_servera + "/Nekretnina/GetById/?nekretninaId="+this.nekretninaId, MojConfig.http_opcije()).subscribe(x => {
       this.pogodnosti = x;
@@ -66,7 +73,7 @@ export class DetaljiNekretnineComponent implements OnInit {
   }
 
   getslika(slika_id: any) {
-    return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
+      return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
   }
   generisi_preview() {
     // @ts-ignore
@@ -81,18 +88,20 @@ export class DetaljiNekretnineComponent implements OnInit {
     }
   }
 
-  slika:any;
+
   spasiSliku() {
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Slike/Snimi`, this.slika, MojConfig.http_opcije()).subscribe(x=>{
       this.fetchPogodnosti();
-      this.slika=null;
     });
   }
 
-  slike:any;
-  objekat:any;
-  noviKomentar: any;
-  isAddMode: boolean;
+  obrisiSliku(x: any) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Slike/Delete/${x}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.fetchPogodnosti();
+      porukaSuccess("Uspjesno ste izbrisali sliku!");
+      this.slike=null;
+    });
+  }
   otvoriSlike(s:any) {
     this.slike=true;
     this.objekat=s;
@@ -102,6 +111,9 @@ export class DetaljiNekretnineComponent implements OnInit {
     this.router.navigate(['rezervacija/', s.id]);
   }
 
+  urediNekretninu(s: any) {
+    this.odabranaNekretnina=s;
+  }
   otvoriRezervacije() {
        this.httpKlijent.get(MojConfig.adresa_servera + "/Rezervacija/GetById?nekretninaId=" + this.nekretninaId).
          subscribe((x:any)=>{
@@ -140,4 +152,5 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.fetchRecenzije();
     });
   }
+
 }
