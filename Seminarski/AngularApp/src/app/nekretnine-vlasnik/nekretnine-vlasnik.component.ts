@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {MojConfig} from "../../MojConfig";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Route, Router, RouterLinkActive, RouterModule} from "@angular/router";
+import {LoginInformacije} from "../helper/login-informacije";
+import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 
 @Component({
   selector: 'app-nekretnine-vlasnik',
@@ -12,6 +14,11 @@ export class NekretnineVlasnikComponent {
 
   constructor(private httpKlijent: HttpClient, private router: Router, private route: ActivatedRoute) {
   }
+
+  loginInfo():LoginInformacije {
+    return AutentifikacijaHelper.getLoginInfo();
+  }
+
   vlasnikId :number;
   nekretninaVlasnikPodaci : any;
   ngOnInit(): void {

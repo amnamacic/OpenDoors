@@ -12,7 +12,7 @@
   <button type="button" class="btn btn-primary" (click)="promjenaLozinke=true"> Promijeni lozinku</button>
 </div>
 <div style="float:left;margin-right: 1%">
-  <button type="button" class="btn btn-primary" (click)="otvoriNekretnineVlasnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje nekretnine</button>
+  <button type="button" class="btn btn-primary" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="otvoriNekretnineVlasnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje nekretnine</button>
 </div>
 <div style="float:left;">
   <button type="button" class="btn btn-primary" (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Rezervacije</button>

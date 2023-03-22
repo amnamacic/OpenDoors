@@ -14,11 +14,11 @@
         <tr>{{s.cijenaPoDanu}}KM po danu</tr>
         <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
         <tr>
-          <button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button>
-          <button class="btn btn-outline-danger" (click)="delete(s)">Obrisi</button>
+          <button class="btn btn-primary"  class="btn btn-outline-danger" (click)="detaljiNekretnine(s)">Detalji</button>
+          <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="delete(s)">Obrisi</button>
         </tr>
       </div>
     </div>
   </div>
 </div>
-<button type="button" class="btn btn-primary" ><a routerLink="/add-nekretnina" style="color:black">Dodaj nekretninu</a></button>
+<button type="button" class="btn btn-primary" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" ><a routerLink="/add-nekretnina" style="color:black">Dodaj nekretninu</a></button>
