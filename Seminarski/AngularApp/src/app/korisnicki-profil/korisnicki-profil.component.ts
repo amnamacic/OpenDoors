@@ -4,17 +4,22 @@ import {LoginInformacije} from "../helper/login-informacije";
 import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {NavComponent} from "../nav/nav.component";
 
+declare function porukaSuccess(a: string): any;
+
+declare function porukaError(a: string): any;
 
 @Component({
   selector: 'app-korisnicki-profil',
   templateUrl: './korisnicki-profil.component.html',
-  styleUrls: ['./korisnicki-profil.component.css']
+  styleUrls: ['./korisnicki-profil.component.css'],
+  providers: [NavComponent]
 })
 export class KorisnickiProfilComponent  implements OnInit{
   rezervacije: any;
 
-  constructor(private httpKlijent: HttpClient, private router :Router) {
+  constructor(private httpKlijent: HttpClient, private router :Router, private odjava:NavComponent) {
   }
   novaSifra:any;
   promjenaLozinke=false;

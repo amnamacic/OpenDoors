@@ -25,6 +25,7 @@ namespace OpenDoors.Controllers
         {
             Nekretnina? nekretnina = _dbContext.Nekretnina.Find(id);
 
+
             if (nekretnina == null)
                 return BadRequest("pogresan ID");
 
@@ -240,6 +241,34 @@ namespace OpenDoors.Controllers
                 .AsQueryable();
             return data.Take(100).ToList();
         }
+        [HttpGet]
+        public ActionResult sortirajPoCijeni()
+        {
+            var data = _dbContext.Nekretnina
+                .OrderBy(s => s.CijenaPoDanu)
+                .Select(s => new
+                {
+                    id = s.Id,
+                    brojKvadrata = s.BrojKvadrata,
+                    brojKupatila = s.BrojKupatila,
+                    brojSoba = s.BrojSoba,
+                    brojKreveta = s.BrojKreveta,
+                    avans = s.Avans,
+                    adresa = s.Adresa,
+                    cijenaPoDanu = s.CijenaPoDanu,
+                    lokacijaId = s.LokacijaId,
+                    lokacija = s.Lokacija.DioGrada,
+                    tip = s.Tip,
+                    tipId = s.TipId,
+                    vlasnikId = s.VlasnikId,
+                    vlasnik = s.Vlasnik.Ime + " " + s.Vlasnik.Prezime,
+                    slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
+
+                })
+                .AsQueryable();
+            return Ok(data.Take(100).ToList());
+        }
+
     }
 }
 

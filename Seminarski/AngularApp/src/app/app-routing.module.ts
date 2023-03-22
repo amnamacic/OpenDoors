@@ -14,6 +14,7 @@ import {AddNekretninaComponent} from "./add-nekretnina/add-nekretnina.component"
 import {KorisnickiProfilComponent} from "./korisnicki-profil/korisnicki-profil.component";
 import {NekretnineVlasnikComponent} from "./nekretnine-vlasnik/nekretnine-vlasnik.component";
 import {RezervacijaComponent} from "./rezervacija/rezervacija.component";
+import {NavComponent} from "./nav/nav.component";
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'nekretnine-vlasnik/:id', component: NekretnineVlasnikComponent },
   { path: 'rezervacija/:id', component: RezervacijaComponent},
   { path: 'add-nekretnina', component: AddNekretninaComponent },
-  { path: 'korisnicki-profil', component: KorisnickiProfilComponent }
+  { path: 'korisnicki-profil', component: KorisnickiProfilComponent },
+  { path: 'nav', component: NavComponent }
 ];
 
 @NgModule({

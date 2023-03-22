@@ -1,3 +1,4 @@
+<button class="btn btn-outline-dark" style="margin-left: 90%; float:right" (click)="sortiraj()">Sortiraj</button>
 <div class="row">
   <div class="col-md-4 ml-auto" *ngFor="let s of nekretninaPodaci"
        style="background-color: white;  width:47%; margin-top:1%;padding: 2%">
@@ -15,7 +16,7 @@
         <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
         <tr>
           <button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button>
-          <button class="btn btn-outline-danger" (click)="delete(s)">Obrisi</button>
+          <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik"(click)="delete(s)">Obrisi</button>
         </tr>
       </div>
     </div>

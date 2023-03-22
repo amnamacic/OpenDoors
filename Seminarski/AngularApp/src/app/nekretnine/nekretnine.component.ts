@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MojConfig} from "../../MojConfig";
+import {LoginInformacije} from "../helper/login-informacije";
+import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 
 @Component({
   selector: 'app-nekretnine',
@@ -14,6 +16,10 @@ export class NekretnineComponent implements OnInit {
 
 
   constructor(private httpKlijent: HttpClient, private router: Router,private route: ActivatedRoute) {
+  }
+
+  loginInfo():LoginInformacije {
+    return AutentifikacijaHelper.getLoginInfo();
   }
 
   ngOnInit() :void{
@@ -45,5 +51,11 @@ export class NekretnineComponent implements OnInit {
   }
   getslika(slika_id: any) {
     return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
+  }
+
+  sortiraj() {
+    this.httpKlijent.get( 'https://localhost:7115/Nekretnina/sortirajPoCijeni', MojConfig.http_opcije()).subscribe(x=>{
+      this.nekretninaPodaci=x;
+    });
   }
 }
