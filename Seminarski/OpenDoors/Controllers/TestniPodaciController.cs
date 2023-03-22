@@ -73,8 +73,8 @@ namespace OpenDoors.Controllers
 
             kreditneKartice.Add(new KreditnaKartica { BrojKartice = "123456789876", TipKartice = "Debitna", datumIsteka = DateTime.Now, CVV = 123, Korisnik = krajnjiKorisnici[0] });
 
-            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 5, Djeca = 3, Status = "Zavrsena", DatumOtkazivanja = DateTime.Now, Cijena = 100, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[0], Korisnik = krajnjiKorisnici[0], KreditnaKartica = kreditneKartice[0]});
-            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 3, Djeca = 1, Status = "U toku", DatumOtkazivanja = DateTime.Now, Cijena = 80, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[1], Korisnik = krajnjiKorisnici[0], KreditnaKartica = kreditneKartice[0] });
+            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 5, Djeca = 3, Status = true, Cijena = 100, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[0], Korisnik = krajnjiKorisnici[0], KreditnaKartica = kreditneKartice[0]});
+            rezervacije.Add(new Rezervacija { DatumRezervacije = DateTime.Now, BrojOsoba = 3, Djeca = 1, Status = true, Cijena = 80, CheckIn = DateTime.Now, CheckOut = DateTime.Now, PovratNovca = true, Nekretnina = nekretnine[1], Korisnik = krajnjiKorisnici[0], KreditnaKartica = kreditneKartice[0] });
 
            
 

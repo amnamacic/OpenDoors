@@ -30,9 +30,11 @@ export class RezervacijaComponent {
   tipoviKartice = [{naziv: 'Kreditna'},
     {naziv: 'Debitna'}];
 
-
+  minDate: string;
   constructor(private httpKlijent: HttpClient, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
-
+    const today = new Date();
+    today.setDate(today.getDate() + 1);
+    this.minDate = today.toISOString().split('T')[0];
   }
 
 
@@ -46,11 +48,9 @@ export class RezervacijaComponent {
     this.register = this.formBuilder.group({
       brojOsoba: new FormControl('', [
         Validators.required,
-        Validators.min(1)
       ]),
       djeca: new FormControl('', [
         Validators.required,
-        Validators.min(0)
       ]),
       checkIn: new FormControl('', [
         Validators.required,
@@ -63,10 +63,22 @@ export class RezervacijaComponent {
       ]),
       nekretninaId: new FormControl(this.nekretnina),
       korisnikId: new FormControl(this.korisnikId)
+    }, {
+      validator: this.dateRangeValidator('checkIn', 'checkOut')
     });
   }
 
-
+  dateRangeValidator(startDateControlName: string, endDateControlName: string) {
+    return (formGroup: FormGroup) => {
+      const checkIn = formGroup.controls[startDateControlName];
+      const checkOut = formGroup.controls[endDateControlName];
+      if (checkIn.value && checkOut.value && checkIn.value > checkOut.value) {
+        checkOut.setErrors({ 'minDate': true });
+      } else {
+        checkOut.setErrors(null);
+      }
+    }
+  }
   get brojOsoba(): FormControl {
     return this.register.get("brojOsoba") as FormControl;
   }
@@ -109,7 +121,7 @@ export class RezervacijaComponent {
       ]),
       CVV: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.pattern('[0-9]{3}'),
       ]),
       brojKartice: new FormControl('', [
         Validators.required,
@@ -120,8 +132,6 @@ export class RezervacijaComponent {
         Validators.required]),
       korisnikId: new FormControl(this.korisnikId)
     });
-
-
   }
 
   spasiKarticu() {
