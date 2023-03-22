@@ -10,8 +10,8 @@ namespace OpenDoors.Models
         public DateTime DatumRezervacije { get; set; }
         public int BrojOsoba { get; set; }
         public int Djeca { get; set; }
-        public string Status { get; set; }
-        public DateTime DatumOtkazivanja { get; set; }
+        public bool? Status { get; set; } = true;
+        public DateTime? DatumOtkazivanja { get; set; }
         public double Cijena { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }

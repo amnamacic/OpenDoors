@@ -4,17 +4,19 @@
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Broj osoba:</label>
-          <input type="number" class="form-control" placeholder="Unesite broj osoba" formControlName="brojOsoba">
+          <input type="number" class="form-control" placeholder="Unesite broj osoba" formControlName="brojOsoba"
+                 [min]="1">
           <div class="form-text text-danger"
                *ngIf="brojOsoba.errors?.['required'] && (brojOsoba.dirty || brojOsoba.touched)">
             Unos broja osoba je obavezan.
           </div>
+
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Djeca:</label>
-          <input type="number" class="form-control" placeholder="Unesite broj djece:" formControlName="djeca">
+          <input type="number" class="form-control" placeholder="Unesite broj djece:" formControlName="djeca" [min]="0">
           <div class="form-text text-danger" *ngIf="djeca.errors?.['required'] && (djeca.dirty || djeca.touched)">
             Unos broja djece je obavezan.
           </div>
@@ -25,7 +27,7 @@
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Check in:</label>
-          <input type="date" class="form-control" formControlName="checkIn">
+          <input type="date" class="form-control" formControlName="checkIn" [min]="minDate">
           <div class="form-text text-danger" *ngIf="checkIn.errors?.['required'] && (checkIn.dirty || checkIn.touched)">
             Unos check-in-a je obavezan.
           </div>
@@ -34,7 +36,7 @@
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Check-out: </label>
-          <input type="date" class="form-control" formControlName="checkOut">
+          <input type="date" class="form-control" formControlName="checkOut" [min]="register.controls['checkIn'].value">
           <div class="form-text text-danger"
                *ngIf="checkOut.errors?.['required'] && (checkOut.dirty || checkOut.touched)">
             Unos check-out-a je obavezan.
@@ -61,7 +63,8 @@
 
 
 <div *ngIf="uplata!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive2" tabindex="-1"
-     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block; margin-left: 30%; width:50%;">
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block; margin-left: 30%; width:50%;">
   <div class="modal-dialog modal-xl">
     <div class="modal-content" style="background-color: rgb(53,53,53); color: white;">
       <div class="modal-header">
@@ -91,6 +94,12 @@
                      *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
                   Unos broja kartice je obavezan.
                 </div>
+                <div class="form-text text-danger" *ngIf="brojKartice.errors?.['minlength'] && (brojKartice.dirty || brojKartice.touched)">
+                  Broj kartice mora sadržavati minimum 12 karaktera.
+                </div>
+                <div class="form-text text-danger" *ngIf="brojKartice.errors?.['maxlength'] && (brojKartice.dirty || brojKartice.touched)">
+                  Broj kartice ne može sadržavati više od 16 karaktera.
+                </div>
               </div>
             </div>
           </div>
@@ -98,7 +107,7 @@
             <div class="col-md-6 mb-4">
               <div class="form-group">
                 <label>Datum isteka:</label>
-                <input type="date" class="form-control" formControlName="datumIsteka">
+                <input type="date" class="form-control" formControlName="datumIsteka" [min]="minDate">
                 <div class="form-text text-danger"
                      *ngIf="datumIsteka.errors?.['required'] && (datumIsteka.dirty || datumIsteka.touched)">
                   Unos datuma isteka je obavezan.
@@ -108,9 +117,12 @@
             <div class="col-md-6 mb-4">
               <div class="form-group">
                 <label>CVV: </label>
-                <input type="number" class="form-control" formControlName="CVV">
+                <input type="number" class="form-control" formControlName="CVV" >
                 <div class="form-text text-danger" *ngIf="CVV.errors?.['required'] && (CVV.dirty || CVV.touched)">
-                  Unos CVC je obavezan.
+                  Unos CVV je obavezan.
+                </div>
+                <div class="form-text text-danger" *ngIf="CVV.errors?.['pattern'] && (CVV.dirty || CVV.touched)">
+                 CVV mora imati 3 broja.
                 </div>
               </div>
             </div>

@@ -114,12 +114,17 @@ export class DetaljiNekretnineComponent implements OnInit {
     this.odabranaNekretnina=s;
   }
   otvoriRezervacije() {
+    this.promjeniStatus();
        this.httpKlijent.get(MojConfig.adresa_servera + "/Rezervacija/GetById?nekretninaId=" + this.nekretninaId).
          subscribe((x:any)=>{
            this.rezervacijaPodaci=x;
        })
   }
 
+  promjeniStatus(){
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/promjeniStatus?nekretninaId=`+this.nekretninaId, MojConfig.http_opcije()).subscribe(x => {
+    });
+  }
   fetchRecenzije() :void
   {
     this.httpKlijent.get(MojConfig.adresa_servera+ "/Recenzije/GetById?nekretninaId=" + this.nekretninaId,MojConfig.http_opcije()).subscribe(x=>{

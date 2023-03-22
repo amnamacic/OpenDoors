@@ -37,10 +37,10 @@ namespace OpenDoors.Controllers
             {
                BrojOsoba=x.BrojOsoba,
                Djeca=x.Djeca,
-               Status="Aktivna",
+               Status=true,
                CheckIn=x.CheckIn,
                CheckOut=x.CheckOut,
-               Cijena= (x.CheckOut.Subtract(x.CheckIn)).Days*cijenaPoDanu ,
+               Cijena= (x.CheckOut.Subtract(x.CheckIn)).Days==0?cijenaPoDanu: (x.CheckOut.Subtract(x.CheckIn)).Days * cijenaPoDanu ,
                NekretninaId=x.NekretninaId,
                KorisnikId=x.KorisnikId,
                KreditnaKarticaId=x.KreditnaKarticaId
@@ -128,6 +128,20 @@ namespace OpenDoors.Controllers
 
             _dbContext.SaveChanges();
             return Ok(rezervacija);
+        }
+
+        [HttpPost]
+        public ActionResult promjeniStatus(int nekretninaId)
+        {
+            var rezervacije = _dbContext.Rezervacija.Where(x=>x.NekretninaId==nekretninaId).ToList();
+
+            if(rezervacije!=null)
+                foreach(var rez in rezervacije)
+                    if (rez.CheckOut < DateTime.Now)
+                        rez.Status = false;
+
+            _dbContext.SaveChanges();
+            return Ok(rezervacije);
         }
     }
 }

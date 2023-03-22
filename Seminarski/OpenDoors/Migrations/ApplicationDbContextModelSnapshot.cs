@@ -490,7 +490,7 @@ namespace OpenDoors.Migrations
                     b.Property<double>("Cijena")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("DatumOtkazivanja")
+                    b.Property<DateTime?>("DatumOtkazivanja")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DatumRezervacije")
@@ -511,9 +511,8 @@ namespace OpenDoors.Migrations
                     b.Property<bool>("PovratNovca")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
