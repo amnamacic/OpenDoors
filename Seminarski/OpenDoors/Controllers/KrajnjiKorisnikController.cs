@@ -3,6 +3,7 @@ using OpenDoors.Models;
 using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using OpenDoors.Data;
+using OpenDoors.Helper;
 
 namespace OpenDoors.Controllers
 {
@@ -32,8 +33,9 @@ namespace OpenDoors.Controllers
                Id=x.Id,
                Username=x.Username,
                Password=x.Password,
-               Email=x.Email
-            };
+               Email=x.Email,
+               slikaKorisnika = x.slikaKorisnika.ParsirajBase64()
+        };
 
             _dbContext.Add(korisnik);
             _dbContext.SaveChanges();
@@ -60,23 +62,7 @@ namespace OpenDoors.Controllers
                 .Take(100);
             return Ok(data.ToList());
         }
-
-        [HttpPost]
-        public ActionResult PromijeniLozinku([FromBody] PromjenaLozinkeVM x)
-        {
-            var korisnik = _dbContext.KrajnjiKorisnik.Find(x.id);
-            if (korisnik == null)
-                return BadRequest();
-            else if (korisnik.Password != x.staraLozinka)
-                return BadRequest();
-            else
-            {
-                korisnik.Password = x.novaLozinka;
-                _dbContext.SaveChanges();
-            }
-
-            return Ok();
-        }
+      
     }
 
 

@@ -122,6 +122,17 @@
           </div>
         </div>
       </div>
+      <div class="mb-3">
+        <label for="slika-input" class="form-label" style="color: white">Slika: </label>
+        <input class="form-control" formControlName="slikaKorisnika" id="slika-input" type="file" accept="image/*"
+               (change)="generisiPreview()"/>
+        <div style="color:darkred; font-weight: bold" *ngIf="register.controls['slikaKorisnika'].invalid && (register.controls['slikaKorisnika'].dirty || register.controls['slikaKorisnika'].touched)">
+          <div class="form-text text-danger" *ngIf="slikaKorisnika.errors?.['required'] &&
+     (slikaKorisnika.dirty || slikaKorisnika.touched)">Slika je obavezna.
+          </div>
+        </div>
+        <img [src]="slikab64">
+      </div>
       <form>
         <label>Vlasnik: </label>
         <input id="avans" type="checkbox" (change)="promjenaVlasnika($event)">

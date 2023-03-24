@@ -12,7 +12,7 @@ namespace OpenDoors.Models
         public string Spol { get; set; }
         public int GodinaRodjenja { get; set; }
         public string BrojTelefona { get; set; }
-
+        public byte[]? slikaKorisnika { get; set; }
     }
 }
 

@@ -70,18 +70,25 @@ export class RegistracijaComponent implements OnInit{
         Validators.required,
         Validators.email
       ]),
+      slikaKorisnika: new FormControl('', [
+        Validators.required,
+      ]),
     });
   }
 
   collect() {
     if(this.register.valid){
+      let s={
+        ...this.register.value,
+        slikaKorisnika:this.slikab64
+      };
       if(this.vlasnik==true)
-        this.httpKlijent.post(`${MojConfig.adresa_servera}/Vlasnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
+        this.httpKlijent.post(`${MojConfig.adresa_servera}/Vlasnik/Snimi`,s, MojConfig.http_opcije()).subscribe(x=>{
           porukaSuccess("Uspjesna registracija!");
           this.router.navigateByUrl("/login");
         });
       else
-        this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`, this.register.value,MojConfig.http_opcije()).subscribe(x=>{
+        this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`,s,MojConfig.http_opcije()).subscribe(x=>{
           porukaSuccess("Neuspjesna registracija!");
       });
 
@@ -126,6 +133,25 @@ export class RegistracijaComponent implements OnInit{
 
   get email() : FormControl{
     return this.register.get("email") as FormControl;
+  }
+
+  get slikaKorisnika() : FormControl{
+    return this.register.get("slikaKorisnika") as FormControl;
+  }
+
+  public slikab64:any;
+
+  generisiPreview() {
+    // @ts-ignore
+    var file = document.getElementById("slika-input").files[0];
+    if (file) {
+      var reader = new FileReader();
+      let this2=this;
+      reader.onload = function () {
+        this2.slikab64 = reader.result;
+      }
+      reader.readAsDataURL(file);
+    }
   }
 
   promjenaVlasnika(event:any) {

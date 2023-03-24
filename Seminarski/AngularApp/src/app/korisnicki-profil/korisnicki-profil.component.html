@@ -1,32 +1,57 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="card text-black mb-3" style="max-width: 30rem; background-color: aliceblue">
-  <div class="card-header" style="font-size: xx-large">Vaš profil: </div>
-  <div class="card-body">
-    <h5 style="font-weight: bold"> Korisničko ime:</h5>
-    <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.username}}</h5><br>
-    <h5 style="font-weight: bold"> Email:</h5>
-    <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.email}}</h5>
+<div class="card text-black mb-3" style="max-width: 70%;margin:auto; background-color: aliceblue">
+  <div class="card-header" style="font-size: xx-large">Vaš profil:</div>
+  <div class="card-body" style="padding:5%">
+    <div id="prviDiv">
+      <img src="{{getSlikuKorisnika(loginInfo().autentifikacijaToken.korisnickiNalogId)}}">
+      <div class="userInfo" style="float: right; margin-right: 3%">
+        <h5 style="font-weight: bold"> Korisničko ime:</h5>
+        <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.username}}</h5>
+        <h5 style="font-weight: bold"> Email:</h5>
+        <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.email}}</h5>
+        <div style="float:left; ">
+          <button type="button" style="margin-bottom: 4%" class="btn btn-primary" (click)="promjenaLozinke=true">
+            Promijeni lozinku
+          </button>
+          <br>
+          <button type="submit" class="btn btn-primary" (click)="promijeniSliku()">Promijeni sliku</button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="d-inline">
+      <button type="button" class="btn btn-primary" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik"
+              (click)="otvoriNekretnineVlasnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)"
+              style="margin-right: 2%">
+        Moje nekretnine
+      </button>
+      <button type="button" class="btn btn-primary"
+              (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje
+        rezervacije
+      </button>
+    </div>
+
+    <div *ngIf="promjenaSlike==true" style="margin-top: 2%">
+      <input class="form-control" type="file" id="formFile" accept="image/*" (change)="generisiPreview()">
+      <img style="width: 50%; height: 50%" src="{{novaSlika.slikaKorisnika}}"><br>
+      <button type="button" class="btn btn-primary" style="margin-right: 2%" (click)="spasiNovuSliku()">Spasi</button>
+      <button type="button" class="btn btn-primary" (click)="promjenaSlike=false">Odustani</button>
+    </div>
   </div>
 </div>
-<div style="float:left; margin-right: 1%">
-  <button type="button" class="btn btn-primary" (click)="promjenaLozinke=true"> Promijeni lozinku</button>
-</div>
-<div style="float:left;margin-right: 1%">
-  <button type="button" class="btn btn-primary" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="otvoriNekretnineVlasnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje nekretnine</button>
-</div>
-<div style="float:left;">
-  <button type="button" class="btn btn-primary" (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Rezervacije</button>
-</div>
 
-<div *ngIf="rezervacije!=null" class="modal fade show" id="exampleModalLive1" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+
+<div *ngIf="rezervacije!=null" class="modal fade show" id="exampleModalLive1" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
   <div class="modal-dialog modal-xl">
-    <div class="modal-content"  style="background-color: rgb(53,53,53);color: white;width: 100%;height: 100%">
+    <div class="modal-content" style="background-color: rgb(53,53,53);color: white;width: 100%;height: 100%">
       <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="rezervacije=null"></button>
       </div>
-      <div class="h-100" >
+      <div class="h-100">
         <div class="modal-body">
-          <div class="mb-3" >
+          <div class="mb-3">
             <table style="width: 100%">
               <thead>
               <tr>
@@ -48,28 +73,33 @@
                 <td>{{s.checkOut}}</td>
                 <td>{{s.status}}</td>
                 <td>{{s.cijena}}</td>
-                <td><button type="button" class="btn btn-primary" (click)="otkaziRezervaciju(s.id)">Otkazi</button></td>
+                <td>
+                  <button type="button" class="btn btn-primary" (click)="otkaziRezervaciju(s.id)">Otkazi</button>
+                </td>
               </tr>
               </tbody>
             </table>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
-<div *ngIf="promjenaLozinke==true" class="modal fade show" id="exampleModalLive2" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+<div *ngIf="promjenaLozinke==true" class="modal fade show" id="exampleModalLive2" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
   <div class="modal-dialog">
-    <div class="modal-content"  style="background-color: rgb(53,53,53);color: white">
+    <div class="modal-content" style="background-color: rgb(53,53,53);color: white">
       <div class="modal-header">
         <button type="button" class="btn-close" aria-label="Close" (click)="promjenaLozinke=false"></button>
       </div>
 
-      <div class="h-100" >
+      <div class="h-100">
         <div class="modal-body">
-          <div class="mb-3" >
-            <label class="form-label" style="font-weight: bold; font-size: larger; color: white; font-style: initial" >Trenutna lozinka:</label>
+          <div class="mb-3">
+            <label class="form-label" style="font-weight: bold; font-size: larger; color: white; font-style: initial">Trenutna
+              lozinka:</label>
             <input class="form-control" [(ngModel)]="novaSifra.staraLozinka">
           </div>
         </div>
@@ -80,7 +110,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary"(click)="promjenaLozinke=false">Odustani</button>
+          <button type="button" class="btn btn-primary" (click)="promjenaLozinke=false">Odustani</button>
           <button type="button" class="btn btn-primary" (click)="PromijeniPassword()">Spasi</button>
         </div>
       </div>

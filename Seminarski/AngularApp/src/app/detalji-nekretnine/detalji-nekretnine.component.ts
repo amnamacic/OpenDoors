@@ -35,7 +35,7 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.nekretninaId=+s["id"];
       this.fetchPogodnosti();
     })
-
+    console.log(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
     this.slika =   {
       id:0,
       nekretninaId:this.nekretninaId,
@@ -150,8 +150,8 @@ export class DetaljiNekretnineComponent implements OnInit {
   }
 
   delete(s: any) {
-    this.httpKlijent.post(`${MojConfig.adresa_servera}/Recenzije/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
-      this.fetchRecenzije();
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.fetchPogodnosti();
     });
   }
 

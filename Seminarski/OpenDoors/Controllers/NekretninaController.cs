@@ -37,6 +37,14 @@ namespace OpenDoors.Controllers
                     if (rezNekretnine != null)
                         foreach (var rez in rezNekretnine)
                             _dbContext.Remove(rez);
+                var slikeNekretnine = _dbContext.Slike.Where(s => s.NekretninaId == id).ToList();
+                if (slikeNekretnine != null)
+                    foreach (var s in slikeNekretnine)
+                        _dbContext.Remove(s);
+                var pogodnostiNekretnine = _dbContext.NekretninaPogodnostiNekretnine.Where(y => y.NekretninaId == id).ToList();
+                if (pogodnostiNekretnine != null)
+                    foreach (var p in pogodnostiNekretnine)
+                        _dbContext.Remove(p);
             }
           
             _dbContext.Remove(nekretnina);
@@ -71,6 +79,7 @@ namespace OpenDoors.Controllers
             objekat.LokacijaId = x.LokacijaId;
             objekat.TipId = x.TipId;
             objekat.VlasnikId = x.VlasnikId;
+
 
             _dbContext.SaveChanges();
 

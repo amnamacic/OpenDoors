@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MojConfig} from "../../MojConfig";
 import {LoginInformacije} from "../helper/login-informacije";
 import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
@@ -23,6 +23,7 @@ export class KorisnickiProfilComponent  implements OnInit{
   }
   novaSifra:any;
   promjenaLozinke=false;
+  promjenaSlike: boolean;
 
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
@@ -34,7 +35,7 @@ export class KorisnickiProfilComponent  implements OnInit{
   }
 
   PromijeniPassword() {
-    this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/PromjeniLozinku`, this.novaSifra, MojConfig.http_opcije()).subscribe(x=>{
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Korisnik/PromijeniLozinku`, this.novaSifra, MojConfig.http_opcije()).subscribe(x=>{
       this.promjenaLozinke=false;
       AutentifikacijaHelper.setLoginInfo(x=null);
       this.router.navigateByUrl("/login");
@@ -56,4 +57,36 @@ export class KorisnickiProfilComponent  implements OnInit{
       this.otvoriRezervacijeKorisnika(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
     });
   }
+
+  getSlikuKorisnika(korisnickiNalogId: number) {
+    return `${MojConfig.adresa_servera}/Korisnik/GetSlikuKorisnika/${korisnickiNalogId}`;
+  }
+
+  novaSlika:any;
+  generisiPreview() {
+    // @ts-ignore
+    var file = document.getElementById("formFile").files[0];
+    if (file) {
+      var reader = new FileReader();
+      let this2=this;
+      reader.onload=function ()
+      {
+        this2.novaSlika.slikaKorisnika=reader.result.toString();
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+
+  promijeniSliku() {
+    this.novaSlika={id:this.loginInfo().autentifikacijaToken.korisnickiNalogId, slikaKorisnika:""};
+    this.promjenaSlike=true;
+  }
+
+  spasiNovuSliku() {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Korisnik/PromijeniSliku`, this.novaSlika, MojConfig.http_opcije()).subscribe(x=>{
+      this.promjenaSlike=false;
+      porukaSuccess("Uspješno ste promijenili profilnu sliku!");
+    });
+  }
+
 }

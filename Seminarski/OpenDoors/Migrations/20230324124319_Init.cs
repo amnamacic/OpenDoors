@@ -159,7 +159,8 @@ namespace OpenDoors.Migrations
                     Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Spol = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GodinaRodjenja = table.Column<int>(type: "int", nullable: false),
-                    BrojTelefona = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BrojTelefona = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    slikaKorisnika = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -2,7 +2,7 @@
 using OpenDoors.Models;
 using OpenDoors.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-
+using OpenDoors.Helper;
 
 namespace OpenDoors.Controllers
 {
@@ -32,7 +32,8 @@ namespace OpenDoors.Controllers
                 Id = x.Id,
                 Username = x.Username,
                 Password = x.Password,
-                Email = x.Email
+                Email = x.Email,
+                slikaKorisnika = x.slikaKorisnika.ParsirajBase64()
             };
 
             _dbContext.Add(vlasnik);
@@ -55,14 +56,12 @@ namespace OpenDoors.Controllers
                     Id = s.Id,
                     Username = s.Username,
                     Password = s.Password,
-                    Email = s.Email
+                    Email = s.Email,
                 })
                 .Take(100);
             return Ok(data.ToList());
         }
     }
-
-
 }
 
 

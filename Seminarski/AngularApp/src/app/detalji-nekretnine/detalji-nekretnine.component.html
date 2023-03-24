@@ -18,9 +18,9 @@
       <tr>Pogodnosti:</tr>
       <span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span>
 
-      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="otvoriRezervacije()">Rezervacije</button>
-      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="urediNekretninu(s)">Uredi</button>
-      <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik"(click)="delete(s)">Obrisi</button>
+      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId" (click)="otvoriRezervacije()">Rezervacije</button>
+      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">Uredi</button>
+      <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">Obrisi</button>
     </div>
 
 
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="row align-content-lg-end" style="float: right;margin-left: 78%;padding: 0">
-          <button style="width: 10%; float: right" class="btn btn-outline-success" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="urediKomentar(s)">Uredi</button>
+          <button style="width: 10%; float: right" class="btn btn-outline-success" (click)="urediKomentar(s)">Uredi</button>
           <button style="width:10%;float: right" class="btn btn-outline-danger" (click)="delete(s)">Obrisi</button>
         </div>
       </div>

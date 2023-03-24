@@ -12,7 +12,7 @@ using OpenDoors.Data;
 namespace OpenDoors.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230322151326_Init")]
+    [Migration("20230324124319_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -641,6 +641,9 @@ namespace OpenDoors.Migrations
                     b.Property<string>("Spol")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("slikaKorisnika")
+                        .HasColumnType("varbinary(max)");
 
                     b.ToTable("Korisnik");
                 });

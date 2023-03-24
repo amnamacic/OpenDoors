@@ -639,6 +639,9 @@ namespace OpenDoors.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("slikaKorisnika")
+                        .HasColumnType("varbinary(max)");
+
                     b.ToTable("Korisnik");
                 });
 
