@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="card text-black mb-3" style="max-width: 70%;margin:auto; background-color: aliceblue">
-  <div class="card-header" style="font-size: xx-large">Vaš profil:</div>
+  <div class="card-header" style="font-size: xx-large">Vaš profil:
+    <button type="button" class="btn btn-outline-success" style="float:right; margin-top: 0.5%" (click)="verifikacijaProfila()"
+            *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.verifikovan!=true">
+      Verifikuj profil
+    </button>
+  </div>
   <div class="card-body" style="padding:5%">
     <div id="prviDiv">
       <img src="{{getSlikuKorisnika(loginInfo().autentifikacijaToken.korisnickiNalogId)}}" alt="Ne postoji slika!">
@@ -25,10 +30,7 @@
               style="margin-right: 2%">
         Moje nekretnine
       </button>
-      <button type="button" class="btn btn-primary"
-              (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje
-        rezervacije
-      </button>
+      <button type="button" class="btn btn-outline-dark" (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje rezervacije</button>
     </div>
 
     <div *ngIf="promjenaSlike==true" style="margin-top: 2%">
@@ -118,3 +120,25 @@
   </div>
 </div>
 
+<div *ngIf="unesiKod==true" class="modal fade show" id="exampleModalLive1" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="unesiKod=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>Unesite verifikacijski kod: </h5>
+        </div>
+        <div>
+          <input class="form-control" [(ngModel)]="this.verifikacijskiKod">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="verifikuj()">Verifikuj</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,7 @@ namespace OpenDoors.Helper
         public static void PosaljiEmail(string to, string porukaSubject, string poruka)
         {
             String SendMailFrom = "opendoors263@gmail.com";
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 25);
             SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
             MailMessage email = new MailMessage();
             // START
@@ -21,9 +21,8 @@ namespace OpenDoors.Helper
             SmtpServer.Timeout = 5000;
             SmtpServer.EnableSsl = true;
             SmtpServer.UseDefaultCredentials = false;
-            SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "kokjujgdfgzexqei");
+            SmtpServer.Credentials = new NetworkCredential(SendMailFrom, "jhrmbwosbndmpnze");
             SmtpServer.Send(email);
-
         }
     }
 }

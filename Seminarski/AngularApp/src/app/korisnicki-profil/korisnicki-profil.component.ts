@@ -18,7 +18,9 @@ declare function porukaError(a: string): any;
 })
 export class KorisnickiProfilComponent  implements OnInit{
   rezervacije: any;
-
+  verifikacijskiKod: any;
+   unesiKod: boolean=false;
+   korisnikId: any;
   constructor(private httpKlijent: HttpClient, private router :Router, private odjava:NavComponent) {
   }
   novaSifra:any;
@@ -29,9 +31,11 @@ export class KorisnickiProfilComponent  implements OnInit{
     return AutentifikacijaHelper.getLoginInfo();
   }
 
+  email=this.loginInfo().autentifikacijaToken.korisnickiNalog.email;
   ngOnInit(): void {
     this.novaSifra={id:this.loginInfo().autentifikacijaToken.korisnickiNalog.id,
       staraLozinka:"", novaLozinka:""};
+    console.log(this.loginInfo().autentifikacijaToken.korisnickiNalog.email);
   }
 
   PromijeniPassword() {
@@ -87,6 +91,34 @@ export class KorisnickiProfilComponent  implements OnInit{
       this.promjenaSlike=false;
       porukaSuccess("Uspješno ste promijenili profilnu sliku!");
     });
+  }
+
+
+  verifikacijaProfila() {
+
+    let s={
+      email:this.email
+    }
+    this.httpKlijent.post(MojConfig.adresa_servera+"/Korisnik/posaljiVerifikacijskiKod", s).subscribe(x=>{
+      this.korisnikId=x;
+      porukaSuccess("Verifikacijski kod je poslan na email.");
+      this.unesiKod=true;
+    })
+  }
+
+  verifikuj() {
+    let podaci={
+      korisnikID:this.korisnikId,
+      token:this.verifikacijskiKod
+    }
+    this.httpKlijent.post(MojConfig.adresa_servera + '/Korisnik/Verifikuj',podaci).subscribe(response=>{
+      if(response==true){
+        porukaSuccess('Verifikacija uspješna!');
+        this.unesiKod=false;
+      }
+      else
+        porukaError('Verifikacijski kod nije ispravan, molimo vas pokušajte ponovo!');
+    })
   }
 
 }
