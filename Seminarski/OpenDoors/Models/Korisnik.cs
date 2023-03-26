@@ -13,6 +13,7 @@ namespace OpenDoors.Models
         public int GodinaRodjenja { get; set; }
         public string BrojTelefona { get; set; }
         public byte[]? slikaKorisnika { get; set; }
+        public string? Token { get; set; }
     }
 }
 

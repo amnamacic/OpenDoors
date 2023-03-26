@@ -89,7 +89,8 @@ export class RegistracijaComponent implements OnInit{
         });
       else
         this.httpKlijent.post(`${MojConfig.adresa_servera}/KrajnjiKorisnik/Snimi`,s,MojConfig.http_opcije()).subscribe(x=>{
-          porukaSuccess("Neuspjesna registracija!");
+          porukaError("Neuspjesna registracija!");
+          this.router.navigateByUrl("/login");
       });
 
     }

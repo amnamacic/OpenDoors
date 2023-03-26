@@ -20,6 +20,13 @@ export class LogInComponent implements OnInit{
   success=false;
   korisnickoIme:any;
   lozinka:any;
+  email:string;
+  korisnikId:any;
+  verifikacija:string;
+  unesiKod: boolean=false;
+  otvoriModal: boolean=false;
+  promjena:boolean=false;
+  novaLozinka: string;
 
 
 
@@ -62,6 +69,46 @@ export class LogInComponent implements OnInit{
   ngOnInit (){
     this.korisnickoIme="amina.muhibic";
     this.lozinka="Amina123";
+  }
+
+  posaljiKod() {
+    let s={
+      email:this.email
+    }
+    this.httpKlijent.post(MojConfig.adresa_servera+"/Korisnik/posaljiVerifikacijskiKod", s).subscribe(x=>{
+      this.korisnikId=x;
+      porukaSuccess("Verifikacijski kod je poslan na email.");
+      this.otvoriModal=false;
+      this.unesiKod=true;
+    })
+  }
+
+  provjeriValidnost(){
+    let s={
+      korisnikID:this.korisnikId,
+      token: this.verifikacija
+    }
+    this.httpKlijent.post(MojConfig.adresa_servera+"/Korisnik/ProvjeriValidnost", s).subscribe(x=>{
+      if(x==true){
+        porukaSuccess("Ispravan kod, unesite lozinku");
+        this.unesiKod=false;
+        this.promjena=true;
+      }
+      else
+        porukaError("Neispravan kod.")
+    })
+  }
+
+  NovaLozinka() {
+    let s={
+      id:this.korisnikId,
+      novaLozinka:this.novaLozinka
+    }
+    this.httpKlijent.post(MojConfig.adresa_servera+"/Korisnik/NovaLozinka", s).subscribe(x=>{
+      porukaSuccess("Lozinka uspješno promijenjena.");
+      this.promjena=false;
+      this.router.navigateByUrl('/login');
+    })
   }
 
 }

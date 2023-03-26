@@ -3,7 +3,7 @@
   <div class="card-header" style="font-size: xx-large">Vaš profil:</div>
   <div class="card-body" style="padding:5%">
     <div id="prviDiv">
-      <img src="{{getSlikuKorisnika(loginInfo().autentifikacijaToken.korisnickiNalogId)}}">
+      <img src="{{getSlikuKorisnika(loginInfo().autentifikacijaToken.korisnickiNalogId)}}" alt="Ne postoji slika!">
       <div class="userInfo" style="float: right; margin-right: 3%">
         <h5 style="font-weight: bold"> Korisničko ime:</h5>
         <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.username}}</h5>

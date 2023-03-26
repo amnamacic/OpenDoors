@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GoDonate.Helper;
+using Microsoft.AspNetCore.Mvc;
 using OpenDoors.Data;
 using OpenDoors.Helper;
 using OpenDoors.ViewModels;
@@ -40,8 +41,10 @@ namespace OpenDoors.Controllers
         {
             byte[]? sKorisnika = _dbContext.Korisnik.Find(korisnikid).slikaKorisnika;
 
-
-            return File(sKorisnika, "image/*");
+            if (sKorisnika != null)
+                return File(sKorisnika, "image/*");
+            else
+                return BadRequest("Korisnik nema profilnu sliku!");
         }
 
         [HttpPost]
@@ -56,6 +59,53 @@ namespace OpenDoors.Controllers
                 _dbContext.SaveChanges();
             }
             return Ok();
+        }
+
+        [HttpPost]
+        public bool Verifikuj([FromBody] TokenVM x)
+        {
+            var korisnik = _dbContext.Korisnik.Find(x.korisnikId);
+            if (x.token == korisnik.Token)
+            {
+                korisnik.Verifikovan = true;
+
+                _dbContext.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+
+        }
+
+        [HttpPost]
+        public ActionResult NovaLozinka([FromBody] NovaLozinkaVM x)
+        {
+            var korisnik = _dbContext.Korisnik.Find(x.id);
+            korisnik.Password = x.novaLozinka;
+            _dbContext.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPost]
+        public ActionResult posaljiVerifikacijskiKod([FromBody] VerifikacijskiKodVM x)
+        {
+            var token = TokenGenerator.Generate(5);
+            var poruka = $"Vaš novi verifikacijski kod je {token}.";
+            var provjera = _dbContext.Korisnik.FirstOrDefault(s => s.Email == x.Email);
+            EmailHelper.PosaljiEmail(provjera.Email, "Password recovery", poruka);
+            provjera.Token = token;
+            _dbContext.SaveChanges();
+            return Ok(provjera.Id);
+        }
+
+        [HttpPost]
+        public bool ProvjeriValidnost([FromBody] TokenVM x)
+        {
+            var korisnik = _dbContext.Korisnik.Find(x.korisnikId);
+            if (korisnik.Token == x.token)
+                return true;
+            else
+                return false;
         }
 
     }

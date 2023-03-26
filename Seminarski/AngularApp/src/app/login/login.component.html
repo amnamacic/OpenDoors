@@ -1,64 +1,134 @@
 <section class="h-100 w-100 gradient-form" style="background-color: #eee;">
 
-    <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-      <div class="col-xl-10">
-        <div class="card rounded-3 text-black">
-          <div class="row g-1">
-            <div class="col-lg-6">
-              <div class="card-body p-md-5 mx-md-4">
+  <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+    <div class="col-xl-10">
+      <div class="card rounded-3 text-black">
+        <div class="row g-1">
+          <div class="col-lg-6">
+            <div class="card-body p-md-5 mx-md-4">
 
-                <div class="text-center">
-                  <img src="https://t3.ftcdn.net/jpg/03/56/46/10/360_F_356461066_rUflx03xPKYXEGe36Ecslg2ilEnWsAHa.jpg"
-                       style="width: 200px;" alt="logo">
-                  <h4 class="mt-1 mb-5 pb-1">OpenDoors</h4>
+              <div class="text-center">
+                <img src="https://t3.ftcdn.net/jpg/03/56/46/10/360_F_356461066_rUflx03xPKYXEGe36Ecslg2ilEnWsAHa.jpg"
+                     style="width: 200px;" alt="logo">
+                <h4 class="mt-1 mb-5 pb-1">OpenDoors</h4>
+              </div>
+
+
+              <form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
+
+                <div class="form-outline mb-4">
+                  <p> Korisničko ime: </p>
+                  <input type="text" class="form-control" [(ngModel)]="this.korisnickoIme"
+                         formControlName="korisnickoIme" placeholder="KorisnickoIme">
+                  <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
+                    <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> Korisničko ime je obavezno!
+                    </div>
+                  </div>
                 </div>
 
-
-                  <form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
-
-                  <div class="form-outline mb-4">
-                    <p > Korisničko ime: </p>
-                    <input type="text" class="form-control" [(ngModel)]="this.korisnickoIme"
-                           formControlName="korisnickoIme" placeholder="KorisnickoIme">
-                    <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
-                      <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> Korisničko ime je obavezno!</div>
-                    </div>
+                <div class="form-outline mb-4">
+                  <p> Lozinka: </p>
+                  <input class="form-control" [(ngModel)]="this.lozinka" formControlName="lozinka"
+                         placeholder="*****">
+                  <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
+                    <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> Lozinka je obavezna!</div>
                   </div>
+                </div>
 
-                  <div class="form-outline mb-4">
-                    <p> Lozinka: </p>
-                    <input class="form-control" [(ngModel)]="this.lozinka" formControlName="lozinka"
-                           placeholder="*****">
-                    <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
-                      <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> Lozinka je obavezna!</div>
-                    </div>
-                  </div>
+                <div class="text-right pt-1 mb-5 pb-1">
+                  <button class="btn btn-primary w-100" type="click" (click)="onSubmit()">Prijavite se</button>
+                </div>
+              </form>
+              <button class="btn btn-primary" (click)="otvoriModal=true">Zaboravili ste lozinku?</button>
 
-                  <div class="text-right pt-1 mb-5 pb-1">
-                    <button class="btn btn-primary w-100" type="click" (click)="onSubmit()">Prijavite se</button>
-                  </div>
-
-                  <div class="d-flex align-items-center justify-content-center pb-4">
-                    <p class="mb-0 me-2">Nemate račun?</p>
-                    <button type="button" class="btn btn-outline-primary" ><a routerLink="/registracija" style="color:black">Registrujte se</a></button>
-                  </div>
-
-                </form>
-
-
+              <div class="d-flex align-items-center justify-content-center pb-4">
+                <p class="mb-0 me-2">Nemate račun?</p>
+                <button type="button" class="btn btn-outline-primary"><a routerLink="/registracija" style="color:black">Registrujte
+                  se</a></button>
+              </div>
             </div>
           </div>
-            <div class="col-lg-6 d-flex align-items-center" style="background-color: black">
-              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
+          <div class="col-lg-6 d-flex align-items-center" style="background-color: black">
+            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+              <h4 class="mb-4">We are more than just a company</h4>
+              <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 </section>
+
+<div *ngIf="otvoriModal==true" class="modal fade show" id="exampleModalLive1" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="otvoriModal=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>Unesite email za verifikacijski kod: </h5>
+        </div>
+        <div>
+          <input class="form-control" [(ngModel)]="this.email" placeholder="someone@gmail.com">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="posaljiKod()">Pošalji</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="unesiKod==true" class="modal fade show" id="exampleModalLive2" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="unesiKod=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>Unesite kod: </h5>
+        </div>
+        <div>
+          <input class="form-control" [(ngModel)]="this.verifikacija">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="provjeriValidnost()">Pošalji</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="promjena==true" class="modal fade show" id="exampleModalLive3" tabindex="-1"
+     aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
+     style="display: block;  margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: black;color: white">
+      <div class="modal-header">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="promjena=false"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h5>Unesite novu lozinku: </h5>
+        </div>
+        <div>
+          <input class="form-control" [(ngModel)]="this.novaLozinka">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="NovaLozinka()">Promijeni</button>
+      </div>
+    </div>
+  </div>
+</div>
+
