@@ -21,6 +21,8 @@ namespace OpenDoors.Controllers
         [HttpPost]
         public Vlasnik Snimi([FromBody] VlasnikAdd x)
         {
+            byte[]? slika_bajtovi = x.slikaKorisnika?.ParsirajBase64();
+            byte[]? slika_bajtovi_resized = SlikeResize.resize(slika_bajtovi, 200);
 
             var vlasnik = new Vlasnik
             {
@@ -33,8 +35,9 @@ namespace OpenDoors.Controllers
                 Username = x.Username,
                 Password = x.Password,
                 Email = x.Email,
-                slikaKorisnika = x.slikaKorisnika.ParsirajBase64()
+                slikaKorisnika = slika_bajtovi_resized
             };
+
 
             _dbContext.Add(vlasnik);
             _dbContext.SaveChanges();

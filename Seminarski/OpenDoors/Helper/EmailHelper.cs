@@ -8,7 +8,7 @@ namespace OpenDoors.Helper
         public static void PosaljiEmail(string to, string porukaSubject, string poruka)
         {
             String SendMailFrom = "opendoors263@gmail.com";
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 25);
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com", 587);
             SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
             MailMessage email = new MailMessage();
             // START

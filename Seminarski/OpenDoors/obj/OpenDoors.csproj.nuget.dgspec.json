@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {}
+    "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {
+    "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
         "projectName": "OpenDoors",
-        "projectPath": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
-        "packagesPath": "C:\\Users\\Asmira\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asmira\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
+        "projectPath": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\OpenDoors.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\Desktop\\OpenDoors\\Seminarski\\OpenDoors\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Asmira\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,6 +57,10 @@
             "Microsoft.Identity.Web": {
               "target": "Package",
               "version": "[1.25.10, )"
+            },
+            "SkiaSharp": {
+              "target": "Package",
+              "version": "[2.88.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

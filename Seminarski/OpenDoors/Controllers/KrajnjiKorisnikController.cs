@@ -22,6 +22,8 @@ namespace OpenDoors.Controllers
         [HttpPost]
         public KrajnjiKorisnik Snimi([FromBody] KrajnjiKorisnikAdd x)
         {
+            byte[]? slika_bajtovi = x.slikaKorisnika?.ParsirajBase64();
+            byte[]? slika_bajtovi_resized = SlikeResize.resize(slika_bajtovi, 200);
 
             var korisnik = new KrajnjiKorisnik
             {
