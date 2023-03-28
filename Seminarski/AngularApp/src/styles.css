@@ -2,15 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&display=swap');
+
 body, html {
   height: 100%;
   margin: 0 auto;
 }
 
-body {
-  font-family: 'Montserrat';
+body{
   font-size: 18px;
-  background-image: url('./assets/Images/background.jpg');
+  font-family: 'Quicksand', sans-serif;
   background-position: center;
   background-size: cover;
 }
@@ -30,10 +31,11 @@ a {
 a {
   color: white;
 }
-
+.btn{
+  border-radius: 18px;
+}
 
 section {
   width: 80%;
   margin: 0 auto;
-  padding: 2em;
 }

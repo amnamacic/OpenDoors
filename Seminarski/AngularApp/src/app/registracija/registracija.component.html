@@ -1,4 +1,4 @@
-<section class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px">
+<section class=" h-100" style="background-color: rgb(53,53,53); border-radius: 20px">
   <h1>Registrujte se </h1> <br>
   <form [formGroup]="register" (ngSubmit)="collect()">
     <div class="row">
@@ -139,6 +139,11 @@
       </form>
     </div>
     <button type="submit"  class="btn btn-primary" >Registruj se</button>
+    <div class="reg">
+      <div style="color:white" routerLink="/login" >Imate račun?
+        <button type="submit"  class="btn btn-primary" > Prijavite se </button>
+      </div>
+    </div>
   </form>
 </section>
 

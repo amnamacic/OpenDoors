@@ -1,7 +1,12 @@
 .navbar-brand{
   font-size: xx-large;
+  color:white;
+
 }
 
 nav{
-  height: 70px;
+  height: 60px;
+}
+* {
+  color:white;
 }
