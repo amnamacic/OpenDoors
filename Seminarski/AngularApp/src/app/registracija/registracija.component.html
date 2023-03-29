@@ -1,64 +1,65 @@
 <section class=" h-100" style="background-color: rgb(53,53,53); border-radius: 20px">
-  <h1>Registrujte se </h1> <br>
+  <h1>{{'Register'| translate}} </h1> <br>
   <form [formGroup]="register" (ngSubmit)="collect()">
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Ime:</label>
-          <input type="text" class="form-control" placeholder="Unesite ime" formControlName="ime">
+          <label>{{'Name'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'Name'| translate}}" formControlName="ime">
           <div class="form-text text-danger" *ngIf="ime.errors?.['required'] && (ime.dirty || ime.touched)">
-            Vaše ime je obavezno.
+            {{'Name'| translate}}{{'isReq'| translate}}
           </div>
           <div class="form-text text-danger" *ngIf="ime.errors?.['minlength'] && (ime.dirty || ime.touched)">
-            Vaše ime je prekratko.
-            Potrebna su barem 2 karaktera.
+            {{'Name'| translate}}{{'Short'| translate}}.
+             {{'Min'| translate}} 2 {{'Char'| translate}}.
           </div>
           <div class="form-text text-danger" *ngIf="ime.errors?.['pattern'] && (ime.dirty || ime.touched)">
-            Vaše ime treba započinjati slovom/ne može sadržavati brojeve.
+            {{'Name'| translate}}{{'MustStart'| translate}} {{'Char'| translate}} and {{'CantInclude'| translate}} {{'Num'| translate}}.
           </div>
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Prezime:</label>
-          <input type="text" class="form-control" placeholder="Unesite prezime" formControlName="prezime">
-          <div class="form-text text-danger" *ngIf="prezime.errors?.['required'] && (prezime.dirty || prezime.touched)">Vaše prezime je obavezno.
+          <label>{{'Surname'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'Surname'| translate}}"  formControlName="prezime">
+          <div class="form-text text-danger" *ngIf="prezime.errors?.['required'] && (prezime.dirty || prezime.touched)">{{'Surname'| translate}}{{'isReq'| translate}}
           </div>
           <div class="form-text text-danger" *ngIf="!!prezime.errors?.['minlength'] && (prezime.dirty || prezime.touched)">
-            Vaše prezime je prekratko.
-            Potrebna su barem 2 karaktera.
+            {{'Surname'| translate}}{{'Short'| translate}}.
+             {{'Min'| translate}} 2 {{'Char'| translate}}.
           </div>
           <div class="form-text text-danger" *ngIf="prezime.errors?.['pattern'] && (prezime.dirty || prezime.touched)">
-            Vaše prezime treba započinjati slovom/ne može sadržavati brojeve.
+            {{'Surname'| translate}}{{'MustStart'| translate}} {{'Char'| translate}} and {{'CantInclude'| translate}} {{'Num'| translate}}.
           </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-4">
-        <div class="m-1" style="color: white">Spol:</div>
+        <div class="m-1" style="color: white">{{'Gender'| translate}}:</div>
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input" value="M" id="male" formControlName="spol">
-          <label class="form-check-label" for="male">Muški</label>
+          <label class="form-check-label" for="male">{{'M'| translate}}</label>
         </div>
         <div class="form-check form-check-inline">
           <input type="radio" class="form-check-input" value="Ž" id="female" formControlName="spol">
-          <label class="form-check-label" for="female">Ženski</label>
+          <label class="form-check-label" for="female">{{'F'| translate}}</label>
         </div>
-        <div class="form-text text-danger" *ngIf="spol.errors?.['required']">Odaberi spol.</div>
+        <div class="form-text text-danger" *ngIf="spol.errors?.['required']">{{'Choose'| translate}} {{'Gender'| translate}}</div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Godina rođenja:</label>
-          <input type="number" class="form-control" placeholder="Unesite godinu rodjenja" formControlName="godinaRodjenja">
+          <label>{{'BirthYear'| translate}}:</label>
+          <input type="number" class="form-control" placeholder="{{'BirthYear'| translate}}"  formControlName="godinaRodjenja">
           <div class="form-text text-danger" *ngIf="godinaRodjenja.errors?.['required'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
-            Vaš godina rodjenja je obavezna.
+            {{'BrthYear'| translate}}{{'isReq'| translate}}.
           </div>
           <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['pattern'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
-            Vaš godina rodjenja nije validna.
+            {{'NotValid'| translate}}.
           </div>
-          <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['min'] || godinaRodjenja.errors?.['max']">
-            Godina mora biti veća od 1955, a manja od 2004.
+          <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['min'] || godinaRodjenja.errors?.['max']">+
+
+            {{'Min'| translate}} 1955, {{'Max'| translate}} 2004.
           </div>
         </div>
       </div>
@@ -66,25 +67,25 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Broj telefona:</label>
-          <input type="text" class="form-control" placeholder="Unesite broj telefona" formControlName="brojTelefona">
+          <label>{{'PhoneNum'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'PhoneNum'| translate}}"  formControlName="brojTelefona">
           <div class="form-text text-danger" *ngIf="brojTelefona.errors?.['required'] && (brojTelefona.dirty || brojTelefona.touched)">
-            Vaš broj telefona je obavezan.
+            {{'PhoneNum'| translate}}{{'isReq'| translate}}.
           </div>
           <div class="form-text text-danger" *ngIf="!!brojTelefona.errors?.['pattern'] && (brojTelefona.dirty || brojTelefona.touched)">
-            Vaš broj telefona nije validan.
+            {{'NotValid'| translate}}.
           </div>
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>Email:</label>
-          <input type="text" class="form-control" placeholder="Unesite email" formControlName="email">
+          <input type="text" class="form-control" placeholder="Email" formControlName="email">
           <div class="form-text text-danger" *ngIf="email.errors?.['required'] && (email.dirty || email.touched)">
-            Vaš email je obavezan.
+            Email{{'isReq'| translate}}.
           </div>
           <div class="form-text text-danger" *ngIf="!!email.errors?.['email'] && (email.dirty || email.touched)">
-            Vaš email nije validan.
+            {{'NotValid'| translate}}.
           </div>
         </div>
       </div>
@@ -93,55 +94,55 @@
       <div class="col-md-6 mb-4">
         <div class="form-group">
 
-          <label>Korisnicko ime:</label>
-          <input type="text" class="form-control" placeholder="Unesite korisnicko ime" formControlName="username">
+          <label>{{'Username'| translate}}:</label>
+          <input type="text" class="form-control" placeholder="{{'Username'| translate}}"  formControlName="username">
           <div class="form-text text-danger" *ngIf="username.errors?.['required'] && (username.dirty || username.touched)">
-            Vaše korisničko ime je obavezno.
+            {{'Username'| translate}}{{'isReq'| translate}}
           </div>
           <div class="form-text text-danger" *ngIf="username.errors?.['pattern'] && (username.dirty || username.touched)">
-            Vaše korisničko ime nije validno.
+            {{'NotValid'| translate}}
           </div>
           <div class="form-text text-danger" *ngIf="username.errors?.['minlength'] && (username.dirty || username.touched)">
-            Vaše korisničko ime mora sadržavati minimum 6 karaktera.
+            {{'Min'| translate}} 6 {{'Char'| translate}}
           </div>
           <div class="form-text text-danger" *ngIf="username.errors?.['maxlength'] && (username.dirty || username.touched)">
-            Vaše korisničko ime ne može sadržavati više od 15 karaktera.
+            {{'Min'| translate}} 15 {{'Char'| translate}}
           </div>
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Lozinka:</label>
-          <input type="password" class="form-control" id="password" placeholder="Unesite lozinku" formControlName="password">
+          <label>{{'Password'| translate}}:</label>
+          <input type="password" class="form-control" id="password" placeholder="{{'Password'| translate}}" formControlName="password">
           <div class="form-text text-danger" *ngIf="password.errors?.['required'] &&
-     (password.dirty || password.touched)">Vaša lozinka je obavezna.
+     (password.dirty || password.touched)">{{'Password'| translate}}{{'isReq'| translate}}
           </div>
           <div class="form-text text-danger" *ngIf="password.errors?.['minlength'] || password.errors?.['maxlength'] &&
     (password.dirty || password.touched)">
-            Vaša lozinka mora imati najmanje 6, a najviše 15 karaktera.
+            {{'Min'| translate}} 6 {{'Char'| translate}}, {{'Max'| translate}} 15 {{'Char'| translate}}
           </div>
         </div>
       </div>
       <div class="mb-3">
-        <label for="slika-input" class="form-label" style="color: white">Slika: </label>
+        <label for="slika-input" class="form-label" style="color: white">{{'Photo'| translate}}: </label>
         <input class="form-control" formControlName="slikaKorisnika" id="slika-input" type="file" accept="image/*"
                (change)="generisiPreview()"/>
         <div style="color:darkred; font-weight: bold" *ngIf="register.controls['slikaKorisnika'].invalid && (register.controls['slikaKorisnika'].dirty || register.controls['slikaKorisnika'].touched)">
           <div class="form-text text-danger" *ngIf="slikaKorisnika.errors?.['required'] &&
-     (slikaKorisnika.dirty || slikaKorisnika.touched)">Slika je obavezna.
+     (slikaKorisnika.dirty || slikaKorisnika.touched)">{{'Photo'| translate}}{{'isReq'| translate}}
           </div>
         </div>
         <img [src]="slikab64">
       </div>
       <form>
-        <label>Vlasnik: </label>
+        <label>{{'Owner'| translate}}: </label>
         <input id="avans" type="checkbox" (change)="promjenaVlasnika($event)">
       </form>
     </div>
-    <button type="submit"  class="btn btn-primary" >Registruj se</button>
+    <button type="submit"  class="btn btn-primary" >{{'Register'| translate}}</button>
     <div class="reg">
-      <div style="color:white" routerLink="/login" >Imate račun?
-        <button type="submit"  class="btn btn-primary" > Prijavite se </button>
+      <div style="color:white" routerLink="/login" >{{'HaveAcc'| translate}}?
+        <button type="submit"  class="btn btn-primary" > {{'Login'| translate}} </button>
       </div>
     </div>
   </form>

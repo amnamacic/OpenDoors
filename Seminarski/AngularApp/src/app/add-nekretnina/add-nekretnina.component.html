@@ -4,13 +4,13 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label" style="color: white">Broj kvadrata: </label>
+          <label class="form-label" style="color: white">{{'SquareFootage'| translate}}: </label>
           <input type="number" class="form-control" placeholder="Broj kvadrata" [(ngModel)]="novaNekretnina.brojKvadrata">
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Broj soba: </label>
+          <label class="form-label">{{'Rooms'| translate}}: </label>
           <input type="number" class="form-control" placeholder="Broj soba" [(ngModel)]="novaNekretnina.brojSoba"/>
         </div>
       </div>
@@ -18,14 +18,14 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Broj kupatila: </label>
+          <label class="form-label">{{'Restrooms'| translate}}: </label>
           <input type="number" class="form-control" placeholder="Broj kupatila" [(ngModel)]="novaNekretnina.brojKupatila">
         </div>
 
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Broj kreveta: </label>
+          <label class="form-label">{{'Beds'| translate}}: </label>
           <input type="number" class="form-control" placeholder="Broj kreveta" [(ngModel)]="novaNekretnina.brojKreveta"/>
         </div>
 
@@ -34,24 +34,24 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Cijena po danu: </label>
+          <label class="form-label">{{'Price'| translate}} {{'PerDay'| translate}}: </label>
           <input type="number" class="form-control" placeholder="Cijena po danu" [(ngModel)]="novaNekretnina.cijenaPoDanu">
         </div>
       </div>
 
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Adresa: </label>
+          <label class="form-label">{{'Address'| translate}}: </label>
           <input class="form-control" placeholder="Adresa" [(ngModel)]="novaNekretnina.adresa"/>
         </div>
       </div>
     </div>
 
     <form>
-      <label>Avans: </label>
-      <input id="avans" type="checkbox" [checked]="novaNekretnina.avans==true" (change)="promjenaAvansa($event)">Da
+      <label>{{'Advance'| translate}}: </label>
+      <input id="avans" type="checkbox" [checked]="novaNekretnina.avans==true" (change)="promjenaAvansa($event)">{{'Yes'| translate}}
     </form>
-    <label class="form-label">Pogodnosti nekretnine:</label>
+    <label class="form-label">{{'Amenities'| translate}}:</label>
     <form>
       <ng-container *ngFor="let object of pogodnostiNekretnine">
         <input type="checkbox" name="pogodnost"  [(ngModel)]="object.selected"> {{object.naziv}}
@@ -60,7 +60,7 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Lokacija</label>
+          <label class="form-label">{{'Location'| translate}}</label>
           <select class="form-control" [(ngModel)]="novaNekretnina.lokacijaId">
             <option *ngFor="let x of lokacije" [value]="x.id">{{x.dioGrada + "-" + x.grad}}</option>
           </select>
@@ -68,7 +68,7 @@
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label class="form-label">Tip nekretnine</label>
+          <label class="form-label">{{'RealType'| translate}}</label>
           <select class="form-control" [(ngModel)]="novaNekretnina.tipId">
             <option *ngFor="let x of tipovi" [value]="x.id">{{x.tip}}</option>
           </select>
@@ -76,14 +76,14 @@
       </div>
     </div>
     <div class="mb-3" *ngIf="urediNekretninu==null">
-      <label class="form-label">Nova slika</label>
+      <label class="form-label">{{'NewPhoto'| translate}}</label>
       <input class="form-control" id="slika-input" type="file" accept="image/*" multiple="multiple"
              (change)="generisi_preview()"/>
       <img *ngFor="let s of novaNekretnina.slike" style="max-width: 100%; height: 200px" src="{{get_slika(s)}}">
     </div>
-    <button class="btn btn-primary" style="color:white; background-color: dodgerblue;border:none; border-radius: 18px"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="postaviNekretninu()">Postavi nekretninu</button>
+    <button class="btn btn-primary" style="color:white; background-color: dodgerblue;border:none; border-radius: 18px"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="postaviNekretninu()">{{'Save'| translate}}</button>
   </div>
   <br/>
-  <button class="btn btn-primary" style="color:white; background-color: dodgerblue;border:none; border-radius: 18px" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" routerLink="/" >Otkaži</button>
+  <button class="btn btn-primary" style="color:white; background-color: dodgerblue;border:none; border-radius: 18px" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" routerLink="/" >{{'Cancel'| translate}}</button>
 </section>
 

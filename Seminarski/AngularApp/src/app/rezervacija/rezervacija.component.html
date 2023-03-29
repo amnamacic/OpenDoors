@@ -3,22 +3,22 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Broj osoba:</label>
-          <input type="number" class="form-control" placeholder="Unesite broj osoba" formControlName="brojOsoba"
+          <label>{{'Adults'| translate}}: </label>
+          <input type="number" class="form-control" placeholder="{{'Adults'| translate}}"  formControlName="brojOsoba"
                  [min]="1">
           <div class="form-text text-danger"
                *ngIf="brojOsoba.errors?.['required'] && (brojOsoba.dirty || brojOsoba.touched)">
-            Unos broja osoba je obavezan.
+            {{'Adults'| translate}}{{'isReq'| translate}}
           </div>
 
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Djeca:</label>
-          <input type="number" class="form-control" placeholder="Unesite broj djece:" formControlName="djeca" [min]="0">
+          <label>{{'Children'| translate}}:</label>
+          <input type="number" class="form-control" placeholder="{{'Children'| translate}}"  formControlName="djeca" [min]="0">
           <div class="form-text text-danger" *ngIf="djeca.errors?.['required'] && (djeca.dirty || djeca.touched)">
-            Unos broja djece je obavezan.
+            {{'Children'| translate}}{{'isReq'| translate}}
           </div>
         </div>
       </div>
@@ -26,38 +26,38 @@
     <div class="row">
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Check in:</label>
+          <label>{{'CheckIn'| translate}}:</label>
           <input type="date" class="form-control" formControlName="checkIn" [min]="minDate">
           <div class="form-text text-danger" *ngIf="checkIn.errors?.['required'] && (checkIn.dirty || checkIn.touched)">
-            Unos check-in-a je obavezan.
+            {{'CheckIn'| translate}}{{'isReq'| translate}}
           </div>
         </div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
-          <label>Check-out: </label>
+          <label>{{'CheckOut'| translate}}:</label>
           <input type="date" class="form-control" formControlName="checkOut" [min]="register.controls['checkIn'].value">
           <div class="form-text text-danger"
                *ngIf="checkOut.errors?.['required'] && (checkOut.dirty || checkOut.touched)">
-            Unos check-out-a je obavezan.
+            {{'CheckOut'| translate}}{{'isReq'| translate}}
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-6 mb-4">
       <div class="form-group">
-        <label class="form-label">Odaberi karticu: </label>
+        <label class="form-label">{{'Card'| translate}}: </label>
         <select type="number" class="form-control" formControlName="kreditnaKarticaId">
           <option *ngFor="let x of kreditnaKarticaPodaci" [ngValue]="x.id">{{x.tipKartice}}-{{x.brojKartice}}</option>
         </select>
         <div class="form-text text-danger"
              *ngIf="kreditnaKarticaId.errors?.['required'] && (kreditnaKarticaId.dirty || kreditnaKarticaId.touched)">
-          Unos kreditne kartice je obavezan.
+          {{'Choose'| translate}}{{'Card'| translate}}e{{'isReq'| translate}}
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" (click)="otvoriModal()">Unesi novu karticu</button>
-    <button type="submit" class="btn btn-primary">Izvrši rezervaciju</button>
+    <button class="btn btn-primary" (click)="otvoriModal()">{{'NewCard'| translate}}</button>
+    <button type="submit" class="btn btn-primary">{{'Reserve'| translate}}</button>
   </form>
 </section>
 
@@ -75,30 +75,30 @@
           <div class="row">
             <div class="col-md-6 mb-4">
               <div class="form-group">
-                <label class="form-label">Tip kartice: </label>
+                <label class="form-label">{{'CardType'| translate}}:</label>
                 <select class="form-control" formControlName="tipKartice">
                   <option *ngFor="let x of tipoviKartice" [value]="x.naziv">{{x.naziv}}</option>
                 </select>
                 <div class="form-text text-danger"
                      *ngIf="tipKartice.errors?.['required'] && (tipKartice.dirty || tipKartice.touched)">
-                  Unos tipa kartice je obavezan.
+                  {{'CardType'| translate}}{{'isReq'| translate}}
                 </div>
               </div>
             </div>
             <div class="col-md-6 mb-4">
               <div class="form-group">
-                <label>Broj kartice:</label>
-                <input type="text" class="form-control" placeholder="Unesite broj djece:"
+                <label>{{'CardNum'| translate}}:</label>
+                <input type="text" class="form-control" placeholder="{{'Children'| translate}}"
                        formControlName="brojKartice">
                 <div class="form-text text-danger"
                      *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
-                  Unos broja kartice je obavezan.
+                  {{'CardNum'| translate}}{{'isReq'| translate}}
                 </div>
                 <div class="form-text text-danger" *ngIf="brojKartice.errors?.['minlength'] && (brojKartice.dirty || brojKartice.touched)">
-                  Broj kartice mora sadržavati minimum 12 karaktera.
+                  {{'Min'| translate}} 12 {{'Char'| translate}}
                 </div>
                 <div class="form-text text-danger" *ngIf="brojKartice.errors?.['maxlength'] && (brojKartice.dirty || brojKartice.touched)">
-                  Broj kartice ne može sadržavati više od 16 karaktera.
+                  {{'Min'| translate}} 16 {{'Char'| translate}}
                 </div>
               </div>
             </div>
@@ -106,11 +106,11 @@
           <div class="row">
             <div class="col-md-6 mb-4">
               <div class="form-group">
-                <label>Datum isteka:</label>
+                <label>{{'ExpDate'| translate}}:</label>
                 <input type="date" class="form-control" formControlName="datumIsteka" [min]="minDate">
                 <div class="form-text text-danger"
                      *ngIf="datumIsteka.errors?.['required'] && (datumIsteka.dirty || datumIsteka.touched)">
-                  Unos datuma isteka je obavezan.
+                  {{'ExpDate'| translate}}{{'isReq'| translate}}
                 </div>
               </div>
             </div>
@@ -119,15 +119,15 @@
                 <label>CVV: </label>
                 <input type="number" class="form-control" formControlName="CVV" >
                 <div class="form-text text-danger" *ngIf="CVV.errors?.['required'] && (CVV.dirty || CVV.touched)">
-                  Unos CVV je obavezan.
+                  CVV{{'isReq'| translate}}.
                 </div>
                 <div class="form-text text-danger" *ngIf="CVV.errors?.['pattern'] && (CVV.dirty || CVV.touched)">
-                 CVV mora imati 3 broja.
+                 CVV {{'MustHave'| translate}} 3 {{'Num'| translate}} {{'Correct'| translate}}.
                 </div>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Spasi</button>
+          <button type="submit" class="btn btn-primary">{{'Save'| translate}}</button>
         </form>
       </div>
     </div>

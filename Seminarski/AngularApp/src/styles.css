@@ -14,6 +14,7 @@ body{
   font-family: 'Quicksand', sans-serif;
   background-position: center;
   background-size: cover;
+  background-image: url("./assets/Images/background.jpg");
 }
 
 
@@ -28,9 +29,7 @@ a {
   display: grid;
   grid-template-columns: 30% auto;}
 
-a {
-  color: white;
-}
+
 .btn{
   border-radius: 18px;
 }
@@ -38,4 +37,5 @@ a {
 section {
   width: 80%;
   margin: 0 auto;
+  padding-top: 2rem;
 }

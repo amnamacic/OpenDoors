@@ -1,25 +1,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="card text-black mb-3" style="max-width: 70%;margin:auto; background-color: aliceblue">
-  <div class="card-header" style="font-size: xx-large">Vaš profil:
+  <div class="card-header" style="font-size: xx-large">{{'MyProfile'| translate}}
     <button type="button" class="btn btn-outline-success" style="float:right; margin-top: 0.5%" (click)="verifikacijaProfila()"
             *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.verifikovan!=true">
-      Verifikuj profil
+      {{'Verify'| translate}} {{'Profile'| translate}}
     </button>
   </div>
   <div class="card-body" style="padding:5%">
     <div id="prviDiv">
       <img src="{{getSlikuKorisnika(loginInfo().autentifikacijaToken.korisnickiNalogId)}}" alt="Ne postoji slika!">
       <div class="userInfo" style="float: right; margin-right: 3%">
-        <h5 style="font-weight: bold"> Korisničko ime:</h5>
+        <h5 style="font-weight: bold"> {{'Username'| translate}}:</h5>
         <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.username}}</h5>
         <h5 style="font-weight: bold"> Email:</h5>
         <h5>{{loginInfo().autentifikacijaToken!.korisnickiNalog!.email}}</h5>
         <div style="float:left; ">
           <button type="button" style="margin-bottom: 4%" class="btn btn-primary" (click)="promjenaLozinke=true">
-            Promijeni lozinku
+            {{'Change'| translate}} {{'Password'| translate}}
           </button>
           <br>
-          <button type="submit" class="btn btn-primary" (click)="promijeniSliku()">Promijeni sliku</button>
+          <button type="submit" class="btn btn-primary" (click)="promijeniSliku()">{{'Change'| translate}} {{'Photo'| translate}}</button>
         </div>
       </div>
     </div>
@@ -28,16 +28,16 @@
       <button type="button" class="btn btn-primary" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik"
               (click)="otvoriNekretnineVlasnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)"
               style="margin-right: 2%">
-        Moje nekretnine
+        {{'MyRealestate'| translate}}
       </button>
-      <button type="button" class="btn btn-outline-dark" (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">Moje rezervacije</button>
+      <button type="button" class="btn btn-outline-dark" (click)="otvoriRezervacijeKorisnika(loginInfo().autentifikacijaToken!.korisnickiNalog!.id)">{{'MyReservations'| translate}}</button>
     </div>
 
     <div *ngIf="promjenaSlike==true" style="margin-top: 2%">
       <input class="form-control" type="file" id="formFile" accept="image/*" (change)="generisiPreview()">
       <img style="width: 50%; height: 50%" src="{{novaSlika.slikaKorisnika}}"><br>
-      <button type="button" class="btn btn-primary" style="margin-right: 2%" (click)="spasiNovuSliku()">Spasi</button>
-      <button type="button" class="btn btn-primary" (click)="promjenaSlike=false">Odustani</button>
+      <button type="button" class="btn btn-primary" style="margin-right: 2%" (click)="spasiNovuSliku()">{{'Save'| translate}}</button>
+      <button type="button" class="btn btn-primary" (click)="promjenaSlike=false">{{'Cancel'| translate}}</button>
     </div>
   </div>
 </div>
@@ -57,13 +57,13 @@
             <table style="width: 100%">
               <thead>
               <tr>
-                <th scope="col">Nekretnina</th>
-                <th scope="col">Osobe</th>
-                <th scope="col">Djeca</th>
-                <th scope="col">Check-in</th>
-                <th scope="col">Check-out</th>
+                <th scope="col">{{'Realestate'| translate}}</th>
+                <th scope="col">{{'Adults'| translate}}</th>
+                <th scope="col">{{'Children'| translate}}</th>
+                <th scope="col">{{'CheckIn'| translate}}</th>
+                <th scope="col">{{'CheckOut'| translate}}</th>
                 <th scope="col">Status</th>
-                <th scope="col">Cijena</th>
+                <th scope="col">{{'Price'| translate}}</th>
               </tr>
               </thead>
               <tbody>
@@ -76,7 +76,7 @@
                 <td>{{s.status}}</td>
                 <td>{{s.cijena}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary" (click)="otkaziRezervaciju(s.id)">Otkazi</button>
+                  <button type="button" class="btn btn-primary" (click)="otkaziRezervaciju(s.id)">{{'Cancel'| translate}}</button>
                 </td>
               </tr>
               </tbody>
@@ -100,20 +100,19 @@
       <div class="h-100">
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label" style="font-weight: bold; font-size: larger; color: white; font-style: initial">Trenutna
-              lozinka:</label>
+            <label class="form-label" style="font-weight: bold; font-size: larger; color: white; font-style: initial">{{'CurrPass'| translate}} :</label>
             <input class="form-control" [(ngModel)]="novaSifra.staraLozinka">
           </div>
         </div>
         <div class="modal-body">
           <div class="mb-3">
-            <label class="form-label" style="font-weight: bold; font-size: larger; color:white ">Nova lozinka:</label>
+            <label class="form-label" style="font-weight: bold; font-size: larger; color:white ">{{'NewPass'| translate}}:</label>
             <input class="form-control" [(ngModel)]="novaSifra.novaLozinka">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="promjenaLozinke=false">Odustani</button>
-          <button type="button" class="btn btn-primary" (click)="PromijeniPassword()">Spasi</button>
+          <button type="button" class="btn btn-primary" (click)="promjenaLozinke=false">{{'Cancel'| translate}}</button>
+          <button type="button" class="btn btn-primary" (click)="PromijeniPassword()">{{'Save'| translate}}</button>
         </div>
       </div>
     </div>
@@ -130,14 +129,14 @@
       </div>
       <div class="modal-body">
         <div>
-          <h5>Unesite verifikacijski kod: </h5>
+          <h5>{{'VerificationCode'| translate}}: </h5>
         </div>
         <div>
           <input class="form-control" [(ngModel)]="this.verifikacijskiKod">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" (click)="verifikuj()">Verifikuj</button>
+        <button class="btn btn-success" (click)="verifikuj()">{{'Verify'| translate}}</button>
       </div>
     </div>
   </div>

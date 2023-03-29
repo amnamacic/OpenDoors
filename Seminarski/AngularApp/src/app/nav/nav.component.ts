@@ -4,6 +4,8 @@ import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../MojConfig";
+import {TranslateService} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 declare function porukaSuccess(a: string):any;
 @Component({
@@ -13,9 +15,13 @@ declare function porukaSuccess(a: string):any;
 })
 
 export class NavComponent {
-  constructor(private autentifikacijahelper: AutentifikacijaHelper, private router: Router,private httpKlijent:HttpClient) {
+  constructor(private autentifikacijahelper: AutentifikacijaHelper, private router: Router,private httpKlijent:HttpClient,public translate: TranslateService) {
+      translate.addLangs(['bos','en']);
+      translate.setDefaultLang('bos');
   }
-
+  switchLang(lang: string){
+    this.translate.use(lang);
+  }
   appTitle: string = 'OpenDoors';
 
   loginInfo():LoginInformacije{

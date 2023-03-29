@@ -7,15 +7,15 @@
         <tr>{{s.adresa}}, {{s.lokacija.dioGrada}}</tr>
       </div>
       <div class="col-6">
-        <tr>{{s.brojKvadrata}} kvadrata</tr>
-        <tr>{{s.brojSoba}} sobe</tr>
-        <tr>{{s.brojKupatila}} kupatila</tr>
-        <tr>{{s.brojKreveta}} kreveta</tr>
-        <tr>{{s.cijenaPoDanu}}KM po danu</tr>
-        <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
+        <tr>{{s.brojKvadrata}} {{'SquareFootage'| translate}}</tr>
+        <tr>{{s.brojSoba}} {{'Rooms'| translate}}</tr>
+        <tr>{{s.brojKupatila}} {{'Restrooms'| translate}}</tr>
+        <tr>{{s.brojKreveta}} {{'Beds'| translate}}</tr>
+        <tr>{{s.cijenaPoDanu}} KM {{'Price'| translate}} {{'PerDay'| translate}}</tr>
+        <tr>{{'Advance'| translate}}: {{s.avans ? "Da" : "Ne"}}</tr>
         <tr>
-          <button class="btn btn-primary" (click)="detaljiNekretnine(s)">Detalji</button>
-          <button class="btn btn-outline-danger" (click)="delete(s)">Obrisi</button>
+          <button class="btn btn-primary" (click)="detaljiNekretnine(s)">{{'Details'| translate}}</button>
+          <button class="btn btn-outline-danger" (click)="delete(s)">{{'Delete'| translate}}</button>
         </tr>
       </div>
     </div>

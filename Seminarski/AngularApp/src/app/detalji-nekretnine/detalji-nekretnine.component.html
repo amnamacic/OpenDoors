@@ -6,26 +6,26 @@
     <div class="col-6 ">
       <h2>
         <tr>{{s.adresa}}, {{s.lokacija}}
-          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>Rezerviši</button>
+          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
         </tr>
       </h2>
-      <tr>{{s.brojKvadrata}} kvadrata</tr>
-      <tr>{{s.brojSoba}} sobe</tr>
-      <tr>{{s.brojKupatila}} kupatila</tr>
-      <tr>{{s.brojKreveta}} kreveta</tr>
-      <tr>{{s.cijenaPoDanu}}KM po danu</tr>
-      <tr>Avans: {{s.avans ? "Da" : "Ne"}}</tr>
-      <tr>Pogodnosti:</tr>
+      <tr>{{s.brojKvadrata}} {{'SquareFootage'| translate}}</tr>
+      <tr>{{s.brojSoba}} {{'Rooms'| translate}}</tr>
+      <tr>{{s.brojKupatila}} {{'Restrooms'| translate}}</tr>
+      <tr>{{s.brojKreveta}} {{'Beds'| translate}}</tr>
+      <tr>{{s.cijenaPoDanu}} KM {{'Price'| translate}} {{'PerDay'| translate}}</tr>
+      <tr>{{'Advance'| translate}}: {{s.avans ? "Da" : "Ne"}}</tr>
+      <tr>{{'Amenities'| translate}}:</tr>
       <span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span>
 
-      <button style="float: right; border-radius:18px" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId" (click)="otvoriRezervacije()">Rezervacije</button>
-      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">Uredi</button>
-      <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">Obrisi</button>
+      <button style="float: right; border-radius:18px" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId" (click)="otvoriRezervacije()">{{'Reservations'| translate}}</button>
+      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
+      <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">{{'Delete'| translate}}</button>
     </div>
 
 
     <div id="recenzije" style=" width:100%;margin-top:5%">
-      <h4>Recenzije:</h4><br>
+      <h4>{{'Ratings'| translate}}:</h4><br>
       <div class="row" *ngFor="let s of recenzijePodaci"
            style="border-radius: 1%;color: black">
         <div class="row justify-content-between" style="padding-top:1% ">
@@ -36,7 +36,7 @@
           </div>
           <div class="col-6 col-md-3 " style="text-align: end;padding: 0">
             <h6 style="color: grey">
-              Postavljeno: {{s.datumPostavljanja}}
+              {{'Added'| translate}}: {{s.datumPostavljanja}}
             </h6>
           </div>
         </div>
@@ -49,57 +49,57 @@
           </div>
         </div>
         <div class="row align-content-lg-end" style="float: right;margin-left: 78%;padding: 0">
-          <button style="width: 10%; float: right" class="btn btn-outline-success" (click)="urediKomentar(s)">Uredi</button>
-          <button style="width:10%;float: right" class="btn btn-outline-danger" (click)="delete(s)">Obrisi</button>
+          <button style="width: 10%; float: right" class="btn btn-outline-success" (click)="urediKomentar(s)">{{'Edit'| translate}}</button>
+          <button style="width:10%;float: right" class="btn btn-outline-danger" (click)="delete(s)">{{'Delete'| translate}}</button>
         </div>
       </div>
     </div>
 
     <form [formGroup]="noviKomentar" (ngSubmit)="ostaviKomentar()">
       <div id="komentar" style="margin-top:5%">
-        <h4>Ostavi komentar:</h4>
+        <h4>{{'LeaveComment'| translate}}:</h4>
         <div class="row">
           <div class="col-md-6 mb-4">
             <div class="form-group">
-              <label class="form-label">Komentar: </label>
+              <label class="form-label">{{'Comment'| translate}}: </label>
               <input type="text" class="form-control" formControlName="komentar" placeholder="Komentar">
               <div class="form-text text-danger"
                    *ngIf="komentar.errors?.['required'] && (komentar.dirty || komentar.touched)">
-                Unos komentara je obavezan.
+                {{'Comment'| translate}}{{'isReq'| translate}}
               </div>
             </div>
           </div>
           <div class="col-md-6 mb-4">
             <div class="form-group">
-              <label class="form-label">Ocjena: </label>
+              <label class="form-label">{{'Rate'| translate}}: </label>
               <input type="number" class="form-control" formControlName="ocjena" placeholder="Ocjena"/>
               <div class="form-text text-danger"
                    *ngIf="ocjena.errors?.['required'] && (ocjena.dirty || ocjena.touched)">
-                Unos ocjene je obavezan.
+                {{'Rate'| translate}}{{'isReq'| translate}}
               </div>
               <div class="form-text text-danger" *ngIf="ocjena.errors?.['min'] && (ocjena.dirty || ocjena.touched)">
-                Minimalna ocjena može biti 1.
+                {{'Min'| translate}} 1
               </div>
               <div class="form-text text-danger" *ngIf="ocjena.errors?.['max'] && (ocjena.dirty || ocjena.touched)">
-                Maksimalna ocjena može biti 10.
+                {{'Max'| translate}} 10
               </div>
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-success" style="float: right">Ostavi komentar</button>
+        <button type="submit" class="btn btn-outline-success" style="float: right">{{'Comment'| translate}}</button>
       </div>
     </form>
 
     <table *ngIf="rezervacijaPodaci!=null" style="border-radius: 1%; background-color: #eeeeee; color: black">
       <thead>
       <tr>
-        <th scope="col">Korisnik</th>
-        <th scope="col">Osobe</th>
-        <th scope="col">Djeca</th>
-        <th scope="col">Check-in</th>
-        <th scope="col">Check-out</th>
+        <th scope="col">{{'User'| translate}}</th>
+        <th scope="col">{{'Adults'| translate}}</th>
+        <th scope="col">{{'Children'| translate}}</th>
+        <th scope="col">{{'CheckIn'| translate}}</th>
+        <th scope="col">{{'CheckOut'| translate}}</th>
         <th scope="col">Status</th>
-        <th scope="col">Cijena</th>
+        <th scope="col">{{'Price'| translate}}</th>
       </tr>
       </thead>
       <tbody>
@@ -117,10 +117,10 @@
 
     <div class="row"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" style="width: 100%;padding: 0;margin: 0;">
       <div class="col">
-        <label class="form-label">Nova slika:</label>
+        <label class="form-label">{{'NewPhoto'| translate}}:</label>
         <input class="form-control" type="file" id="slika-input" accept="image/*" (change)="generisi_preview()"/>
         <img style="max-width: 100%; height: 200px" src="{{slika.slika}}">
-        <button style="margin-left: 90%;width: 10%" class="btn btn-outline-success" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="spasiSliku()">Spasi</button>
+        <button style="margin-left: 90%;width: 10%" class="btn btn-outline-success" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="spasiSliku()">{{'Save'| translate}}</button>
       </div>
     </div>
   </div>

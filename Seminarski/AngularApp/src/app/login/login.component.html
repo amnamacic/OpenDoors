@@ -17,40 +17,39 @@
               <form [formGroup]="LogInForma" (ngSubmit)="onSubmit()">
 
                 <div class="form-outline mb-4">
-                  <p> Korisničko ime: </p>
+                  <p> {{'Username'| translate}}</p>
                   <input type="text" class="form-control" [(ngModel)]="this.korisnickoIme"
                          formControlName="korisnickoIme" placeholder="KorisnickoIme">
                   <div *ngIf="submitted && LogInForma.controls.korisnickoIme.errors" class="error">
-                    <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> Korisničko ime je obavezno!
+                    <div *ngIf="LogInForma.controls.korisnickoIme.errors?.['required']"> {{'Username'| translate}}{{'isReq'| translate}}
                     </div>
                   </div>
                 </div>
 
                 <div class="form-outline mb-4">
-                  <p> Lozinka: </p>
+                  <p> {{'Password'| translate}}</p>
                   <input class="form-control" [(ngModel)]="this.lozinka" formControlName="lozinka"
                          placeholder="*****">
                   <div *ngIf="submitted && LogInForma.controls.lozinka.errors" class="error">
-                    <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> Lozinka je obavezna!</div>
+                    <div *ngIf="LogInForma.controls.lozinka.errors?.['required']"> {{'Password'| translate}}{{'isReq'| translate}}</div>
                   </div>
                 </div>
 
                 <div class="text-right pt-1 mb-5 pb-1">
-                  <button class="btn btn-primary w-100" type="click" (click)="onSubmit()">Prijavite se</button>
+                  <button class="btn btn-primary w-100" type="click" (click)="onSubmit()">{{"Login"| translate}}</button>
                 </div>
               </form>
-              <button class="btn btn-primary" style="margin-bottom: 5%; background-color: white; border:1px solid black;margin-left: 15%;: center;color:black " (click)="otvoriModal=true">Zaboravili ste lozinku?</button>
+              <button class="btn btn-primary" style="margin-bottom: 5%; background-color: white; border:1px solid black;margin-left: 15%;: center;color:black " (click)="otvoriModal=true">{{'ForgotPass' | translate}}</button>
 
               <div class="d-flex align-items-center justify-content-center pb-4">
-                <p class="mb-0 me-2">Nemate račun?</p>
-                <button type="button" class="btn btn-outline-success"><a routerLink="/registracija" style="color:white">Registrujte
-                  se</a></button>
+                <p class="mb-0 me-2">{{'NoAcc'| translate}}</p>
+                <button type="button" class="btn btn-outline-success"><a routerLink="/registracija" style="color:white">{{'Register'| translate}}</a></button>
               </div>
             </div>
           </div>
           <div class="col-lg-6 d-flex align-items-center" style="background-color: black">
             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-              <h4 class="mb-4">Vaša booking aplikacija</h4>
+              <h4 class="mb-4">OpenDoors</h4>
               <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -73,14 +72,14 @@
       </div>
       <div class="modal-body">
         <div>
-          <h5>Unesite email za verifikacijski kod: </h5>
+          <h5>{{'EmailV'| translate}} </h5>
         </div>
         <div>
           <input class="form-control" [(ngModel)]="this.email" placeholder="someone@gmail.com">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" (click)="posaljiKod()">Pošalji</button>
+        <button class="btn btn-success" (click)="posaljiKod()">{{'Send'| translate}}</button>
       </div>
     </div>
   </div>
@@ -96,14 +95,14 @@
       </div>
       <div class="modal-body">
         <div>
-          <h5>Unesite kod: </h5>
+          <h5>{{"VerificationCode"| translate}}</h5>
         </div>
         <div>
           <input class="form-control" [(ngModel)]="this.verifikacija">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" (click)="provjeriValidnost()">Pošalji</button>
+        <button class="btn btn-success" (click)="provjeriValidnost()">{{'Send'| translate}}</button>
       </div>
     </div>
   </div>
@@ -119,14 +118,14 @@
       </div>
       <div class="modal-body">
         <div>
-          <h5>Unesite novu lozinku: </h5>
+          <h5>{{'NewPass'| translate}}</h5>
         </div>
         <div>
           <input class="form-control" [(ngModel)]="this.novaLozinka">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success" (click)="NovaLozinka()">Promijeni</button>
+        <button class="btn btn-success" (click)="NovaLozinka()">{{'Change'| translate}}</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HttpClient} from '@angular/common/http'
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AppComponent} from "./app.component";
 import { NavComponent } from './nav/nav.component';
@@ -23,6 +23,8 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { KorisnickiProfilComponent } from './korisnicki-profil/korisnicki-profil.component';
 import { NekretnineVlasnikComponent } from './nekretnine-vlasnik/nekretnine-vlasnik.component';
 import { RezervacijaComponent } from './rezervacija/rezervacija.component';
+import { TranslateLoader, TranslateModule} from '@ngx-translate/core'
+import { TranslateHttpLoader} from '@ngx-translate/http-loader'
 
 @NgModule({
   declarations: [
@@ -54,11 +56,22 @@ import { RezervacijaComponent } from './rezervacija/rezervacija.component';
     RouterTestingModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
 })
 export class AppModule { }
+export function httpTranslateLoader(http: HttpClient){
+  return new TranslateHttpLoader(http);
+}
+
 
 
 

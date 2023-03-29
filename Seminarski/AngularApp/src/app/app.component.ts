@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
