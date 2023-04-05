@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {LoginInformacije} from "../helper/login-informacije";
 import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
+import {SignalRComponent} from "../signal-r/signal-r.component";
 
 
 declare function porukaSuccess(a: string):any;
@@ -25,7 +26,9 @@ export class DetaljiNekretnineComponent implements OnInit {
   objekat:any;
   noviKomentar: any;
   slika:any;
-  constructor(private httpKlijent: HttpClient, private router: Router,  private route: ActivatedRoute,private formBuilder: FormBuilder) {
+
+  constructor(private httpKlijent: HttpClient, private router: Router, private route: ActivatedRoute,
+              private formBuilder: FormBuilder, public  signalRServis: SignalRComponent) {
   }
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
@@ -35,7 +38,9 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.nekretninaId=+s["id"];
       this.fetchPogodnosti();
     })
+    this.signalRServis.zapocniKonekciju(this.nekretninaId);
     console.log(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
+
     this.slika =   {
       id:0,
       nekretninaId:this.nekretninaId,
@@ -137,6 +142,7 @@ export class DetaljiNekretnineComponent implements OnInit {
       this.httpKlijent.post(`${MojConfig.adresa_servera}/Recenzije/AddUpdate`, this.noviKomentar.value,MojConfig.http_opcije()).subscribe(x=>{
         this.fetchRecenzije();
         porukaSuccess("Uspjesno dodan komentar!");
+        this.signalRServis.zapocniKonekciju(this.nekretninaId);
       });
     }
     else
@@ -150,8 +156,9 @@ export class DetaljiNekretnineComponent implements OnInit {
   }
 
   delete(s: any) {
-    this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
-      this.fetchPogodnosti();
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Recenzije/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.fetchRecenzije();
+      this.signalRServis.zapocniKonekciju(this.nekretninaId);
     });
   }
 

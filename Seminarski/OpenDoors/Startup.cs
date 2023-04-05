@@ -14,6 +14,7 @@ using OpenDoors.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using OpenDoors.Data;
+using OpenDoors.Helper;
 
 namespace OpenDoors
 {
@@ -29,6 +30,16 @@ namespace OpenDoors
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(
+              options => {
+                  options
+              .AddPolicy("CorsPolicy", builder => builder
+              .WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials());
+          }); //This needs to set everything allowed
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("db1")));
@@ -43,6 +54,7 @@ namespace OpenDoors
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -69,22 +81,17 @@ namespace OpenDoors
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseCors(
-               options => options
-               .SetIsOriginAllowed(x => _ = true)
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials()
-           ); //This needs to set everything allowed
-
-
+           
             app.UseRouting();
-
+            app.UseCors("CorsPolicy");
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHub<RecenzijeHub>("/recenzijeHub");
 
             });
         }

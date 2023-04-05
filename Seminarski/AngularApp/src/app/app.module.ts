@@ -24,7 +24,8 @@ import { KorisnickiProfilComponent } from './korisnicki-profil/korisnicki-profil
 import { NekretnineVlasnikComponent } from './nekretnine-vlasnik/nekretnine-vlasnik.component';
 import { RezervacijaComponent } from './rezervacija/rezervacija.component';
 import { TranslateLoader, TranslateModule} from '@ngx-translate/core'
-import { TranslateHttpLoader} from '@ngx-translate/http-loader'
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { SignalRComponent } from './signal-r/signal-r.component'
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { TranslateHttpLoader} from '@ngx-translate/http-loader'
     KorisnickiProfilComponent,
     NekretnineVlasnikComponent,
     RezervacijaComponent,
+    SignalRComponent,
 
   ],
   exports: [RouterModule],

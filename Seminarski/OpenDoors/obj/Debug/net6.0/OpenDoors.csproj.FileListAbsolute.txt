@@ -497,3 +497,5 @@ C:\Users\HP\Desktop\rs\OpenDoors\Seminarski\OpenDoors\obj\Debug\net6.0\refint\Op
 C:\Users\HP\Desktop\rs\OpenDoors\Seminarski\OpenDoors\obj\Debug\net6.0\OpenDoors.pdb
 C:\Users\HP\Desktop\rs\OpenDoors\Seminarski\OpenDoors\obj\Debug\net6.0\OpenDoors.genruntimeconfig.cache
 C:\Users\HP\Desktop\rs\OpenDoors\Seminarski\OpenDoors\obj\Debug\net6.0\ref\OpenDoors.dll
+C:\Users\HP\Desktop\OpenDoors\Seminarski\OpenDoors\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\HP\Desktop\OpenDoors\Seminarski\OpenDoors\bin\Debug\net6.0\System.Net.WebSockets.WebSocketProtocol.dll

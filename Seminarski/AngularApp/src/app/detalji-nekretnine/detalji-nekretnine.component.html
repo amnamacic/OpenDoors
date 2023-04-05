@@ -25,7 +25,9 @@
 
 
     <div id="recenzije" style=" width:100%;margin-top:5%">
-      <h4>{{'Ratings'| translate}}:</h4><br>
+      <h4>{{'Ratings'| translate}}:</h4>
+      {{signalRServis.brojKomentara}}
+      <br>
       <div class="row" *ngFor="let s of recenzijePodaci"
            style="border-radius: 1%;color: black">
         <div class="row justify-content-between" style="padding-top:1% ">
@@ -65,7 +67,7 @@
               <input type="text" class="form-control" formControlName="komentar" placeholder="Komentar">
               <div class="form-text text-danger"
                    *ngIf="komentar.errors?.['required'] && (komentar.dirty || komentar.touched)">
-                {{'Comment'| translate}}{{'isReq'| translate}}
+                {{'Leave comment'| translate}}{{'isReq'| translate}}
               </div>
             </div>
           </div>
@@ -86,7 +88,7 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-success" style="float: right">{{'Comment'| translate}}</button>
+        <button type="submit" class="btn btn-outline-success" style="float: right">{{'LeaveComment'| translate}}</button>
       </div>
     </form>
 
