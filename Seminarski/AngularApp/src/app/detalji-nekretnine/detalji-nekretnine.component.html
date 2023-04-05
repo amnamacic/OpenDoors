@@ -1,4 +1,4 @@
-<section *ngFor="let s of pogodnosti" class="h-100" style="background-color: white; border-radius: 20px; width:90%">
+<section *ngFor="let s of pogodnosti" class="h-100" style="background-color: white; border-radius: 20px; width:90%;padding: 2%">
   <div class="row ">
     <div class="col-6">
       <img [src]="getslika(s.slike_ids[0])" (click)="otvoriSlike(s)">
@@ -6,10 +6,11 @@
     <div class="col-6 ">
       <h2>
         <tr>{{s.adresa}}, {{s.lokacija}}
-          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button><br>
-          Broj rezervacija: {{signalRServis.brojRecenzija}}
+          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
+          <h6>Trenutno rezervacija: {{signalRServis.brojRecenzija}}</h6>
         </tr>
       </h2>
+      <tr></tr>
       <tr>{{s.brojKvadrata}} {{'SquareFootage'| translate}}</tr>
       <tr>{{s.brojSoba}} {{'Rooms'| translate}}</tr>
       <tr>{{s.brojKupatila}} {{'Restrooms'| translate}}</tr>
@@ -27,14 +28,14 @@
 
     <div id="recenzije" style=" width:100%;margin-top:5%">
       <h4>{{'Ratings'| translate}}:</h4>
-      {{signalRServis.brojKomentara}}
-      <br>
+
+      <h6 style="color:grey">{{signalRServis.brojKomentara}} recenzija</h6>
       <div class="row" *ngFor="let s of recenzijePodaci"
            style="border-radius: 1%;color: black">
         <div class="row justify-content-between" style="padding-top:1% ">
           <div class="col-12 col-md-8">
             <h4>
-              <i class="bi-person-fill pe-2" style="font-size: 1.25em"></i>{{s.korisnik}}
+              <i class="bi-person-fill pe-2" style="font-size: 1.25em"></i>{{s.korisnik.username}}
             </h4>
           </div>
           <div class="col-6 col-md-3 " style="text-align: end;padding: 0">
@@ -51,10 +52,11 @@
             <h4>{{s.ocjena}}</h4>
           </div>
         </div>
-        <div class="row align-content-lg-end" style="float: right;margin-left: 78%;padding: 0">
-          <button style="width: 10%; float: right" class="btn btn-outline-success" (click)="urediKomentar(s)">{{'Edit'| translate}}</button>
-          <button style="width:10%;float: right" class="btn btn-outline-danger" (click)="delete(s)">{{'Delete'| translate}}</button>
-        </div>
+
+          <button style="width:10%;float: right;margin-left:88%" class="btn btn-outline-danger"
+                  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalogId==s.korisnik.id"
+                  (click)="delete(s)">{{'Delete'| translate}}</button>
+
       </div>
     </div>
 

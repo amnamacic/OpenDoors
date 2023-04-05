@@ -151,11 +151,6 @@ export class DetaljiNekretnineComponent implements OnInit {
       console.table(this.noviKomentar.value)
   }
 
-  urediKomentar(s:any) {
-    this.httpKlijent.get(MojConfig.adresa_servera+ "/Recenzije/GetByKomentarId?komentarId=" + s.id,MojConfig.http_opcije()).subscribe(x=>{
-      this.komentarPodaci=x;
-    });
-  }
 
   delete(s: any) {
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Recenzije/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{

@@ -54,7 +54,7 @@ namespace OpenDoors.Controllers
                     Id= s.Id,
                     Ocjena=s.Ocjena,
                     Komentar=s.Komentar,
-                    Korisnik=s.KorisnickiNalog.Username,
+                    Korisnik=s.KorisnickiNalog,
                     DatumModifikacije=s.DatumModifikacije,
                     DatumPostavljanja=s.DatumPostavljanja.ToString("dd/MM/yyyy")
                 })
@@ -73,7 +73,7 @@ namespace OpenDoors.Controllers
                     Id = s.Id,
                     Ocjena = s.Ocjena,
                     Komentar = s.Komentar,
-                    Korisnik = s.KorisnickiNalog.Username,
+                    Korisnik = s.KorisnickiNalog,
                     DatumModifikacije = s.DatumModifikacije,
                     DatumPostavljanja = s.DatumPostavljanja.ToString("dd/MM/yyyy"),
                     NekretninaId=s.NekretninaId,

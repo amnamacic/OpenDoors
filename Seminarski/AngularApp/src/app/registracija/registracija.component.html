@@ -1,4 +1,4 @@
-<section class=" h-100" style="background-color: rgb(53,53,53); border-radius: 20px">
+<section class=" h-100" style="background-color: rgb(53,53,53); border-radius: 20px;padding: 2%">
   <h1>{{'Register'| translate}} </h1> <br>
   <form [formGroup]="register" (ngSubmit)="collect()">
     <div class="row">
@@ -45,14 +45,14 @@
           <input type="radio" class="form-check-input" value="Ž" id="female" formControlName="spol">
           <label class="form-check-label" for="female">{{'F'| translate}}</label>
         </div>
-        <div class="form-text text-danger" *ngIf="spol.errors?.['required']">{{'Choose'| translate}} {{'Gender'| translate}}</div>
+        <div class="form-text text-danger" *ngIf="spol.errors?.['required']">{{'Gender'| translate}} {{'isReq'| translate}}</div>
       </div>
       <div class="col-md-6 mb-4">
         <div class="form-group">
           <label>{{'BirthYear'| translate}}:</label>
           <input type="number" class="form-control" placeholder="{{'BirthYear'| translate}}"  formControlName="godinaRodjenja">
           <div class="form-text text-danger" *ngIf="godinaRodjenja.errors?.['required'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
-            {{'BrthYear'| translate}}{{'isReq'| translate}}.
+            {{'BirthYear'| translate}}{{'isReq'| translate}}.
           </div>
           <div class="form-text text-danger" *ngIf="!!godinaRodjenja.errors?.['pattern'] && (godinaRodjenja.dirty || godinaRodjenja.touched)">
             {{'NotValid'| translate}}.
@@ -139,12 +139,8 @@
         <input id="avans" type="checkbox" (change)="promjenaVlasnika($event)">
       </form>
     </div>
-    <button type="submit"  class="btn btn-primary" >{{'Register'| translate}}</button>
-    <div class="reg">
-      <div style="color:white" routerLink="/login" >{{'HaveAcc'| translate}}?
-        <button type="submit"  class="btn btn-primary" > {{'Login'| translate}} </button>
-      </div>
-    </div>
+    <button type="submit" class="btn btn-primary" >{{'Register'| translate}}</button>
+
   </form>
 </section>
 
