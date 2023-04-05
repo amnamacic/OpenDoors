@@ -2,6 +2,7 @@
 {
     public class RezervacijaGetAll
     {
+        public int NekretninaId { get; set; }
         public int Id { get; set; }
         public int BrojOsoba { get; set; }
         public int Djeca { get; set; }

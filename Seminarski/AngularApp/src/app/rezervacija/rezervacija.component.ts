@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginInformacije} from "../helper/login-informacije";
 import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 import {MojConfig} from "../../MojConfig";
+import {SignalRComponent} from "../signal-r/signal-r.component";
 
 declare function porukaSuccess(a: string): any;
 
@@ -31,7 +32,8 @@ export class RezervacijaComponent {
     {naziv: 'Debitna'}];
 
   minDate: string;
-  constructor(private httpKlijent: HttpClient, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private httpKlijent: HttpClient, private router: Router, private route: ActivatedRoute,
+              private formBuilder: FormBuilder, public  signalRServis: SignalRComponent) {
     const today = new Date();
     today.setDate(today.getDate() + 1);
     this.minDate = today.toISOString().split('T')[0];
@@ -103,6 +105,7 @@ export class RezervacijaComponent {
     if (this.register.valid) {
       this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/Snimi`, this.register.value, MojConfig.http_opcije()).subscribe(x => {
         porukaSuccess('Rezervacija uspjesna!');
+        this.signalRServis.zapocniKonekcijuRezervacije(this.nekretnina);
       }, error => {porukaError("Nekretnina je zauzeta u izabranom periodu.")});
     } else
       console.table(this.register.value);

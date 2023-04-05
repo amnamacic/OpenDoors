@@ -13,8 +13,9 @@ import {MojConfig} from "../../MojConfig";
 })
 export class SignalRComponent {
   public brojKomentara:number;
+  public brojRecenzija: number;
 
-  zapocniKonekciju(nekId:number) {
+  zapocniKonekcijuRecenzije(nekId:number) {
 
     var connection = new signalR.HubConnectionBuilder()
       .withUrl(MojConfig.adresa_servera+ '/recenzijeHub')
@@ -30,6 +31,25 @@ export class SignalRComponent {
     ).then(()=>{
       connection?.invoke("ProslijediPoruku", nekId)
        ;
+    });
+  }
+
+  zapocniKonekcijuRezervacije(nekId:number) {
+
+    var connection = new signalR.HubConnectionBuilder()
+      .withUrl(MojConfig.adresa_servera+ '/rezervacijeHub')
+      .build();
+
+    connection.on('CountRezervacija', (p:number)=>{
+      this.brojRecenzija = p;
+    });
+
+    connection.start().then(()=>{
+        console.log("otvoren kanal WS");
+      }
+    ).then(()=>{
+      connection?.invoke("ProslijediPoruku", nekId)
+      ;
     });
   }
 }

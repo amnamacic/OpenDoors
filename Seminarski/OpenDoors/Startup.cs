@@ -92,6 +92,7 @@ namespace OpenDoors
                     pattern: "{controller}/{action=Index}/{id?}");
 
                 endpoints.MapHub<RecenzijeHub>("/recenzijeHub");
+                endpoints.MapHub<RezervacijeHub>("/rezervacijeHub");
 
             });
         }

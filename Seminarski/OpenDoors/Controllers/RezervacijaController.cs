@@ -101,7 +101,7 @@ namespace OpenDoors.Controllers
                 .OrderBy(s => s.Id)
                 .Select(s => new RezervacijaGetAll
                 {
-                    Id=s.Id,
+                    Id = s.Id,
                     BrojOsoba = s.BrojOsoba,
                     Djeca = s.Djeca,
                     Status = s.Status,
@@ -111,6 +111,7 @@ namespace OpenDoors.Controllers
                     Nekretnina = s.Nekretnina.Adresa + ", " + s.Nekretnina.Lokacija.Naziv,
                     Korisnik = s.Korisnik.Ime + " " + s.Korisnik.Prezime,
                     KreditnaKartica = s.KreditnaKartica.TipKartice + s.KreditnaKartica.BrojKartice,
+                    NekretninaId = s.NekretninaId
                 })
                 .AsQueryable();
             return data.Take(100).ToList();

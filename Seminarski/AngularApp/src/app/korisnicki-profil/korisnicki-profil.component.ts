@@ -5,6 +5,7 @@ import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {NavComponent} from "../nav/nav.component";
+import {SignalRComponent} from "../signal-r/signal-r.component";
 
 declare function porukaSuccess(a: string): any;
 
@@ -21,7 +22,7 @@ export class KorisnickiProfilComponent  implements OnInit{
   verifikacijskiKod: any;
    unesiKod: boolean=false;
    korisnikId: any;
-  constructor(private httpKlijent: HttpClient, private router :Router, private odjava:NavComponent) {
+  constructor(private httpKlijent: HttpClient, private router :Router, private odjava:NavComponent, public  signalRServis: SignalRComponent) {
   }
   novaSifra:any;
   promjenaLozinke=false;
@@ -56,9 +57,10 @@ export class KorisnickiProfilComponent  implements OnInit{
     });
   }
 
-  otkaziRezervaciju(id:number) {
-    this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/OtkaziRezervaciju/${id}`, MojConfig.http_opcije()).subscribe(x=>{
+  otkaziRezervaciju(s:any) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/OtkaziRezervaciju/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
       this.otvoriRezervacijeKorisnika(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
+      this.signalRServis.zapocniKonekcijuRezervacije(s.nekretninaId);
     });
   }
 

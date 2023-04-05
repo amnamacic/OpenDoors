@@ -6,7 +6,8 @@
     <div class="col-6 ">
       <h2>
         <tr>{{s.adresa}}, {{s.lokacija}}
-          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
+          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button><br>
+          Broj rezervacija: {{signalRServis.brojRecenzija}}
         </tr>
       </h2>
       <tr>{{s.brojKvadrata}} {{'SquareFootage'| translate}}</tr>
