@@ -1,4 +1,4 @@
-<section class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px; color: white">
+<section class="h-100" style="background-color: rgb(53,53,53); border-radius: 20px; color: white; padding: 2%">
   <form [formGroup]="register" (ngSubmit)="collect()">
     <div class="row">
       <div class="col-md-6 mb-4">
@@ -44,6 +44,7 @@
         </div>
       </div>
     </div>
+    <div class="row">
     <div class="col-md-6 mb-4">
       <div class="form-group">
         <label class="form-label">{{'Card'| translate}}: </label>
@@ -56,8 +57,12 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" (click)="otvoriModal()">{{'NewCard'| translate}}</button>
-    <button type="submit" class="btn btn-primary">{{'Reserve'| translate}}</button>
+    <div class="col-md-6 mb-4">
+      <button style="margin-top:10%" class="btn btn-outline-info" (click)="otvoriModal()">{{'NewCard'| translate}}</button>
+    </div>
+    </div>
+    <button  type="submit" class="btn btn-info">{{'Reserve'| translate}}</button>
+    <button  type="button" class="btn btn-outline-danger">{{'Cancel'| translate}}</button>
   </form>
 </section>
 
@@ -68,7 +73,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content" style="background-color: rgb(53,53,53); color: white;">
       <div class="modal-header">
-        <button type="button" class="btn btn-close" aria-label="Close" (click)="uplata=null"></button>
+        <button type="button" class="btn btn-close btn-close-white" aria-label="Close" (click)="uplata=null"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="uplata" (ngSubmit)="spasiKarticu()">
@@ -88,7 +93,7 @@
             <div class="col-md-6 mb-4">
               <div class="form-group">
                 <label>{{'CardNum'| translate}}:</label>
-                <input type="text" class="form-control" placeholder="{{'Children'| translate}}"
+                <input type="text" class="form-control" placeholder="{{'XXXX XXXX XXXXX'| translate}}"
                        formControlName="brojKartice">
                 <div class="form-text text-danger"
                      *ngIf="brojKartice.errors?.['required'] && (brojKartice.dirty || brojKartice.touched)">
@@ -117,7 +122,7 @@
             <div class="col-md-6 mb-4">
               <div class="form-group">
                 <label>CVV: </label>
-                <input type="number" class="form-control" formControlName="CVV" >
+                <input type="number" class="form-control" formControlName="CVV" placeholder="XXX" >
                 <div class="form-text text-danger" *ngIf="CVV.errors?.['required'] && (CVV.dirty || CVV.touched)">
                   CVV{{'isReq'| translate}}.
                 </div>
@@ -127,7 +132,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">{{'Save'| translate}}</button>
+          <button type="submit" class="btn btn-info">{{'Save'| translate}}</button>
         </form>
       </div>
     </div>

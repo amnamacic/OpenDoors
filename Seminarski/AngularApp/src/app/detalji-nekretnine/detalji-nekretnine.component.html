@@ -6,7 +6,8 @@
     <div class="col-6 ">
       <h2>
         <tr>{{s.adresa}}, {{s.lokacija}}
-          <button type="button" class="btn btn-info"  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
+          <button type="button" class="btn btn-info"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik" (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
+          <button  type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId" (click)="otvoriRezervacije()">{{'Reservations'| translate}}</button>
           <h6>Trenutno rezervacija: {{signalRServis.brojRecenzija}}</h6>
         </tr>
       </h2>
@@ -17,12 +18,12 @@
       <tr>{{s.brojKreveta}} {{'Beds'| translate}}</tr>
       <tr>{{s.cijenaPoDanu}} KM {{'Price'| translate}} {{'PerDay'| translate}}</tr>
       <tr>{{'Advance'| translate}}: {{s.avans ? "Da" : "Ne"}}</tr>
-      <tr>{{'Amenities'| translate}}:</tr>
-      <span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span>
+      <tr>{{'Amenities'| translate}}:<span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span></tr>
 
-      <button style="float: right; border-radius:18px" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId" (click)="otvoriRezervacije()">{{'Reservations'| translate}}</button>
-      <button style="float: right" type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
-      <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">{{'Delete'| translate}}</button>
+      <div class="d-inline" style="float: right">
+      <button type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
+      <button type="button" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">{{'Delete'| translate}}</button>
+      </div>
     </div>
 
 

@@ -105,6 +105,7 @@ export class RezervacijaComponent {
     if (this.register.valid) {
       this.httpKlijent.post(`${MojConfig.adresa_servera}/Rezervacija/Snimi`, this.register.value, MojConfig.http_opcije()).subscribe(x => {
         porukaSuccess('Rezervacija uspjesna!');
+        this.router.navigate(["korisnicki-profil/"]);
         this.signalRServis.zapocniKonekcijuRezervacije(this.nekretnina);
       }, error => {porukaError("Nekretnina je zauzeta u izabranom periodu.")});
     } else

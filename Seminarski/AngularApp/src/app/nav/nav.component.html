@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;">
     <div class="container">
       <a class="navbar-brand">{{appTitle}}</a>
-      <form class="form-inline">
+      <form class="form-inline" style="margin-left: 35%">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="item nav-link active"  routerLink="/nekretnine/{{0}}">{{'Homepage'| translate}}</a>
@@ -17,21 +17,22 @@
             <a class="nav-link active"  routerLink="/login">{{'Login'| translate}}</a>
           </li>
           <li>
-            <a class="nav-link active" >
-              <select
-                class="form-control" style="background-color: rgb(53,53,53);color: white"
-                #selectedLang
-                (change)="switchLang(selectedLang.value)">
-                <option *ngFor="let language of translate.getLangs()"
-                        [value]="language"
-                        [selected]="language === translate.currentLang">
-                  {{language}}
-                </option>
-              </select>
-            </a>
+
           </li>
         </ul>
       </form>
+      <a class="nav-link active" >
+        <select
+          class="form-control" style="background-color: rgb(53,53,53);color: white;height:1%;margin-left:80%"
+          #selectedLang
+          (change)="switchLang(selectedLang.value)">
+          <option *ngFor="let language of translate.getLangs()"
+                  [value]="language"
+                  [selected]="language === translate.currentLang">
+            {{language}}
+          </option>
+        </select>
+      </a>
     </div>
   </nav>
 </div>
@@ -40,7 +41,7 @@
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: cadetblue;">
     <div class="container">
       <a class="navbar-brand">{{appTitle}}</a>
-      <form class="form-inline" style="margin-left: 55%">
+      <form class="form-inline" style="margin-left: 35%">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="nav-link active" routerLink="/nekretnine/{{0}}">{{'Homepage'| translate}}</a>
@@ -67,7 +68,7 @@
 
         <a class="nav-link active" >
           <select
-            class="form-control" style="background-color: rgb(53,53,53);color: white;height:1%;margin-left:150%"
+            class="form-control" style="background-color: rgb(53,53,53);color: white;height:1%;margin-left:80%"
             #selectedLang
             (change)="switchLang(selectedLang.value)">
             <option *ngFor="let language of translate.getLangs()"

@@ -14,12 +14,11 @@
         <tr>{{s.cijenaPoDanu}} KM {{'Price'| translate}} {{'PerDay'| translate}}</tr>
         <tr>{{'Advance'| translate}}: {{s.avans ? "Da" : "Ne"}}</tr>
         <tr>
-          <button class="btn btn-primary"  class="btn btn-outline-danger" (click)="detaljiNekretnine(s)">{{'Details'| translate}}</button>
-          <button class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="delete(s)">{{'Delete'| translate}}</button>
+          <button class="btn btn-info" (click)="detaljiNekretnine(s)">{{'Details'| translate}}</button>
         </tr>
       </div>
     </div>
   </div>
 </div>
 <br/>
-<button type="button" class="btn btn-primary" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" ><a routerLink="/add-nekretnina" style="color:black">{{'AddReal'| translate}}</a></button>
+<button style="margin-left: 3%" type="button" class="btn btn-primary" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" ><a routerLink="/add-nekretnina" style="color:black">{{'AddReal'| translate}}</a></button>

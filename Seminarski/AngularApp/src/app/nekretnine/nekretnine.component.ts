@@ -31,14 +31,24 @@ export class NekretnineComponent implements OnInit {
 
   getNekretnine() :void
   {
-    if(this.Id==0)
-      this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",MojConfig.http_opcije()).subscribe(x=>{
-      this.nekretninaPodaci = x;
-    });
-    else
-      this.httpKlijent.get(`${MojConfig.adresa_servera}/Nekretnina/GetByTip?tipId=`+this.Id,MojConfig.http_opcije()).subscribe(x=>{
+    if(this.Id==0){
+      if(this.loginInfo().isLogiran && this.loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik)
+        this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAllOsimVlasnika?korisnickiNalogId=" + this.loginInfo().autentifikacijaToken.korisnickiNalog.id, MojConfig.http_opcije()).subscribe(x=>{
+          this.nekretninaPodaci = x;})
+      else
+          this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAll",MojConfig.http_opcije()).subscribe(x=>{
+            this.nekretninaPodaci = x;
+    })}
+    else{
+      if(this.loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik)
+        this.httpKlijent.get(MojConfig.adresa_servera+ "/Nekretnina/GetAllOsimVlasnika?korisnickiNalogId=" + this.loginInfo().autentifikacijaToken.korisnickiNalog.id,MojConfig.http_opcije()).subscribe(x=>{
+          this.nekretninaPodaci = x;
+        })
+      else
+        this.httpKlijent.get(`${MojConfig.adresa_servera}/Nekretnina/GetByTip?tipId=`+this.Id,MojConfig.http_opcije()).subscribe(x=>{
         this.nekretninaPodaci=x;
       });
+    }
   }
 
   detaljiNekretnine(s:any) {
@@ -51,11 +61,5 @@ export class NekretnineComponent implements OnInit {
   }
   getslika(slika_id: any) {
     return `${MojConfig.adresa_servera}/Slike/GetSlikaDB/${slika_id}`;
-  }
-
-  sortiraj() {
-    this.httpKlijent.get( 'https://localhost:7115/Nekretnina/sortirajPoCijeni', MojConfig.http_opcije()).subscribe(x=>{
-      this.nekretninaPodaci=x;
-    });
   }
 }

@@ -6,6 +6,9 @@ import {NekretninaVM} from "./nekretninaVM";
 import {LoginInformacije} from "../helper/login-informacije";
 import {AutentifikacijaHelper} from "../helper/autentifikacija-helper";
 
+
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 @Component({
   selector: 'app-add-nekretnina',
   templateUrl: './add-nekretnina.component.html',
@@ -85,7 +88,11 @@ export class AddNekretninaComponent implements OnInit {
     if(this.urediNekretninu!=null)
       this.novaNekretnina.slike=this.slikeUredjeneNekretnine.map((x:any)=>x.slikaString);
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Snimi`, this.novaNekretnina, MojConfig.http_opcije()).subscribe(x => {
-      this.router.navigateByUrl("/pocetna");
+      this.router.navigate(["nekretnine/",0])
+      if(this.urediNekretninu==null)
+        porukaSuccess("Uspješno dodata nekretnina!")
+      else
+        porukaSuccess("Uspješno spašene promjene!")
     });
   }
 
