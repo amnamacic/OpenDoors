@@ -1,13 +1,19 @@
-<section *ngFor="let s of pogodnosti" class="h-100" style="background-color: white; border-radius: 20px; width:90%;padding: 2%">
+<section *ngFor="let s of pogodnosti" class="h-100"
+         style="background-color: white; border-radius: 20px; width:90%;padding: 2%">
   <div class="row ">
     <div class="col-6">
-      <img [src]="getslika(s.slike_ids[0])" (click)="otvoriSlike(s)">
+      <img style="height: 400px;width: 500px;" [src]="getslika(s.slike_ids[0])" (click)="otvoriSlike(s)">
     </div>
     <div class="col-6 ">
       <h2>
         <tr>{{s.adresa}}, {{s.lokacija}}
-          <button type="button" class="btn btn-info"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik" (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
-          <button  type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId" (click)="otvoriRezervacije()">{{'Reservations'| translate}}</button>
+          <button type="button" class="btn btn-info"
+                  *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik ||
+                   s.vlasnikId!=loginInfo().autentifikacijaToken.korisnickiNalogId "
+                  (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
+          <button type="button" class="btn btn-outline-dark"
+                  *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId"
+                  (click)="otvoriRezervacije()">{{'Reservations'| translate}}</button>
           <h6>Trenutno rezervacija: {{signalRServis.brojRecenzija}}</h6>
         </tr>
       </h2>
@@ -21,8 +27,12 @@
       <tr>{{'Amenities'| translate}}:<span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span></tr>
 
       <div class="d-inline" style="float: right">
-      <button type="button" class="btn btn-outline-success" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
-      <button type="button" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">{{'Delete'| translate}}</button>
+        <button type="button" class="btn btn-outline-success"
+                *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"
+                (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
+        <button type="button" class="btn btn-outline-danger"
+                *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"
+                (click)="deleteNekretninu(s)">{{'Delete'| translate}}</button>
       </div>
     </div>
 
@@ -79,14 +89,17 @@
           </div>
         </div>
 
-          <button style="width:10%;float: right;margin-left:88%" class="btn btn-outline-danger"
-                  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalogId==s.korisnik.id"
-                  (click)="delete(s)">{{'Delete'| translate}}</button>
+        <button style="width:10%;float: right;margin-left:88%" class="btn btn-outline-danger"
+                *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalogId==s.korisnik.id"
+                (click)="delete(s)">{{'Delete'| translate}}</button>
 
       </div>
     </div>
 
-    <form *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik" [formGroup]="noviKomentar" (ngSubmit)="ostaviKomentar()">
+    <form *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik ||
+                   s.vlasnikId!=loginInfo().autentifikacijaToken.korisnickiNalogId "
+          [formGroup]="noviKomentar"
+          (ngSubmit)="ostaviKomentar()">
       <div id="komentar">
         <h4>{{'LeaveComment'| translate}}:</h4>
         <div class="row">
@@ -96,14 +109,15 @@
               <input type="text" class="form-control" formControlName="komentar" placeholder="Komentar">
               <div class="form-text text-danger"
                    *ngIf="komentar.errors?.['required'] && (komentar.dirty || komentar.touched)">
-                {{'Leave comment'| translate}}{{'isReq'| translate}}
+                {{'Comment'| translate}}{{'isReq'| translate}}
               </div>
             </div>
           </div>
           <div class="col-md-6 mb-4">
             <div class="form-group">
               <label class="form-label">{{'Rate'| translate}}: </label>
-              <input type="number" class="form-control" formControlName="ocjena" placeholder="Ocjena"/>
+              <input type="number" class="form-control" formControlName="ocjena" placeholder="Ocjena" [min]="1"
+                     [max]="10"/>
               <div class="form-text text-danger"
                    *ngIf="ocjena.errors?.['required'] && (ocjena.dirty || ocjena.touched)">
                 {{'Rate'| translate}}{{'isReq'| translate}}
@@ -117,16 +131,21 @@
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-success" style="float: right">{{'LeaveComment'| translate}}</button>
+        <button type="submit" class="btn btn-outline-success"
+                style="float: right">{{'LeaveComment'| translate}}</button>
       </div>
     </form>
 
-    <div class="row"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" style="width: 100%;padding: 0;margin: 0;">
+    <div class="row"
+         *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"
+         style="width: 100%;padding: 0;margin: 0;">
       <div class="col">
         <label class="form-label">{{'NewPhoto'| translate}}:</label>
         <input class="form-control" type="file" id="slika-input" accept="image/*" (change)="generisi_preview()"/>
         <img style="max-width: 100%; height: 200px" src="{{slika.slika}}">
-        <button style="margin-left: 90%;width: 10%" class="btn btn-outline-success" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="spasiSliku()">{{'Save'| translate}}</button>
+        <button style="margin-left: 90%;width: 10%" class="btn btn-outline-success"
+                *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik"
+                (click)="spasiSliku()">{{'Save'| translate}}</button>
       </div>
     </div>
   </div>
@@ -140,21 +159,25 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="slike=null"></button>
       </div>
       <div class="modal-body">
-        <div class="container" style="padding: 0;margin-right: 1%; display: inline;position: relative;" *ngFor="let x of objekat.slike_ids" >
-          <img  [src]="getslika(x)" style="height: 300px;width: 400px">
-          <button type="button" class="btn-close" aria-label="Close" style="position: absolute;right: 0" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="obrisiSliku(x)"></button>
+        <div class="container" style="padding: 0;margin-right: 1%; display: inline;position: relative;"
+             *ngFor="let x of objekat.slike_ids">
+          <img [src]="getslika(x)" style="height: 300px;width: 400px">
+          <button type="button" class="btn-close" aria-label="Close" style="position: absolute;right: 0"
+                  *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik"
+                  (click)="obrisiSliku(x)"></button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
 <div *ngIf="odabranaNekretnina!=null" class="modal fade show bd-example-modal-xl" id="exampleModalLive3" tabindex="-1"
      aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog modal-xl" >
+  <div class="modal-dialog modal-xl">
     <div class="modal-content" style="background-color: rgb(53,53,53)">
       <div class="modal-header">
-        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="odabranaNekretnina=null"></button>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close"
+                (click)="odabranaNekretnina=null"></button>
       </div>
       <div class="modal-body">
         <app-add-nekretnina [urediNekretninu]="odabranaNekretnina"></app-add-nekretnina>

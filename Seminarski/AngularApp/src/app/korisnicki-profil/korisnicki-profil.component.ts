@@ -18,16 +18,19 @@ declare function porukaError(a: string): any;
   providers: [NavComponent]
 })
 export class KorisnickiProfilComponent  implements OnInit{
-  rezervacije: any;
-  verifikacijskiKod: any;
-   unesiKod: boolean=false;
-   korisnikId: any;
+
   constructor(private httpKlijent: HttpClient, private router :Router, private odjava:NavComponent, public  signalRServis: SignalRComponent) {
   }
+  rezervacije: any;
+  verifikacijskiKod: any;
+  unesiKod: boolean=false;
+  korisnikId: any;
   novaSifra:any;
   promjenaLozinke=false;
   promjenaSlike: boolean;
-
+  novaSlika:any;
+  currentphoto=this.getSlikuKorisnika(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
+  clock_tick=Date.now();
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
   }
@@ -36,7 +39,7 @@ export class KorisnickiProfilComponent  implements OnInit{
   ngOnInit(): void {
     this.novaSifra={id:this.loginInfo().autentifikacijaToken.korisnickiNalog.id,
       staraLozinka:"", novaLozinka:""};
-    console.log(this.loginInfo().autentifikacijaToken.korisnickiNalog.email);
+    //console.log(this.loginInfo().autentifikacijaToken.korisnickiNalog.email);
   }
 
   PromijeniPassword() {
@@ -44,6 +47,7 @@ export class KorisnickiProfilComponent  implements OnInit{
       this.promjenaLozinke=false;
       AutentifikacijaHelper.setLoginInfo(x=null);
       this.router.navigateByUrl("/login");
+      porukaSuccess("Uspješno ste promjenili lozinku. Molimo vas, ponovo se prijavite.")
     });
   }
 
@@ -68,7 +72,6 @@ export class KorisnickiProfilComponent  implements OnInit{
     return `${MojConfig.adresa_servera}/Korisnik/GetSlikuKorisnika/${korisnickiNalogId}`;
   }
 
-  novaSlika:any;
   generisiPreview() {
     // @ts-ignore
     var file = document.getElementById("formFile").files[0];
@@ -92,12 +95,13 @@ export class KorisnickiProfilComponent  implements OnInit{
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Korisnik/PromijeniSliku`, this.novaSlika, MojConfig.http_opcije()).subscribe(x=>{
       this.promjenaSlike=false;
       porukaSuccess("Uspješno ste promijenili profilnu sliku!");
+      this.currentphoto=this.getSlikuKorisnika(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
+      this.clock_tick=Date.now();
     });
   }
 
 
   verifikacijaProfila() {
-
     let s={
       email:this.email
     }

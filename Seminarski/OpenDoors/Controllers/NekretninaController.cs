@@ -87,11 +87,9 @@ namespace OpenDoors.Controllers
             {
                 foreach (var s in x.slike)
                 {
-                    byte[]? slika_bajtovi = s?.ParsirajBase64();
-                    byte[]? slika_bajtovi_resized = SlikeResize.resize(slika_bajtovi, 200);
                     var noviSlika = new Slike
                     {
-                        Slika = slika_bajtovi_resized,
+                        Slika = s?.ParsirajBase64(),
                         Nekretnina = objekat,
                         DatumPostavljanja = DateTime.Now
                     };

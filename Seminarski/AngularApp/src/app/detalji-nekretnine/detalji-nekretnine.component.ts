@@ -41,7 +41,7 @@ export class DetaljiNekretnineComponent implements OnInit {
     this.signalRServis.zapocniKonekcijuRecenzije(this.nekretninaId);
     this.signalRServis.zapocniKonekcijuRezervacije(this.nekretninaId);
 
-    console.log(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
+    //console.log(this.loginInfo().autentifikacijaToken.korisnickiNalogId);
 
     this.slika =   {
       id:0,
@@ -51,7 +51,8 @@ export class DetaljiNekretnineComponent implements OnInit {
 
     this.fetchRecenzije();
 
-    this.noviKomentar=this.formBuilder.group({
+    if(this.loginInfo().isLogiran)
+      this.noviKomentar=this.formBuilder.group({
       komentar: new FormControl('', [
         Validators.required]),
       ocjena: new FormControl('', [
@@ -99,6 +100,7 @@ export class DetaljiNekretnineComponent implements OnInit {
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Slike/Snimi`, this.slika, MojConfig.http_opcije()).subscribe(x=>{
       this.fetchPogodnosti();
     });
+    this.slika.slika=null;
   }
 
   obrisiSliku(x: any) {
@@ -140,10 +142,11 @@ export class DetaljiNekretnineComponent implements OnInit {
   }
 
   ostaviKomentar() {
+
     if(this.noviKomentar.valid){
       this.httpKlijent.post(`${MojConfig.adresa_servera}/Recenzije/AddUpdate`, this.noviKomentar.value,MojConfig.http_opcije()).subscribe(x=>{
         this.fetchRecenzije();
-        porukaSuccess("Uspjesno dodan komentar!");
+        porukaSuccess("Uspjesno ste ostavili komentar!");
         this.signalRServis.zapocniKonekcijuRecenzije(this.nekretninaId);
       });
     }
@@ -159,4 +162,10 @@ export class DetaljiNekretnineComponent implements OnInit {
     });
   }
 
+  deleteNekretninu(s: any) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Delete/${s.id}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.router.navigate(['nekretnine-vlasnik/', this.loginInfo().autentifikacijaToken.korisnickiNalogId]);
+      porukaSuccess("Uspješno ste izbrisali nekretninu.");
+    });
+  }
 }

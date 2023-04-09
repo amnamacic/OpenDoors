@@ -83,8 +83,9 @@
     </div>
     <button class="btn btn-info"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" (click)="postaviNekretninu()">
       {{'Save'| translate}}</button>
-    <button class="btn btn-outline-danger"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" routerLink="/" >
-      {{'Cancel'| translate}}</button>
+    <button class="btn btn-outline-danger"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik">
+      <a routerLink="/nekretnine-vlasnik/{{loginInfo().autentifikacijaToken.korisnickiNalogId}}" style="text-decoration: none;color:black;">
+      {{'Cancel'| translate}}</a></button>
   </div>
 
 </section>

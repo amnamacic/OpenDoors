@@ -143,6 +143,7 @@ export class RezervacijaComponent {
       this.httpKlijent.post(`${MojConfig.adresa_servera}/KreditnaKartica/Snimi`, this.uplata.value, MojConfig.http_opcije()).subscribe(x => {
         this.fetchKreditneKartice();
         porukaSuccess('Unos kartice uspjesan!');
+        this.uplata=null;
       });
     } else
       porukaError('Unos kartice neuspjesan!');
