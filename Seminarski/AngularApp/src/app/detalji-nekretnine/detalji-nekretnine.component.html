@@ -21,13 +21,38 @@
       <tr>{{'Amenities'| translate}}:<span *ngFor="let p of s.selectedPogodnosti">{{p.naziv}},</span></tr>
 
       <div class="d-inline" style="float: right">
-      <button type="button" class="btn btn-outline-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
+      <button type="button" class="btn btn-outline-success" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
       <button type="button" class="btn btn-outline-danger" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"(click)="delete(s)">{{'Delete'| translate}}</button>
       </div>
     </div>
 
+    <table *ngIf="rezervacijaPodaci!=null" style="color: black;width: 98%;margin-left: 1%;margin-top: 5%">
+      <thead>
+      <h4>Rezervacije: </h4>
+      <tr>
+        <th scope="col">{{'User'| translate}}</th>
+        <th scope="col">{{'Adults'| translate}}</th>
+        <th scope="col">{{'Children'| translate}}</th>
+        <th scope="col">{{'CheckIn'| translate}}</th>
+        <th scope="col">{{'CheckOut'| translate}}</th>
+        <th scope="col">Status</th>
+        <th scope="col">{{'Price'| translate}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let s of rezervacijaPodaci">
+        <td>{{s.korisnik}}</td>
+        <td>{{s.brojOsoba}}</td>
+        <td>{{s.djeca}}</td>
+        <td>{{s.checkIn}}</td>
+        <td>{{s.checkOut}}</td>
+        <td>{{s.status ? "Aktivna" : "Završena"}}</td>
+        <td>{{s.cijena}}</td>
+      </tr>
+      </tbody>
+    </table>
 
-    <div id="recenzije" style=" width:100%;margin-top:5%">
+    <div id="recenzije" style=" width:100%;margin-top:2%;margin-bottom: 2%">
       <h4>{{'Ratings'| translate}}:</h4>
 
       <h6 style="color:grey">{{signalRServis.brojKomentara}} recenzija</h6>
@@ -61,8 +86,8 @@
       </div>
     </div>
 
-    <form [formGroup]="noviKomentar" (ngSubmit)="ostaviKomentar()">
-      <div id="komentar" style="margin-top:5%">
+    <form *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik" [formGroup]="noviKomentar" (ngSubmit)="ostaviKomentar()">
+      <div id="komentar">
         <h4>{{'LeaveComment'| translate}}:</h4>
         <div class="row">
           <div class="col-md-6 mb-4">
@@ -95,31 +120,6 @@
         <button type="submit" class="btn btn-outline-success" style="float: right">{{'LeaveComment'| translate}}</button>
       </div>
     </form>
-
-    <table *ngIf="rezervacijaPodaci!=null" style="border-radius: 1%; background-color: #eeeeee; color: black">
-      <thead>
-      <tr>
-        <th scope="col">{{'User'| translate}}</th>
-        <th scope="col">{{'Adults'| translate}}</th>
-        <th scope="col">{{'Children'| translate}}</th>
-        <th scope="col">{{'CheckIn'| translate}}</th>
-        <th scope="col">{{'CheckOut'| translate}}</th>
-        <th scope="col">Status</th>
-        <th scope="col">{{'Price'| translate}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let s of rezervacijaPodaci">
-        <td>{{s.korisnik}}</td>
-        <td>{{s.brojOsoba}}</td>
-        <td>{{s.djeca}}</td>
-        <td>{{s.checkIn}}</td>
-        <td>{{s.checkOut}}</td>
-        <td>{{s.status ? "Nije završena" : "Završena"}}</td>
-        <td>{{s.cijena}}</td>
-      </tr>
-      </tbody>
-    </table>
 
     <div class="row"  *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id" style="width: 100%;padding: 0;margin: 0;">
       <div class="col">
@@ -154,7 +154,7 @@
   <div class="modal-dialog modal-xl" >
     <div class="modal-content" style="background-color: rgb(53,53,53)">
       <div class="modal-header">
-        <button type="button" class="btn-close" aria-label="Close" (click)="odabranaNekretnina=null"></button>
+        <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="odabranaNekretnina=null"></button>
       </div>
       <div class="modal-body">
         <app-add-nekretnina [urediNekretninu]="odabranaNekretnina"></app-add-nekretnina>

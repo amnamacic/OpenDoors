@@ -21,4 +21,5 @@
   </div>
 </div>
 <br/>
-<button style="margin-left: 3%" type="button" class="btn btn-primary" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" ><a routerLink="/add-nekretnina" style="color:black">{{'AddReal'| translate}}</a></button>
+<button style="margin-left: 2%;padding:0.7%;" type="button" class="btn btn-dark" *ngIf="loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik" >
+  <a routerLink="/add-nekretnina" style="text-decoration: none;color: white">{{'AddReal'| translate}}</a></button>

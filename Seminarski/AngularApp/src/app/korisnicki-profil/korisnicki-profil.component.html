@@ -73,10 +73,10 @@
                 <td>{{s.djeca}}</td>
                 <td>{{s.checkIn}}</td>
                 <td>{{s.checkOut}}</td>
-                <td>{{s.status}}</td>
+                <td>{{s.status?"Aktivna":"Završena"}}</td>
                 <td>{{s.cijena}}</td>
                 <td>
-                  <button type="button" class="btn btn-primary" (click)="otkaziRezervaciju(s)">{{'Cancel'| translate}}</button>
+                  <button type="button" class="btn btn-outline-danger" (click)="otkaziRezervaciju(s)">{{'Cancel'| translate}}</button>
                 </td>
               </tr>
               </tbody>
@@ -90,29 +90,22 @@
 
 <div *ngIf="promjenaLozinke==true" class="modal fade show" id="exampleModalLive2" tabindex="-1"
      aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog"
-     style="display: block; margin-top: 10%; margin-bottom: 10%;margin-left: 5%">
+     style="display: block; margin-top: 10%; margin-bottom: 10%;">
   <div class="modal-dialog">
     <div class="modal-content" style="background-color: rgb(53,53,53);color: white">
       <div class="modal-header">
         <button type="button" class="btn-close btn-close-white" aria-label="Close" (click)="promjenaLozinke=false"></button>
       </div>
-
       <div class="h-100">
         <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label" style="font-weight: bold; font-size: larger; color: white; font-style: initial">{{'CurrPass'| translate}} :</label>
-            <input class="form-control" [(ngModel)]="novaSifra.staraLozinka">
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label" style="font-weight: bold; font-size: larger; color:white ">{{'NewPass'| translate}}:</label>
+            <label class="form-label" >{{'CurrPass'| translate}}:</label>
+            <input class="form-control" [(ngModel)]="novaSifra.staraLozinka"><br>
+            <label class="form-label" >{{'NewPass'| translate}}</label>
             <input class="form-control" [(ngModel)]="novaSifra.novaLozinka">
+          <div style="margin-top: 4%">
+          <button type="button" class="btn btn-info" (click)="PromijeniPassword()">{{'Save'| translate}}</button>
+          <button type="button" class="btn btn-outline-danger" (click)="promjenaLozinke=false">{{'Cancel'| translate}}</button>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="promjenaLozinke=false">{{'Cancel'| translate}}</button>
-          <button type="button" class="btn btn-primary" (click)="PromijeniPassword()">{{'Save'| translate}}</button>
         </div>
       </div>
     </div>
