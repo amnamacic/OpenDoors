@@ -88,7 +88,7 @@ export class AddNekretninaComponent implements OnInit {
     if(this.urediNekretninu!=null)
       this.novaNekretnina.slike=this.slikeUredjeneNekretnine.map((x:any)=>x.slikaString);
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Nekretnina/Snimi`, this.novaNekretnina, MojConfig.http_opcije()).subscribe(x => {
-      this.router.navigate(["nekretnine/",0])
+      this.router.navigate(['nekretnine-vlasnik/', this.loginInfo().autentifikacijaToken.korisnickiNalogId])
       if(this.urediNekretninu==null)
         porukaSuccess("Uspješno dodata nekretnina!")
       else

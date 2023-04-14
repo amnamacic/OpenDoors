@@ -288,7 +288,34 @@ namespace OpenDoors.Controllers
                 })
                 .AsQueryable();
             return data.Take(100).ToList();
-        }    
+        }
+
+
+        [HttpGet]
+        public List<NekretninaGetAll> GetByTipOsimVlasnika(int tipId, int korisnickiNalogId)
+        {
+            var data = _dbContext.Nekretnina.Where(x => x.TipId == tipId && x.VlasnikId != korisnickiNalogId)
+                .OrderBy(s => s.TipId)
+                .Select(s => new NekretninaGetAll
+                {
+                    Id = s.Id,
+                    BrojKvadrata = s.BrojKvadrata,
+                    BrojKupatila = s.BrojKupatila,
+                    BrojSoba = s.BrojSoba,
+                    BrojKreveta = s.BrojKreveta,
+                    Adresa = s.Adresa,
+                    CijenaPoDanu = s.CijenaPoDanu,
+                    Avans = s.Avans,
+                    LokacijaId = s.LokacijaId,
+                    Lokacija = s.Lokacija.DioGrada,
+                    Tip = s.Tip.Opis,
+                    VlasnikId = s.VlasnikId,
+                    TipId = s.TipId,
+                    slike_ids = _dbContext.Slike.Where(w => w.NekretninaId == s.Id).Select(w => w.Id).ToList(),
+                })
+                .AsQueryable();
+            return data.Take(100).ToList();
+        }
     }
 }
 

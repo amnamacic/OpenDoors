@@ -8,11 +8,12 @@
       <h2>
         <tr>{{s.adresa}}, {{s.lokacija}}
           <button type="button" class="btn btn-info"
-                  *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik ||
-                   s.vlasnikId!=loginInfo().autentifikacijaToken.korisnickiNalogId "
+                  *ngIf="loginInfo().isLogiran && (loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik ||
+                   s.vlasnikId!=loginInfo().autentifikacijaToken.korisnickiNalogId)"
                   (click)=rezervisiNekretninu(s)>{{'Reserve'| translate}}</button>
           <button type="button" class="btn btn-outline-dark"
-                  *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId"
+                  *ngIf="loginInfo().isLogiran && (loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik &&
+                  s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalogId)"
                   (click)="otvoriRezervacije()">{{'Reservations'| translate}}</button>
           <h6>Trenutno rezervacija: {{signalRServis.brojRecenzija}}</h6>
         </tr>
@@ -28,10 +29,12 @@
 
       <div class="d-inline" style="float: right">
         <button type="button" class="btn btn-outline-success"
-                *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"
+                *ngIf="loginInfo().isLogiran && (loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik &&
+                s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id)"
                 (click)="urediNekretninu(s)">{{'Edit'| translate}}</button>
         <button type="button" class="btn btn-outline-danger"
-                *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"
+                *ngIf="loginInfo().isLogiran && (loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik &&
+                s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id)"
                 (click)="deleteNekretninu(s)">{{'Delete'| translate}}</button>
       </div>
     </div>
@@ -96,8 +99,8 @@
       </div>
     </div>
 
-    <form *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik ||
-                   s.vlasnikId!=loginInfo().autentifikacijaToken.korisnickiNalogId "
+    <form *ngIf="loginInfo().isLogiran && (loginInfo().autentifikacijaToken.korisnickiNalog.isKrajnjiKorisnik ||
+                   s.vlasnikId!=loginInfo().autentifikacijaToken.korisnickiNalogId) "
           [formGroup]="noviKomentar"
           (ngSubmit)="ostaviKomentar()">
       <div id="komentar">
@@ -137,7 +140,8 @@
     </form>
 
     <div class="row"
-         *ngIf="loginInfo().isLogiran && loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik && s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id"
+         *ngIf="loginInfo().isLogiran && (loginInfo().autentifikacijaToken.korisnickiNalog.isVlasnik &&
+         s.vlasnikId==loginInfo().autentifikacijaToken.korisnickiNalog.id)"
          style="width: 100%;padding: 0;margin: 0;">
       <div class="col">
         <label class="form-label">{{'NewPhoto'| translate}}:</label>
